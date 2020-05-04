@@ -1,0 +1,15 @@
+---
+id: 6
+title: TortoiseSVN settings
+date: 2014-03-13T19:25:05+00:00
+author: AndyM
+layout: post
+guid: http://blog.andymadge.com/?p=54
+permalink: /?p=6
+categories:
+  - Software
+  - SVN
+---
+Global ignore pattern for Web Development:
+
+`[Tt]humbs.db *.lck *.LCK _notes */_notes dwsync.xml .settings .project`
