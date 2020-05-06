@@ -1,6 +1,7 @@
 url: http://www.andymadge.com/blog
 name: andymadge.com
 description: Nothing to see here, move along…
+permalink: /blog/:year/:month/:day/:title:output_ext
 
 defaults:
   - scope:
