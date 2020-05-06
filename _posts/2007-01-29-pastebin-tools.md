@@ -5,7 +5,6 @@ date: 2007-01-29T14:53:45+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2007/01/29/pastebin-tools/
-permalink: /2007/01/pastebin-tools/
 categories:
   - Computers
   - Useful Links

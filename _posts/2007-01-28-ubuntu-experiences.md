@@ -5,7 +5,6 @@ date: 2007-01-28T23:24:57+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/linux/ubuntu/2007/01/28/ubuntu-experiences/
-permalink: /2007/01/ubuntu-experiences/
 categories:
   - Ubuntu Linux
 ---

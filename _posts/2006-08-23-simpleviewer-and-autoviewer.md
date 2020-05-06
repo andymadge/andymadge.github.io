@@ -5,7 +5,6 @@ date: 2006-08-23T15:14:44+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/uncategorized/2006/08/23/simpleviewer-and-autoviewer/
-permalink: /2006/08/simpleviewer-and-autoviewer/
 categories:
   - Web Development
 ---

@@ -5,7 +5,6 @@ date: 2008-07-21T08:22:14+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/uncategorized/2008/07/21/take-screenshot-on-iphone-20/
-permalink: /2008/07/take-screenshot-on-iphone-20/
 categories:
   - iPhone
 ---

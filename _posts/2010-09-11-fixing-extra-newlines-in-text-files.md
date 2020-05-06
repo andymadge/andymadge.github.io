@@ -5,7 +5,6 @@ date: 2010-09-11T18:56:16+00:00
 author: AndyM
 layout: post
 guid: http://www.andymadge.com/?p=193
-permalink: /2010/09/fixing-extra-newlines-in-text-files/
 categories:
   - Programming
 ---

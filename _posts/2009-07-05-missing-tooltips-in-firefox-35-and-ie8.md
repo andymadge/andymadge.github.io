@@ -5,7 +5,6 @@ date: 2009-07-05T23:24:37+00:00
 author: AndyM
 layout: post
 guid: http://andymadge.com/blog/?p=128
-permalink: /2009/07/missing-tooltips-in-firefox-35-and-ie8/
 categories:
   - Computers
 ---

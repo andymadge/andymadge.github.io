@@ -5,7 +5,6 @@ date: 2014-03-13T19:25:05+00:00
 author: AndyM
 layout: post
 guid: http://www.andymadge.com/?p=181
-permalink: /?p=181
 categories:
   - Computers
   - Security

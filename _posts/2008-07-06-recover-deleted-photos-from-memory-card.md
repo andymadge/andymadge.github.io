@@ -5,7 +5,6 @@ date: 2008-07-06T20:32:18+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2008/07/06/recover-deleted-photos-from-memory-card/
-permalink: /2008/07/recover-deleted-photos-from-memory-card/
 categories:
   - Computers
   - Software

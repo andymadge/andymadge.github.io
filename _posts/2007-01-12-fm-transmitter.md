@@ -5,7 +5,6 @@ date: 2007-01-12T13:44:22+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/gadgets/2007/01/12/fm-transmitter/
-permalink: /2007/01/fm-transmitter/
 categories:
   - Gadgets
   - MP3

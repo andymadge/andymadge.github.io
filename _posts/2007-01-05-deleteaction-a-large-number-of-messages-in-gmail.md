@@ -5,7 +5,6 @@ date: 2007-01-05T16:17:38+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/pc-help/2007/01/05/deleteaction-a-large-number-of-messages-in-gmail/
-permalink: /2007/01/deleteaction-a-large-number-of-messages-in-gmail/
 categories:
   - Computers
   - Gmail

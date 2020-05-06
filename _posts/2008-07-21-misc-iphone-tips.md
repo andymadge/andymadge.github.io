@@ -5,7 +5,6 @@ date: 2008-07-21T15:40:05+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/mobile-phone/iphone/2008/07/21/misc-iphone-tips/
-permalink: /2008/07/misc-iphone-tips/
 categories:
   - iPhone
 ---

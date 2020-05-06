@@ -5,7 +5,6 @@ date: 2006-10-31T21:42:42+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/useful-links/2006/10/31/photography-depth-of-field/
-permalink: /2006/10/photography-depth-of-field/
 categories:
   - Photography
   - Useful Links

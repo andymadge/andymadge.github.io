@@ -5,7 +5,6 @@ date: 2008-06-20T18:54:59+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2008/06/20/online-peer-to-peer-backup/
-permalink: /2008/06/online-peer-to-peer-backup/
 categories:
   - Computers
   - Software

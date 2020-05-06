@@ -5,7 +5,6 @@ date: 2006-09-11T17:28:45+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/pc-help/2006/09/11/maintaining-privacy-at-an-internet-cafe/
-permalink: /2006/09/maintaining-privacy-at-an-internet-cafe/
 categories:
   - Computers
   - Security

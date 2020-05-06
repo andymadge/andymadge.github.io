@@ -5,7 +5,6 @@ date: 2007-08-30T10:20:06+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2007/08/30/firefox-tip-jump-to-site-subpages-with-ctrlenter/
-permalink: /2007/08/firefox-tip-jump-to-site-subpages-with-ctrlenter/
 categories:
   - Computers
 ---

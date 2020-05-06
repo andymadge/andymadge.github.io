@@ -5,7 +5,6 @@ date: 2007-01-29T22:25:35+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2007/01/29/installing-additional-ubuntu-software/
-permalink: /2007/01/installing-additional-ubuntu-software/
 categories:
   - Computers
   - Ubuntu Linux

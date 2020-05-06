@@ -5,7 +5,6 @@ date: 2006-05-16T03:11:13+00:00
 author: AndyM
 layout: post
 guid: http://andymadge.com/blog/quotes/2006/05/16/learning-quote/
-permalink: /2006/05/learning-quote/
 categories:
   - Quotes
 ---

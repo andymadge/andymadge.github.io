@@ -5,7 +5,6 @@ date: 2007-01-28T23:56:05+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/ubuntu/2007/01/28/installing-slimserver-651-on-ubuntu-610/
-permalink: /2007/01/installing-slimserver-651-on-ubuntu-610/
 categories:
   - Ubuntu Linux
 ---

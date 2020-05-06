@@ -5,7 +5,6 @@ date: 2009-08-09T19:36:52+00:00
 author: AndyM
 layout: post
 guid: http://www.andymadge.com/?p=163
-permalink: /2009/08/password-salting-techniques/
 categories:
   - Computers
   - Security

@@ -5,7 +5,6 @@ date: 2006-09-05T17:16:42+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/quotes/2006/09/05/computer-software-industry/
-permalink: /2006/09/computer-software-industry/
 categories:
   - Quotes
 ---

@@ -1,13 +1,12 @@
 ---
-id: 321
-title: Password Salting Techniques
-date: 2014-03-12T23:38:47+00:00
+id: 175
+title: Comparison of Password Salting Techniques
+date: 2009-08-09T19:06:33+00:00
 author: AndyM
 layout: revision
-guid: http://www.andymadge.com/2014/03/163-revision-19/
-permalink: /2014/03/163-revision-19/
+guid: http://www.andymadge.com/2009/08/163-revision-12/
 ---
-This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.<!--more-->
+This article is about using salting techniques to improve the security of authentication systems for websites.  Examples are in PHP but the techniques apply to any language.
 
 > ## Caveat
 > 
@@ -19,13 +18,7 @@ This article is about using salting techniques to improve the security of authen
 > 
 > I don&#8217;t mean don&#8217;t use authentication, what I mean is that cryptographic techniques are complicated.  Actually they&#8217;re extremely complicated.  If you don&#8217;t have years of experience as a cryptographer, you&#8217;re going to make mistakes that will leave security holes.  Guaranteed.
 > 
-> The alternative is to use a well respected authentication framework such as:
-> 
->   * [PHPass](http://www.openwall.com/phpass/)
->   * [Zend_Auth](http://framework.zend.com/manual/en/zend.auth.html) (requires Zend Framework)
->   * [CodeIgniter Authentication Libraries](http://codeigniter.com/wiki/Category:Libraries::Authentication/) (require CodeIgniter)
-> 
-> [](http://www.openwall.com/phpass/)Frameworks such as this are developed by people who really do know what they are doing, and any security holes are generally quickly discovered and plugged.
+> The alternative is to use a well respected authentication framework such as [PHPass](http://www.openwall.com/phpass/).  Frameworks such as this are developed by people who really do know what they are doing, and any security holes are generally quickly discovered and plugged.
 > 
 > I&#8217;m certainly no cryptographer, and this article is based on my current understanding.
 > 
@@ -35,17 +28,17 @@ This article is about using salting techniques to improve the security of authen
 
 Lets look at the type of attacks we want to protect against.
 
-### Dictionary
+### [Dictionary](http://en.wikipedia.org/wiki/Dictionary_attack)
 
-This involves having a list of common passwords and trying every one in turn.  Most dictionaries would contain millions of possibilities starting with obvious stuff like &#8220;password&#8221;, &#8220;123456&#8221; and more obscure ones such as &#8220;pa$$wOrD&#8221; ([wikipedia entry](http://en.wikipedia.org/wiki/Dictionary_attack))
+This involves having a list of common passwords and trying every one in turn.  Most dictionaries would contain millions of possibilities starting with obvious stuff like &#8220;password&#8221;, &#8220;123456&#8221; and more secure ones such as &#8220;pa$$wOrD&#8221;
 
-### Brute Force
+### [Brute Force](http://en.wikipedia.org/wiki/Brute_force_attack)
 
-This involves trying every possible password and in theory will always work against any system.  The problem is that it takes a LONG time to do.  As computing speed improves, obviously the time taken reduces.  Since you can&#8217;t make brute force attacks impossible, what you want to achieve is to make them take an infeasibly long time &#8211; like years. ([wikipedia entry](http://en.wikipedia.org/wiki/Brute_force_attack))
+This involves trying every possible password and in theory will always work against any system.  The problem is that it takes a LONG time to do.  As computing speed improves, obviously the time taken reduces.  Since you can&#8217;t make brute force attacks impossible, what you want to achieve is to make them take an infeasibly long time &#8211; like years.
 
-### Rainbow Tables
+### [Rainbow Tables](http://en.wikipedia.org/wiki/Rainbow_table)
 
-This is a way of attacking hashed passwords.  The idea is that instead of calculating the hash of each password you want to try, you use a list of pre-calculated hashes, thus saving computation time. ([wikipedia entry](http://en.wikipedia.org/wiki/Rainbow_table))
+This is a way of attacking hashed passwords.  The idea is that instead of calculating the hash of each password you want to try, you use a list of pre-calculated hashes, thus saving computation time.
 
 Bearing those in mind, let&#8217;s look at the different ways you could store the password in your database:
 
@@ -101,7 +94,7 @@ Note that we could also hash the salt as follows:
 
 <pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = SHA1( "<span style="font-family: 'courier new';">ZvmLcZMXw3WIA78uudt9SFysSGocIF</span>" );</pre>
 
-However, all this does is increase the computation time without significantly increasing the security.  The attacker only needs to find the value of `$salt` &#8211; it&#8217;s completely irrelevant how it&#8217;s calculated.
+However, all this does is increase the computation time without significantly increasing the security.  The attacker only needs to find the value of `$salt` &#8211; it&#8217;s completely irrelevant how it&#8217;s calculated.  Don&#8217;t bother.
 
 We need to make the salt different for each user.  One way is to use something that will be different for each user.  The most obvious thing is the username (or maybe email):
 
@@ -109,7 +102,7 @@ We need to make the salt different for each user.  One way is to use something 
 
 This means that if two people have the same password, they will still have different password hashes.  If an attacker is successful with a rainbow table attack for one account, they know nothing about any of the other accounts on the system.
 
-Better still, lets use a different randomly generated string as the salt for each user.  NOTE: In this case we&#8217;re going to need to store the salt alongside the user in the database otherwise we have no way of checking it.
+Better still, lets use a randomly generated string as the salt for each user.  NOTE: In this case we&#8217;re going to need to store the salt alongside the user in the database otherwise we have no way of checking it.
 
 <pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = random_string();
 $password_hash = SHA1( $salt . $password );</pre>
@@ -119,7 +112,7 @@ $password_hash = SHA1( $salt . $password );</pre>
 Finally, let&#8217;s combine some of the above into our best-yet version:
 
 <pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = random_string();
-$password_hash = SHA1( $salt . MD5($email) . $password );</pre>
+$password_hash = SHA1( $salt . $password . MD5($email) );</pre>
 
 I know I said above that there&#8217;s no point in hashing twice, but in this case it does have an effect &#8211; we don&#8217;t want the salting algorithm to be obvious and now password hash doesn&#8217;t contain anything that is recognizable as a word or email address.
 

@@ -5,7 +5,6 @@ date: 2007-06-28T11:09:33+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/uncategorized/2007/06/28/offline-files-tips/
-permalink: /2007/06/offline-files-tips/
 categories:
   - Computers
   - Windows

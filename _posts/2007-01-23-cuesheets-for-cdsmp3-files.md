@@ -5,7 +5,6 @@ date: 2007-01-23T23:56:20+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/uncategorized/2007/01/23/cuesheets-for-cdsmp3-files/
-permalink: /2007/01/cuesheets-for-cdsmp3-files/
 categories:
   - MP3
   - Music

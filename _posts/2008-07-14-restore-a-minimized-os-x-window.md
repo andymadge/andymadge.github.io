@@ -5,7 +5,6 @@ date: 2008-07-14T17:26:51+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/applemac/2008/07/14/restore-a-minimized-os-x-window/
-permalink: /2008/07/restore-a-minimized-os-x-window/
 categories:
   - Apple Mac
   - OS X

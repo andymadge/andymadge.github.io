@@ -5,7 +5,6 @@ date: 2008-08-27T10:34:10+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/computers/2008/08/27/windows-xp-dns-cache/
-permalink: /2008/08/windows-xp-dns-cache/
 categories:
   - Computers
   - Windows

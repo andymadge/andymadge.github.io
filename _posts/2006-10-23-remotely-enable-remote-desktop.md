@@ -5,7 +5,6 @@ date: 2006-10-23T20:58:51+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/pc-help/2006/10/23/remotely-enable-remote-desktop/
-permalink: /2006/10/remotely-enable-remote-desktop/
 categories:
   - Computers
 ---

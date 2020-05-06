@@ -5,7 +5,6 @@ date: 2007-01-28T23:53:48+00:00
 author: AndyM
 layout: post
 guid: http://blog.andymadge.com/uncategorized/2007/01/28/ubuntu-continued/
-permalink: /2007/01/auto-mounting-ntfs-partitions-at-boot/
 categories:
   - Ubuntu Linux
 ---

@@ -5,7 +5,6 @@ date: 2011-05-18T23:55:02+00:00
 author: AndyM
 layout: post
 guid: http://www.andymadge.com/?p=243
-permalink: /2011/05/nagios-error-http-warning-http1-1-403-forbidden/
 categories:
   - Computers
 ---
