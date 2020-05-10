@@ -10,7 +10,7 @@ categories:
 ---
 Install drivers
 
-Install NVTV &#8211; doesn&#8217;t work
+Install NVTV - doesn't work
 
 Edit `/etc/X11/xorg.conf`
 
@@ -20,6 +20,6 @@ Edit `/etc/X11/xorg.conf`
 
 [HOWTO: NVIDIA TV-OUT for Newbies](http://www.ubuntuforums.org/showthread.php?t=98456&highlight=nvtv)
 
-[Dual Monitor With nVidia TwinView HowTo](http://www.ubuntuforums.org/showthread.php?p=1773584) &#8211; don&#8217;t need the dual monitor bit cos doing cloning, but useful ref
+[Dual Monitor With nVidia TwinView HowTo](http://www.ubuntuforums.org/showthread.php?p=1773584) - don't need the dual monitor bit cos doing cloning, but useful ref
 
 [TwinView Howto](http://www.ublug.org/ubuntu/twinview/twinview-howto-breezy.html)

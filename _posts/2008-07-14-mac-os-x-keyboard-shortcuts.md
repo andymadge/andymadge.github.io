@@ -10,7 +10,7 @@ categories:
   - Keyboard Shortcuts
   - OS X
 ---
-Useful OS X keyboard shortcuts, particularly if you&#8217;re switching from Windows.  It&#8217;s not exhaustive, but it&#8217;s got the ones I use regularly.
+Useful OS X keyboard shortcuts, particularly if you're switching from Windows.  It's not exhaustive, but it's got the ones I use regularly.
 
 This page will be updated as I find new ones to include.
 

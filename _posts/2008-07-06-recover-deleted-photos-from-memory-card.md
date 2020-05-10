@@ -28,7 +28,7 @@ There are loads of free utilities that will recover photos, and I suggest trying
   * Download [here](http://www.undelete-plus.com/download.html)
   * Follow [these instructions](http://www.undelete-plus.com/help/7_quickstart.html){.broken_link}
 
-If you&#8217;ve tried all of those and been unsuccessful, then I&#8217;m afraid it&#8217;s not looking very promising, but if you want to continue trying here are a few more utils:
+If you've tried all of those and been unsuccessful, then I'm afraid it's not looking very promising, but if you want to continue trying here are a few more utils:
 
   * [<span class="header_gray">Avira UnErase Personal</span>](http://www.free-av.com/en/tools/10/avira_unerase_personal.html)
   * [<span class="header_gray">FreeUndelete</span>](http://www.officerecovery.com/freeundelete/)

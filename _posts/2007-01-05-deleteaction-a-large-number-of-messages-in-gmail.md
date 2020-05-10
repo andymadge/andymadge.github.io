@@ -21,4 +21,4 @@ Basically, when you press **Select: All**, if the label/search results contain m
 
 Then you just perform the action as normal (delete/assign label etc.)
 
-It&#8217;s probably a little risky to preform these actions on search results, since it doesn&#8217;t tell you how many messages are selected. Better to create a temporary label and perform the action on the label.
+It's probably a little risky to preform these actions on search results, since it doesn't tell you how many messages are selected. Better to create a temporary label and perform the action on the label.

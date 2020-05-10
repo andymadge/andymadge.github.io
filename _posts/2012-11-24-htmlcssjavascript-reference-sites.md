@@ -9,7 +9,7 @@ categories:
   - Useful Links
   - Web Development
 ---
-Stay well away from W3schools (why? &#8211; see <http://w3fools.com/>)
+Stay well away from W3schools (why? - see <http://w3fools.com/>)
 
 ### Better References
 

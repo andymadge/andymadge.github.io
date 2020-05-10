@@ -15,8 +15,8 @@ To install additional software required to support various types of multimedia:
 
   1. Applications->Add/Remove Applications.
   2. Type `xine` into the search box at the top.
-  3. Find &#8220;Xine extra plugins&#8221; in the list and tick it.
-  4. Find and select &#8220;Gstreamer extra codec&#8221; and &#8220;Sun Java 5.0 Plugin&#8221;
+  3. Find "Xine extra plugins" in the list and tick it.
+  4. Find and select "Gstreamer extra codec" and "Sun Java 5.0 Plugin"
   5. Press OK.
 
 #### The Command Line way

@@ -8,7 +8,7 @@ guid: http://blog.andymadge.com/pc-help/2006/10/23/remotely-enable-remote-deskto
 categories:
   - Computers
 ---
-Instructions How to do it&#8230;
+Instructions How to do it...
 
 <!--more-->from 
 
@@ -23,7 +23,7 @@ Instructions How to do it&#8230;
 > <font size="2">What you need to do is create the new RDP listening port via the registry:</font>
 > 
 >   1. <font size="2">Run REGEDIT on your XP workstation or on your Windows 2000/2003 Server. </font>
->   2. <font size="2">Click on File, then choose &#8220;Connect Network Registry&#8221;.</font>
+>   2. <font size="2">Click on File, then choose "Connect Network Registry".</font>
 > 
 > >  										[ 										<font size="2"><img width="100" height="71" border="1" src="http://www.petri.co.il/images/enable_rdp_remotely_small.gif" /></font>](http://www.petri.co.il/images/enable_rdp_remotely.gif){.broken_link}
 > 
@@ -39,7 +39,7 @@ Instructions How to do it&#8230;
 > 
 > <ol start="5">
 >   <li value="4">
->     <font size="2">In the remote machine&#8217;s registry browse to the following key:</font>
+>     <font size="2">In the remote machine's registry browse to the following key:</font>
 >   </li>
 > </ol>
 > 

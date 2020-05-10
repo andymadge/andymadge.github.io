@@ -8,9 +8,9 @@ guid: http://blog.andymadge.com/uncategorized/2007/01/28/ubuntu-continued/
 categories:
   - Ubuntu Linux
 ---
-There&#8217;s a very useful Getting Started document over at [UbuntuGuide](http://ubuntuguide.org/wiki/Ubuntu_Edgy) which describes lots of basic configuration tasks.
+There's a very useful Getting Started document over at [UbuntuGuide](http://ubuntuguide.org/wiki/Ubuntu_Edgy) which describes lots of basic configuration tasks.
 
-In the Ubuntu 6.10 official documentation there seem to be references to a utility in System->Administration->Disks but apparently the Disks utility was removed in v6.10. It&#8217;s not difficult to edit the /etc/fstab file as on any other Linux. There are instructions in the Ubuntu documentation and also [here](http://ubuntuguide.org/wiki/Ubuntu_Edgy#How_to_mount_Windows_partitions_.28NTFS.29_on_boot-up.2C_and_allow_all_users_to_read_only)
+In the Ubuntu 6.10 official documentation there seem to be references to a utility in System->Administration->Disks but apparently the Disks utility was removed in v6.10. It's not difficult to edit the /etc/fstab file as on any other Linux. There are instructions in the Ubuntu documentation and also [here](http://ubuntuguide.org/wiki/Ubuntu_Edgy#How_to_mount_Windows_partitions_.28NTFS.29_on_boot-up.2C_and_allow_all_users_to_read_only)
 
 <!--more-->
 

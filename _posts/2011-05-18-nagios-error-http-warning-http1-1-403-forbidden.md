@@ -1,6 +1,6 @@
 ---
 id: 243
-title: 'Nagios Error &#8220;HTTP WARNING: HTTP/1.1 403 Forbidden&#8221;'
+title: 'Nagios Error "HTTP WARNING: HTTP/1.1 403 Forbidden"'
 date: 2011-05-18T23:55:02+00:00
 author: AndyM
 layout: post
@@ -8,7 +8,7 @@ guid: http://www.andymadge.com/?p=243
 categories:
   - Computers
 ---
-When monitoring websites with Nagios, it&#8217;s common to get the error &#8220;**HTTP WARNING: HTTP/1.1 403 Forbidden**&#8220;.
+When monitoring websites with Nagios, it's common to get the error "**HTTP WARNING: HTTP/1.1 403 Forbidden**".
 
 ### Quick Solution
 
@@ -37,7 +37,7 @@ According to the help (`check_http --help`) this option is used to specify the I
 
 Since a single IP address can be home to many web sites, an IP address is often not enough to identify a particular website.  In this situation, web sites are identified by the _host header_ part of the HTTP request_._
 
-So, the default check_http command contacts the correct web server, however the lack of host header in the request means the server doesn&#8217;t know which actual web site to direct it to, therefore it responds with the 403 error.
+So, the default check_http command contacts the correct web server, however the lack of host header in the request means the server doesn't know which actual web site to direct it to, therefore it responds with the 403 error.
 
 To resolve this we need to use the -H option which specifies the hostname for the web site.  We could change the default command definition to use -H instead of -I however there are good reasons not to do this (see below)
 

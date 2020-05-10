@@ -10,7 +10,7 @@ categories:
 ---
 Server Side Include can be used to allow insertion of an HTML into another. e.g. header or footer can be separated from pages so you only have to change a single file to update the header/footer on all pages of your site.<!--more-->
 
-[Here](http://www.andreas.com/faq-ssi.html)&#8216;s a fairly good introduction to SSI although it does miss a few important points:
+[Here](http://www.andreas.com/faq-ssi.html)'s a fairly good introduction to SSI although it does miss a few important points:
 
   * If you are using .htaccess to enable SSI for a single folder you may want to add couple of extra lines:  
     `Options Indexes FollowSymLinks Includes<br />

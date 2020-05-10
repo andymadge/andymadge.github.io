@@ -13,4 +13,4 @@ On December 8th 2006 the UK law regarding low power FM Transmitters was changed,
 
 There are loads available now, just [look here](http://www.iworld.co.uk/c/iPod_FM_Transmitters.htm){.broken_link}.
 
-I&#8217;m planning to get one soon and will post a review here.
+I'm planning to get one soon and will post a review here.

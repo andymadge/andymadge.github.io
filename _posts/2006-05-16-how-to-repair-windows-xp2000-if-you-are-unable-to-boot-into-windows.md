@@ -8,4 +8,4 @@ guid: http://andymadge.com/blog/uncategorized/2006/05/16/how-to-repair-windows-x
 categories:
   - Computers
 ---
-Go [here](http://www.techspot.com/vb/post63828-1.html) for very good instructions on how to get your PC up and running again if it won&#8217;t boot.
+Go [here](http://www.techspot.com/vb/post63828-1.html) for very good instructions on how to get your PC up and running again if it won't boot.

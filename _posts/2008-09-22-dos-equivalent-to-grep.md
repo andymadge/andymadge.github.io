@@ -9,7 +9,7 @@ categories:
   - Computers
   - Windows
 ---
-In Unix you can pipe the output of a command into the GREP command in order to only display the lines that contain a required string.  This is means you don&#8217;t have to scroll through pages of output to find the bit you&#8217;re interested in.  The DOS equivalent of GREP is FIND:
+In Unix you can pipe the output of a command into the GREP command in order to only display the lines that contain a required string.  This is means you don't have to scroll through pages of output to find the bit you're interested in.  The DOS equivalent of GREP is FIND:
 
 <pre>Searches for a text string in a file or files.
 
@@ -35,6 +35,6 @@ or when viewing the DNS cache:
 
 <pre>ipconfig /displaydns | find /i "google"</pre>
 
-Although that isn&#8217;t ideal since the output of ipconfig isn&#8217;t really formatted to play nicely with the find command.
+Although that isn't ideal since the output of ipconfig isn't really formatted to play nicely with the find command.
 
 Reference: <http://nzpcmad.blogspot.com/2007/07/dos-grep-equivalent-find-command.html>

@@ -10,7 +10,7 @@ categories:
   - Security
   - Useful Links
 ---
-Accessing any protected system from an Internet Cafe-type situation is always a risk. This is because you have no way of knowing whether there is any spy/sniffing/keylogging software on the PC &#8211; either installed by another user or by the sysadmin. The following are tips to minimise the risks
+Accessing any protected system from an Internet Cafe-type situation is always a risk. This is because you have no way of knowing whether there is any spy/sniffing/keylogging software on the PC - either installed by another user or by the sysadmin. The following are tips to minimise the risks
 
 <!--more-->
 
@@ -34,4 +34,4 @@ Accessing any protected system from an Internet Cafe-type situation is always a 
 > 
 > If you are familiar with the version of Windows (and the normal running processes) the Cafe uses and can access the task manager to establish if they are any suspect running procceses.
 
-> Also, the visual keyboard on windows does nothing but slow you down, a software keylogger will pick this up (if it&#8217;s any good), but a hardware would likely not.
+> Also, the visual keyboard on windows does nothing but slow you down, a software keylogger will pick this up (if it's any good), but a hardware would likely not.

@@ -8,7 +8,7 @@ guid: http://blog.andymadge.com/ubuntu/2007/01/29/mount-mp3-network-share-locate
 categories:
   - Ubuntu Linux
 ---
-SlimServer doesn&#8217;t like the Music Folder path in the form `smb://computer/share` &#8211; presumably it can&#8217;t use smbclient. I therefore need to mount this share in the filesystem.
+SlimServer doesn't like the Music Folder path in the form `smb://computer/share` - presumably it can't use smbclient. I therefore need to mount this share in the filesystem.
 
 Parts of this are taken from [here](http://ubuntuforums.org/showthread.php?t=280473) and [here](http://www.mattvanstone.com/2006/06/automatically_mounting_smb_sha.html){.broken_link}.
 
@@ -35,7 +35,7 @@ Parts of this are taken from [here](http://ubuntuforums.org/showthread.php?t=280
         
         <pre>//computer/MP3 /media/mp3   smbfs  auto,credentials=/home/USER/.credentials,uid=1000,umask=000,user   0 0</pre>
     
-      * Create the `.smbcredentials` file in the user&#8217;s home directory: 
+      * Create the `.smbcredentials` file in the user's home directory: 
         <pre>sudo gedit ~/.smbcredentials</pre>
         
         Add the following lines to the file, but change USER to your SMB username and PASSWORD to your SMB password.
@@ -50,8 +50,8 @@ password=PASSWORD</pre>
     
     NOTE: Do not try and mount a folder on a share, it wont work. The source for an SMB mount has to be a share.
     
-    NOTE: Do not put a trailing &#8220;/&#8221; on the share path or the directory path, it will cause it to fail.
+    NOTE: Do not put a trailing "/" on the share path or the directory path, it will cause it to fail.
     
     ### SMB Shares with spaces in the names
     
-    If you have an SMB share with a space in the path then replace the space with &#8220;`\040`&#8221; (This only applies to the entry in `/etc/fstab`, from the command line you can just enclose the share path in quotes)
+    If you have an SMB share with a space in the path then replace the space with "`\040`" (This only applies to the entry in `/etc/fstab`, from the command line you can just enclose the share path in quotes)

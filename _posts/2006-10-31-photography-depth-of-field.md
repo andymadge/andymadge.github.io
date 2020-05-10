@@ -1,6 +1,6 @@
 ---
 id: 25
-title: 'Photography &#8211; Depth Of Field'
+title: 'Photography - Depth Of Field'
 date: 2006-10-31T21:42:42+00:00
 author: AndyM
 layout: post

@@ -10,7 +10,7 @@ categories:
   - Windows
 ---
 SysInternals tools are a fantastic set of free utilities written by <a id="ctl00_mainContentContainer_ctl03" onclick="javascript:Track('ctl00_mainContentContainer_ctl00|ctl00_mainContentContainer_ctl03',this);" href="http://blogs.technet.com/markrussinovich/about.aspx">Mark Russinovich</a> and Bryce Cogswell.  There are invaluable for system admins and Windows Power Users.  
-There is now a website that allows you to run most of the SysInternals tools directly, so you don&#8217;t have to find the right page, download it and unzip.  You just run it directly from:
+There is now a website that allows you to run most of the SysInternals tools directly, so you don't have to find the right page, download it and unzip.  You just run it directly from:
 
 http://live.sysinternals.com/<tool>.exe
 

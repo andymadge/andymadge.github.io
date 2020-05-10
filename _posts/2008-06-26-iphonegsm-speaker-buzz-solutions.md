@@ -9,7 +9,7 @@ categories:
   - Gadgets
   - Mobile Phone
 ---
-Some speakers are better than others at dealing with the interference caused by GSM mobiles.  [This article](http://9to5mac.com/iPhone_GSM_Buzz4_solved){.broken_link} documents one bloke&#8217;s extended quest to solve the problem.
+Some speakers are better than others at dealing with the interference caused by GSM mobiles.  [This article](http://9to5mac.com/iPhone_GSM_Buzz4_solved){.broken_link} documents one bloke's extended quest to solve the problem.
 
 Executive summary is:
 
