@@ -3,7 +3,7 @@ id: 317
 title: Transfer iOS Notes Between Accounts
 date: 2014-03-12T23:10:27+00:00
 author: AndyM
-layout: revision
+layout: post
 guid: http://www.andymadge.com/2014/03/268-revision-6/
 ---
 Enable syncing of notes in iTunes, this will sync the notes to the Mail app (on Lion).
