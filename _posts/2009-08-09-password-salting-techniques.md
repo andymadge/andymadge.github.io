@@ -68,7 +68,9 @@ A hash is a one-way algorithm that is commonly used in cryptography.  The idea 
 
 The most commonly used hash functions are MD5 and SHA1:
 
-<pre style="padding-left: 30px; ">$password_hash = MD5( $password );</pre>
+```php
+$password_hash = MD5( $password );
+```
 
 Lots of people will tell you that MD5 is sufficient for most uses, others will say that SHA1 is more secure so you should use that instead.
 
@@ -78,7 +80,9 @@ Other more secure hash algorithms are SHA256 or Whirlpool, but these have the di
 
 So at this point, we're recommending:
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$password_hash = SHA1( $password );</pre>
+```php
+$password_hash = SHA1( $password );
+```
 
 ### Vulnerabilities
 
@@ -86,43 +90,55 @@ Hashed passwords will provide complete protection against dictionary attacks.  
 
 ## Salting
 
-<span style="font-weight: normal; font-size: 13px; ">Salting is a technique used to protect hashes against rainbow table attacks.  The idea is that an additional string - known as 'salt' - is introduced into the hash value:</span>
+Salting is a technique used to protect hashes against rainbow table attacks.  The idea is that an additional string - known as 'salt' - is introduced into the hash value:
 
-<pre style="padding-left: 30px; ">$salt = "abcd";
-$password_hash = SHA1( $salt . $password );</pre>
+```php
+$salt = "abcd";
+$password_hash = SHA1( $salt . $password );
+```
 
 So, if a rainbow table attack is successful, the attacker now still doesn't know the password, they know `$salt.$password`.  In this trivial example, the attacker would soon work out what the salt was - especially if they break another account - and then they would know the password.
 
 Let's improve the salt...
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = "<span style="font-family: 'courier new';">ZvmLcZMXw3WIA78uudt9SFysSGocIF</span>";
-$password_hash = SHA1( $salt . $password );</pre>
+```php
+$salt = "ZvmLcZMXw3WIA78uudt9SFysSGocIF";
+$password_hash = SHA1( $salt . $password );
+```
 
 Here we are using a random static string as the salt, which is definitely an improvement, but since the salt is static (i.e. the same for every user) then they still only need to work it out once.  After that, every user's account it vulnerable to the same attack.
 
 Note that we could also hash the salt as follows:
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = SHA1( "<span style="font-family: 'courier new';">ZvmLcZMXw3WIA78uudt9SFysSGocIF</span>" );</pre>
+```php
+$salt = SHA1( "ZvmLcZMXw3WIA78uudt9SFysSGocIF" );
+```
 
 However, all this does is increase the computation time without significantly increasing the security.  The attacker only needs to find the value of `$salt` - it's completely irrelevant how it's calculated.
 
 We need to make the salt different for each user.  One way is to use something that will be different for each user.  The most obvious thing is the username (or maybe email):
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$password_hash = SHA1( $username . $password );</pre>
+```php
+$password_hash = SHA1( $username . $password );
+```
 
 This means that if two people have the same password, they will still have different password hashes.  If an attacker is successful with a rainbow table attack for one account, they know nothing about any of the other accounts on the system.
 
 Better still, lets use a different randomly generated string as the salt for each user.  NOTE: In this case we're going to need to store the salt alongside the user in the database otherwise we have no way of checking it.
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = random_string();
-$password_hash = SHA1( $salt . $password );</pre>
+```php
+$salt = random_string();
+$password_hash = SHA1( $salt . $password );
+```
 
 `random_string` is a function defined elsewhere in your code.  There are good examples [here](http://stackoverflow.com/questions/48124/generating-pseudorandom-alpha-numeric-strings) and [here](http://911-need-code-help.blogspot.com/2009/06/generate-random-strings-using-php.html){.broken_link}.
 
 Finally, let's combine some of the above into our best-yet version:
 
-<pre style="font: normal normal normal 12px/18px Consolas, Monaco, 'Courier New', Courier, monospace; padding-left: 30px;">$salt = random_string();
-$password_hash = SHA1( $salt . MD5($email) . $password );</pre>
+```php
+$salt = random_string();
+$password_hash = SHA1( $salt . MD5($email) . $password );
+```
 
 I know I said above that there's no point in hashing twice, but in this case it does have an effect - we don't want the salting algorithm to be obvious and now password hash doesn't contain anything that is recognizable as a word or email address.
 
