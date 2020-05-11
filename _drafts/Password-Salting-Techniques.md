@@ -3,7 +3,6 @@ id: 321
 title: Password Salting Techniques
 date: 2014-03-12T23:38:47+00:00
 author: AndyM
-layout: post
 guid: http://www.andymadge.com/2014/03/163-revision-19/
 ---
 This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.<!--more-->

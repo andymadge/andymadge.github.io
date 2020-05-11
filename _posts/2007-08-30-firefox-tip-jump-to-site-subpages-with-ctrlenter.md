@@ -3,7 +3,6 @@ id: 43
 title: 'Firefox Tip: Jump to Site Subpages with Ctrl+Enter'
 date: 2007-08-30T10:20:06+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/computers/2007/08/30/firefox-tip-jump-to-site-subpages-with-ctrlenter/
 categories:
   - Computers

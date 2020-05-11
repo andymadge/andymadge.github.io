@@ -3,7 +3,6 @@ id: 39
 title: Stalk your tube line with Twitter
 date: 2007-06-13T10:24:42+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/useful-links/2007/06/13/stalk-your-tube-line-with-twitter/
 categories:
   - Useful Links

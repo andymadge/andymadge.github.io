@@ -3,7 +3,6 @@ id: 163
 title: Password Salting Techniques
 date: 2009-08-09T19:36:52+00:00
 author: AndyM
-layout: post
 guid: http://www.andymadge.com/?p=163
 categories:
   - Computers

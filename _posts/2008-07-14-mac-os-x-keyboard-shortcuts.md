@@ -3,7 +3,6 @@ id: 59
 title: Mac OS X keyboard shortcuts
 date: 2008-07-14T17:43:29+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/computers/2008/07/14/mac-os-x-keyboard-shortcuts/
 categories:
   - Computers
