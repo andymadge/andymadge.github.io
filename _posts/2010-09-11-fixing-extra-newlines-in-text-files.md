@@ -9,7 +9,7 @@ categories:
 ---
 When editing source code you often come across files with additional blank lines that shouldn't be there.
 
-<img title="Extra blank lines" src="/assets/images/fixing-newlines-01.png" alt="Extra blank lines" /> 
+![Extra blank lines]({% link /assets/images/fixing-newlines-01.png %})
 
 The problem is generally caused by someone editing the file with a text editor which doesn't understand and maintain the different newline types. You then end up with a file containing a mix of different line endings.<!--more-->
 
@@ -59,11 +59,12 @@ First you need a text editor that can display the different types and also searc
 
 If you open the file in Notepad2 then go to View -> "Show Line Endings" you'll see the line endings:
 
-<img title="Mixed line ending" src="/assets/images/fixing-newlines-02.png" alt="Mixed line ending" /> 
+![Mixed line endings]({% link /assets/images/fixing-newlines-02.png %})
 
 Now that you know which line endings are in the file, you can bring up the Replace dialog:
 
-<img class="size-full wp-image-206" title="Replace dialog" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-17_54_08.png" alt="Replace dialog" width="515" height="305" />  
+![Replace dialog]({% link /assets/images/fixing-newlines-03.png %})
+
 To search for the line endings, you need to tick "Transform backslahes"
 
 Then search for the corresponding line end type:
@@ -106,7 +107,7 @@ The only thing left to do is convert all the line endings to the correct type. G
 
 You have now got a file with consistent line endings and no extraneous blank lines:
 
-<img class="alignnone size-full wp-image-208" title="Screenshot - 11_09_2010 , 18_03_38" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-18_03_38.png" alt="Screenshot - 11_09_2010 , 18_03_38" width="629" height="501" /> 
+![Finished result]({% link /assets/images/fixing-newlines-04.png %})
 
 ## Alternative Method
 
@@ -114,10 +115,10 @@ An alternative method is to convert the newlines first and then swap all the dou
 
 After converting the line endings you get:
 
-<img class="alignnone size-full wp-image-210" title="Screenshot - 11_09_2010 , 18_07_54" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-18_07_54.png" alt="Screenshot - 11_09_2010 , 18_07_54" width="629" height="501" /> 
+![Alternate - extra blank lines]({% link /assets/images/fixing-newlines-05.png %})
 
 Next do the following Replace:
 
-<img class="alignnone size-full wp-image-211" title="Screenshot - 11_09_2010 , 18_09_46" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-18_09_46.png" alt="Screenshot - 11_09_2010 , 18_09_46" width="515" height="305" /> 
+![Alternate - replace dialog]({% link /assets/images/fixing-newlines-06.png %})
 
 Now you should have the same result as above.
