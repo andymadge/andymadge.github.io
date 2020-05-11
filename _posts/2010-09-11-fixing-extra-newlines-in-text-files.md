@@ -9,7 +9,7 @@ categories:
 ---
 When editing source code you often come across files with additional blank lines that shouldn't be there.
 
-<img class="size-full wp-image-196" title="Extra blank lines" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-17_31_28.png" alt="Extra blank lines" width="629" height="501" /> 
+<img title="Extra blank lines" src="/assets/images/fixing-newlines-01.png" alt="Extra blank lines" /> 
 
 The problem is generally caused by someone editing the file with a text editor which doesn't understand and maintain the different newline types. You then end up with a file containing a mix of different line endings.<!--more-->
 
@@ -59,7 +59,7 @@ First you need a text editor that can display the different types and also searc
 
 If you open the file in Notepad2 then go to View -> "Show Line Endings" you'll see the line endings:
 
-<img class="size-full wp-image-194" title="Mixed line ending" src="http://www.andymadge.com/blog/wp-content/uploads/Screenshot-11_09_2010-17_27_59.png" alt="Mixed line ending" width="648" height="466" /> 
+<img title="Mixed line ending" src="/assets/images/fixing-newlines-02.png" alt="Mixed line ending" /> 
 
 Now that you know which line endings are in the file, you can bring up the Replace dialog:
 
