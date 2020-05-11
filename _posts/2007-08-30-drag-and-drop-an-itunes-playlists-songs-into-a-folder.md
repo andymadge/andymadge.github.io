@@ -3,7 +3,6 @@ id: 44
 title: Drag and drop an iTunes playlist's songs into a folder
 date: 2007-08-30T10:59:15+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/computers/2007/08/30/drag-and-drop-an-itunes-playlists-songs-into-a-folder/
 categories:
   - Computers

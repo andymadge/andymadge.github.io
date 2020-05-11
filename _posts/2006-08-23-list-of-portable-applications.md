@@ -3,7 +3,6 @@ id: 17
 title: List of Portable Applications
 date: 2006-08-23T14:41:05+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/pc-help/2006/08/23/list-of-portable-applications/
 categories:
   - Computers

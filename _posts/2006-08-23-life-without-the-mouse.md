@@ -3,7 +3,6 @@ id: 16
 title: Life without the Mouse
 date: 2006-08-23T13:59:42+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/pc-help/2006/08/23/life-without-the-mouse/
 categories:
   - Computers

@@ -3,7 +3,6 @@ id: 46
 title: Server Side Includes (SSI)
 date: 2007-08-30T15:27:42+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/web-design/2007/08/30/server-side-includes-ssi/
 categories:
   - Web Development

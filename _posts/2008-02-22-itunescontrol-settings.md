@@ -3,7 +3,6 @@ id: 54
 title: iTunesControl Settings
 date: 2008-02-22T20:15:25+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/computers/software/2008/02/22/itunescontrol-settings/
 categories:
   - iTunes

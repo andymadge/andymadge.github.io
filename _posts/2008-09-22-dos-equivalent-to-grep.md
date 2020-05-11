@@ -3,7 +3,6 @@ id: 64
 title: DOS Equivalent of GREP
 date: 2008-09-22T14:40:18+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/uncategorized/2008/09/22/dos-equivalent-to-grep/
 categories:
   - Computers

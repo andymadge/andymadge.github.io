@@ -3,7 +3,6 @@ id: 31
 title: Auto Mounting NTFS partitions at boot
 date: 2007-01-28T23:53:48+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/uncategorized/2007/01/28/ubuntu-continued/
 categories:
   - Ubuntu Linux

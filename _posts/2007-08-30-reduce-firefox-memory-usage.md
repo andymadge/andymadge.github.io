@@ -3,7 +3,6 @@ id: 45
 title: Reduce Firefox Memory Usage
 date: 2007-08-30T11:50:52+00:00
 author: AndyM
-layout: post
 guid: http://blog.andymadge.com/computers/2007/08/30/reduce-firefox-memory-usage/
 categories:
   - Computers
