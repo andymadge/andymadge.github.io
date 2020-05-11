@@ -12,27 +12,31 @@ categories:
 ---
 This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.<!--more-->
 
-> ## Caveat
-> 
-> Before I continue, I just want to make an important point:
-> 
-> The single best piece of advice I can give when building your own authentication system is...
-> 
->   * Don't do it.
-> 
-> I don't mean don't use authentication, what I mean is that cryptographic techniques are complicated.  Actually they're extremely complicated.  If you don't have years of experience as a cryptographer, you're going to make mistakes that will leave security holes.  Guaranteed.
-> 
-> The alternative is to use a well respected authentication framework such as:
-> 
->   * [PHPass](http://www.openwall.com/phpass/)
->   * [Zend_Auth](http://framework.zend.com/manual/en/zend.auth.html){.broken_link} (requires Zend Framework)
->   * [CodeIgniter Authentication Libraries](http://codeigniter.com/wiki/Category:Libraries::Authentication/){.broken_link} (require CodeIgniter)
-> 
-> [](http://www.openwall.com/phpass/)Frameworks such as this are developed by people who really do know what they are doing, and any security holes are generally quickly discovered and plugged.
-> 
-> I'm certainly no cryptographer, and this article is based on my current understanding.
-> 
-> That said, assuming you're going ahead anyway, let's get back to the article...
+{% capture caveat %}
+## Caveat
+
+Before I continue, I just want to make an important point:
+
+The single best piece of advice I can give when building your own authentication system is...
+
+  * Don't do it.
+
+I don't mean don't use authentication, what I mean is that cryptographic techniques are complicated.  Actually they're extremely complicated.  If you don't have years of experience as a cryptographer, you're going to make mistakes that will leave security holes.  Guaranteed.
+
+The alternative is to use a well respected authentication framework such as:
+
+  * [PHPass](http://www.openwall.com/phpass/)
+  * [Zend_Auth](http://framework.zend.com/manual/en/zend.auth.html){.broken_link} (requires Zend Framework)
+  * [CodeIgniter Authentication Libraries](http://codeigniter.com/wiki/Category:Libraries::Authentication/){.broken_link} (require CodeIgniter)
+
+[](http://www.openwall.com/phpass/)Frameworks such as this are developed by people who really do know what they are doing, and any security holes are generally quickly discovered and plugged.
+
+I'm certainly no cryptographer, and this article is based on my current understanding.
+
+That said, assuming you're going ahead anyway, let's get back to the article...
+{% endcapture %}
+
+<div class="notice--warning">{{ caveat | markdownify }}</div>
 
 ## Attacks
 
