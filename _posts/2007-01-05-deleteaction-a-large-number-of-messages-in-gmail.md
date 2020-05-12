@@ -12,9 +12,7 @@ When you search in Gmail the results are returned in pages of 20. If you press *
 
 The same thing applies if you want to perform some action on all messages in a Label. You can only see 100 messages at a time, so how do you select the entire Label?
 
-<!--more-->The answer is in the Gmail help 
-
-[here](http://mail.google.com/support/bin/answer.py?answer=35088&query=delete+all&topic=&type=f&ctx=search)
+<!--more-->
 
 Basically, when you press **Select: All**, if the label/search results contain more than 100 message, an extra line appears immediately below it, saying **Select all [number] conversations in [current view]** Click on this to select all messages in the label/results.
 

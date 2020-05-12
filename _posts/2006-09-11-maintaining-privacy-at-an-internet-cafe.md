@@ -8,6 +8,7 @@ categories:
   - Computers
   - Security
   - Useful Links
+link: http://www.experts-exchange.com/Security/Win_Security/Q_21496483.html
 ---
 Accessing any protected system from an Internet Cafe-type situation is always a risk. This is because you have no way of knowing whether there is any spy/sniffing/keylogging software on the PC - either installed by another user or by the sysadmin. The following are tips to minimise the risks
 

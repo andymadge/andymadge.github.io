@@ -8,5 +8,4 @@ categories:
   - Quotes
 ---
 > “Tell me and I'll forget; show me and I may remember; involve me and I'll understand.”
-
-- Chinese Proverb
+<cite><a href="https://www.brainyquote.com/quotes/benjamin_franklin_383997">Benjamin Franklin</a></cite>

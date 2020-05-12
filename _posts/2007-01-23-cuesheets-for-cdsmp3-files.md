@@ -9,7 +9,7 @@ categories:
   - Music
   - Software
 ---
-Since Cuesheet Heaven seems to be down, here are a couple of alternatives:
+Since [Cuesheet Heaven](https://www.regeert.nl/cuesheet/) seems to be down, here are a couple of alternatives:
 
   * [Freedb2cue](http://leho.kraav.com/freedb2cue/){.broken_link} - online converter from [freedb](http://www.freedb.org/) to cue sheet
   * [CueMaster](http://cuemaster.org/) - Windows software to create cue sheet from freedb data

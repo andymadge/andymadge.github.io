@@ -14,7 +14,8 @@ Obviously this works for any web page, I just happen to be doing it for this blo
 
 <!--more-->
 
-<pre>pre, code {
+```css
+pre, code {
 font-size: 1.2em;
 }
 
@@ -44,4 +45,5 @@ margin-right: auto;
 }
 
 .right { float: right; }
-.left { float: left; }</pre>
+.left { float: left; }
+```

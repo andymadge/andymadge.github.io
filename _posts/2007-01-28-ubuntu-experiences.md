@@ -7,7 +7,7 @@ guid: http://blog.andymadge.com/linux/ubuntu/2007/01/28/ubuntu-experiences/
 categories:
   - Ubuntu Linux
 ---
-<img class="size-full wp-image-145 alignright" title="Ubuntu logo" src="http://www.andymadge.com/blog/wp-content/uploads/Ubuntu_Logo.png" alt="Ubuntu logo" width="250" height="65" />
+![Ubuntu logo]({% link assets/images/Ubuntu_Logo.png %})
 
 I've just installed [Ubuntu](http://www.ubuntu.com/) 6.10 and I'm going to be recording my experiences here, mostly so I can refer back to it later when I can't remember how I did things...  
 <!--more-->
@@ -23,8 +23,8 @@ It now seems to be running quite well - it's much more responsive than the LiveC
 
 My current todo list is:
 
-  * [Mount the Windows partition automatically at boot](/ubuntu/2007/01/28/auto-mounting-ntfs-partitions-at-boot/){.broken_link}
+  * [Mount the Windows partition automatically at boot]({% post_url 2007-01-28-auto-mounting-ntfs-partitions-at-boot %})
   * Install newest Nvidia driver and configure TV out
-  * [Install SlimServer](/ubuntu/2007/01/28/installing-slimserver-651-on-ubuntu-610/){.broken_link}
+  * [Install SlimServer]({% post_url 2007-01-28-installing-slimserver-651-on-ubuntu-610 %})
   * Mount MP3 network share from main Windows PC - this is where all the music for SlimServer is stored.
   * Install multimedia software - DivX etc.

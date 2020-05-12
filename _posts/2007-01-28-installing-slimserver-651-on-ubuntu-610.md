@@ -7,6 +7,6 @@ guid: http://blog.andymadge.com/ubuntu/2007/01/28/installing-slimserver-651-on-u
 categories:
   - Ubuntu Linux
 ---
-Ubuntu is based on Debian, so I followed the instructions on the Slim Devices website [here](http://wiki.slimdevices.com/index.php/Debian_Package) and it worked fine. It basically involves adding the Slim Devices repository to Synaptic Package Manager (Settings/Repository->Third Party) and then installing using apt-get.
+Ubuntu is based on Debian, so I followed the instructions on the Slim Devices website [here](http://wiki.slimdevices.com/index.php/Debian_Package) and it worked fine. It basically involves adding the Slim Devices repository to Synaptic Package Manager `Settings/Repository -> Third Party` and then installing using apt-get.
 
 The next thing to do is mount the network share so it can be accessed by SlimServer.

@@ -6,12 +6,11 @@ author: AndyM
 guid: http://blog.andymadge.com/pc-help/2006/10/23/remotely-enable-remote-desktop/
 categories:
   - Computers
+link: http://www.petri.co.il/remotely_enable_remote_desktop_on_windows_server_2003.htm
 ---
-Instructions How to do it...
+Instructions how to do it from [here](http://www.petri.co.il/remotely_enable_remote_desktop_on_windows_server_2003.htm):
 
-<!--more-->from 
-
-[here](http://www.petri.co.il/remotely_enable_remote_desktop_on_windows_server_2003.htm):
+<!--more-->
 
 > <font size="5">How can I remotely enable</font> <font size="5" face="Verdana">Remote Desktop on Windows Server 2003?</font>
 > 

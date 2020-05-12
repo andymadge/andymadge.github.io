@@ -7,6 +7,6 @@ guid: http://blog.andymadge.com/useful-links/2007/06/13/stalk-your-tube-line-wit
 categories:
   - Useful Links
 ---
-<img class="size-full wp-image-150 alignright" title="twittertube1" src="http://www.andymadge.com/blog/wp-content/uploads/twittertube1.gif" alt="twittertube1" width="283" height="120" />
+![twittertube](/assets/images/twittertube.gif)
 
-I have been struggling to see the point of <a href="http://www.twitter.com/" target="_blank">Twitter.com</a> to be honest, but here's something that does make it a little useful - <a href="http://tommorris.org/" target="_blank">Tom Morris</a> has written a script that updates Twitter accounts with the current status
+I have been struggling to see the point of <a href="http://www.twitter.com/" target="_blank">Twitter.com</a> to be honest, but here's something that does make it a little useful - <a href="http://tommorris.org/" target="_blank">Tom Morris</a> has written a script that updates Twitter accounts with the current status.  Here's the [Piccadilly Line](https://twitter.com/tubepiccadil) one.
