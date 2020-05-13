@@ -9,7 +9,9 @@ categories:
   - Security
   - Web Development
 ---
-This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.<!--more-->
+This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.
+
+<!--more-->
 
 {% capture caveat %}
 ## Caveat
@@ -39,7 +41,7 @@ That said, assuming you're going ahead anyway, let's get back to the article...
 
 ## Attacks
 
-Lets look at the type of attacks we want to protect against.
+Let's look at the type of attacks we want to protect against.
 
 ### Dictionary
 
@@ -53,11 +55,11 @@ This involves trying every possible password and in theory will always work agai
 
 This is a way of attacking hashed passwords.  The idea is that instead of calculating the hash of each password you want to try, you use a list of pre-calculated hashes, thus saving computation time. ([wikipedia entry](http://en.wikipedia.org/wiki/Rainbow_table))
 
+## Password Storage
+
 Bearing those in mind, let's look at the different ways you could store the password in your database:
 
-<h2 style="font-size: 1.5em;">
-  Plain Text
-</h2>
+### Plain Text
 
 This is a massively bad idea.  If someone gets hold of your database, they know everybody's password.
 
@@ -65,7 +67,7 @@ NEVER EVER STORE PASSWORDS AS PLAIN TEXT.  ANYWHERE.  EVER.
 
 One argument against this is "The spec requires that the password be stored in case someone forgets it."  If that's the case, then you should use reversible encryption and DON'T STORE THE ENCRYPTION KEY IN THE DATABASE.
 
-## Hashed Passwords
+### Hashed Passwords
 
 A hash is a one-way algorithm that is commonly used in cryptography.  The idea is that there is no way to work backward to find out the password from the hash value.  There are many different hash algorithms, each with their own strengths and weaknesses. ([list of hash algorithms supported by PHP](http://uk3.php.net/manual/en/function.hash-algos.php))
 
@@ -87,11 +89,11 @@ So at this point, we're recommending:
 $password_hash = SHA1( $password );
 ```
 
-### Vulnerabilities
+## Vulnerabilities
 
 Hashed passwords will provide complete protection against dictionary attacks.  They also protect effectively against brute force attacks since the operation would take an infeasibly long time, however they are still vulnerable to rainbow table attacks.
 
-## Salting
+### Salting
 
 Salting is a technique used to protect hashes against rainbow table attacks.  The idea is that an additional string - known as 'salt' - is introduced into the hash value:
 

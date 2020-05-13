@@ -11,41 +11,28 @@ When editing source code you often come across files with additional blank lines
 
 ![Extra blank lines]({% link /assets/images/fixing-newlines-01.png %})
 
-The problem is generally caused by someone editing the file with a text editor which doesn't understand and maintain the different newline types. You then end up with a file containing a mix of different line endings.<!--more-->
+The problem is generally caused by someone editing the file with a text editor which doesn't understand and maintain the different newline types. You then end up with a file containing a mix of different line endings.
+
+<!--more-->
 
 Mixed line endings can have all sorts of unexpected consequences in your applications. Also, editing is really annoying since you have to do a lot more scrolling.
 
 The common newline types are:
 
-<table border="0">
+<table>
   <tr>
-    <td>
-      LF
-    </td>
-    
-    <td>
-      Unix, Linux and Mac OS X
-    </td>
+    <td>LF</td>
+    <td>Unix, Linux and Mac OS X</td>
   </tr>
   
   <tr>
-    <td>
-      CR
-    </td>
-    
-    <td>
-      Mac OS up to 9
-    </td>
+    <td>CR</td>
+    <td>Mac OS up to 9</td>
   </tr>
   
   <tr>
-    <td>
-      CR+LF
-    </td>
-    
-    <td>
-      Windows
-    </td>
+    <td>CR+LF</td>
+    <td>Windows</td>
   </tr>
 </table>
 
@@ -69,35 +56,20 @@ To search for the line endings, you need to tick "Transform backslahes"
 
 Then search for the corresponding line end type:
 
-<table border="0">
+<table>
   <tr>
-    <td>
-      \r
-    </td>
-    
-    <td>
-      CR
-    </td>
+    <td>\r</td>
+    <td>CR</td>
   </tr>
   
   <tr>
-    <td>
-      \n
-    </td>
-    
-    <td>
-      LF
-    </td>
+    <td>\n</td>
+    <td>LF</td>
   </tr>
   
   <tr>
-    <td>
-      \r\n
-    </td>
-    
-    <td>
-      CR+LF
-    </td>
+    <td>\r\n</td>
+    <td>CR+LF</td>
   </tr>
 </table>
 
