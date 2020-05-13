@@ -10,4 +10,6 @@ categories:
 ---
 Global ignore pattern for Web Development:
 
-`[Tt]humbs.db *.lck *.LCK _notes */_notes dwsync.xml .settings .project`
+```
+[Tt]humbs.db *.lck *.LCK _notes */_notes dwsync.xml .settings .project
+```
