@@ -12,14 +12,20 @@ Windows caches DNS responses to speed up network access, but sometimes this can 
 
 If you make changes to DNS and want to test the results straight away, you need to clear the cache with:
 
-<pre>ipconfig /flushdns</pre>
+```batchfile
+ipconfig /flushdns
+```
 
 You can view the current cache with:
 
-<pre>ipconfig /displaydns</pre>
+```batchfile
+ipconfig /displaydns
+```
 
 or
 
-<pre>ipconfig /displaydns | more</pre>
+```batchfile
+ipconfig /displaydns | more
+```
 
 to see a screen at a time

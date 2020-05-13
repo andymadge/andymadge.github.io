@@ -10,7 +10,9 @@ categories:
 ---
 I've been assessing various backup options for both business and personal use recently so here's a summary of my findings
 
-<!--more-->The problem with any form of local backup such as CD/DVD or external hard drive is that it only protects you from a hard drive crash. If someone steals your computer or your house burns down, it's likely that you'll lose the backup as well.
+<!--more-->
+
+The problem with any form of local backup such as CD/DVD or external hard drive is that it only protects you from a hard drive crash. If someone steals your computer or your house burns down, it's likely that you'll lose the backup as well.
 
 Off-site backups avoid these risks although there are disadvantages - if you are doing it manually you have to remember to do it and to take the backup off site (e.g. store the CDRs/external drive at work or a friends house)
 

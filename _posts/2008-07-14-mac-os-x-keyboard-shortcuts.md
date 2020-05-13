@@ -19,7 +19,7 @@ The &#8984; key is also known as Command
 The &#8997; key is also known as Alt or Option  
 The &#8677; key is also known as Tab
 
-<table class="cleantable" border="0">
+<table border="0">
   <tr>
     <th>
       Action
@@ -36,7 +36,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      &#8984;-Space (Command-Space)
+      &#8984;-Space
     </td>
   </tr>
   
@@ -46,7 +46,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      &#8984;-&#8997;-Space (Command-Option-Space)
+      &#8984;-&#8997;-Space
     </td>
   </tr>
   
@@ -56,7 +56,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      &#8984;-click it (Command-click it)
+      &#8984;-click it
     </td>
   </tr>
   
@@ -66,7 +66,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      &#8984;-&#8997;-Escape (Command-Option-Escape)
+      &#8984;-&#8997;-Escape
     </td>
   </tr>
   
@@ -76,7 +76,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      Ctrl-&#8984;-Power (Ctrl-Command-Power)
+      Ctrl-&#8984;-Power
     </td>
   </tr>
   
@@ -86,7 +86,7 @@ The &#8677; key is also known as Tab
     </td>
     
     <td>
-      &#8984;-&#8997;-Shift-Power (Command-Option-Shift-Power)
+      &#8984;-&#8997;-Shift-Power
     </td>
   </tr>
 </table>

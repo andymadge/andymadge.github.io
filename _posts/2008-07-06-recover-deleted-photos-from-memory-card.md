@@ -16,8 +16,8 @@ There are loads of free utilities that will recover photos, and I suggest trying
 
   1. **Zero Assumption Recovery** 
   * Full version is paid-for but the photo recovery option is free
-  * Download [here](http://www.z-a-recovery.com/zar83setup.exe){.broken_link}
-  * Follow [these instructions](http://www.z-a-recovery.com/demo-ir.htm){.broken_link}
+  * Download [here](http://www.z-a-recovery.com/)
+  * Follow [these instructions](https://www.z-a-recovery.com/tutorials/digital-image-recovery.aspx)
 
   2. **Recuva**
   * Download [here](http://www.recuva.com/download)
@@ -25,10 +25,10 @@ There are loads of free utilities that will recover photos, and I suggest trying
 
   3. **Undelete Plus**
   * Download [here](http://www.undelete-plus.com/download.html)
-  * Follow [these instructions](http://www.undelete-plus.com/help/7_quickstart.html){.broken_link}
+  * Follow [these instructions](https://www.undeleteplus.com/help.php)
 
 If you've tried all of those and been unsuccessful, then I'm afraid it's not looking very promising, but if you want to continue trying here are a few more utils:
 
-  * [<span class="header_gray">Avira UnErase Personal</span>](http://www.free-av.com/en/tools/10/avira_unerase_personal.html)
-  * [<span class="header_gray">FreeUndelete</span>](http://www.officerecovery.com/freeundelete/)
-  * [<span class="contentname"><span class="Stil5">PC</span> INSPECTOR File Recovery</span>](http://www.pcinspector.de/default.htm?Language=1)
+  * [Avira UnErase Personal](https://www.portablefreeware.com/?id=864)
+  * [FreeUndelete](http://www.officerecovery.com/freeundelete/)
+  * [PC INSPECTOR File Recovery](http://www.pcinspector.de/default.htm?Language=1)

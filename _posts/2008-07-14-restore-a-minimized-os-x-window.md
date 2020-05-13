@@ -8,14 +8,14 @@ categories:
   - Apple Mac
   - OS X
 ---
-In OS X you can swap between applications in a similar way to Windows (Alt+Tab on Windows,<img src="http://www.danrodney.com/mac/img/menusym-command.gif" alt="" width="12" height="12" /> +Tab on OS X) however there's one important difference - Windows swaps between all open windows, but OS X only swaps between apps.  The problem is that in OS X you can switch to the right application but the window you want can be minimized.
+In OS X you can swap between applications in a similar way to Windows (Alt+Tab on Windows, &#8984;+Tab on OS X) however there's one important difference - Windows swaps between all open windows, but OS X only swaps between apps.  The problem is that in OS X you can switch to the right application but the window you want can be minimized.
 
 To restore the window from the dock you need to:
 
-  1. Hold<img src="http://www.danrodney.com/mac/img/menusym-command.gif" alt="" width="12" height="12" /> 
+  1. Hold &#8984; 
   2. Press Tab until the correct app is highlighted
-  3. Hold<img src="http://www.danrodney.com/mac/img/menusym-option.gif" alt="" width="12" height="11" /> 
-  4. Release<img src="http://www.danrodney.com/mac/img/menusym-command.gif" alt="" width="12" height="12" /> 
-  5. Release<img src="http://www.danrodney.com/mac/img/menusym-option.gif" alt="" width="12" height="11" /> 
+  3. Hold &#8997;
+  4. Release &#8984;
+  5. Release &#8997;
 
-It's a bit tricky but you soon get the hang of it and it's easier than picking up the mouse<img src="http://www.andymadge.com/blog/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;" />
+It's a bit tricky but you soon get the hang of it and it's easier than picking up the mouse <img src="/assets/images/simple-smile.png" alt=":-)" style="height: 1em; max-height: 1em;" />

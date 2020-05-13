@@ -7,4 +7,4 @@ guid: http://blog.andymadge.com/uncategorized/2007/06/29/identify-an-external-mo
 categories:
   - Computers
 ---
-In addition to packing and identification stickers, you can identify an external modem by installing as a 'standard modem', running the diagnostics and reading the responses for AT13 and AT16.
+In addition to packing and identification stickers, you can identify an external modem by installing as a 'standard modem', run the diagnostics and reading the responses for `AT13` and `AT16` commands.

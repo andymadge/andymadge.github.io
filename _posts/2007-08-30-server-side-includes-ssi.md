@@ -7,14 +7,20 @@ guid: http://blog.andymadge.com/web-design/2007/08/30/server-side-includes-ssi/
 categories:
   - Web Development
 ---
-Server Side Include can be used to allow insertion of an HTML into another. e.g. header or footer can be separated from pages so you only have to change a single file to update the header/footer on all pages of your site.<!--more-->
+Server Side Include can be used to allow insertion of an HTML into another. e.g. header or footer can be separated from pages so you only have to change a single file to update the header/footer on all pages of your site.
+
+<!--more-->
 
 [Here](http://www.andreas.com/faq-ssi.html)'s a fairly good introduction to SSI although it does miss a few important points:
 
-  * If you are using .htaccess to enable SSI for a single folder you may want to add couple of extra lines:  
-    `Options Indexes FollowSymLinks Includes<br />
-AddType application/x-httpd-cgi .cgi<br />
-AddType text/x-server-parsed-html .html`
+  * If you are using `.htaccess` to enable SSI for a single folder you may want to add couple of extra lines:
+
+    ```apache
+    Options Indexes FollowSymLinks Includes
+    AddType application/x-httpd-cgi .cgi
+    AddType text/x-server-parsed-html .html
+    ```
+
   * A better option is to use the XBitHack: 
       1. Remove from .htaccess anything else relating to SSI
       2. add `XBitHack on`

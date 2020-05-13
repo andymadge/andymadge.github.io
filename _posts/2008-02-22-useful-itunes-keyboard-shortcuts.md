@@ -14,7 +14,7 @@ Quick reference for keyboard shortcuts
 
 <table style="line-height: 1.5em">
   <tr>
-    <td style="width: 120px">
+    <td>
       CTRL + L
     </td>
     
@@ -24,41 +24,41 @@ Quick reference for keyboard shortcuts
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       CTRL + I
     </td>
     
-    <td valign="top">
+    <td>
       Get Info
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       CTRL + R
     </td>
     
-    <td valign="top">
+    <td>
       Show in Windows Explorer
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       CTRL + G
     </td>
     
-    <td valign="top">
+    <td>
       Show/Hide Artwork
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       CTRL + ALT + F
     </td>
     
-    <td valign="top">
+    <td>
       Select Search field
     </td>
   </tr>
@@ -70,7 +70,7 @@ Quick reference for keyboard shortcuts
 
 <table style="line-height: 1.5em">
   <tr>
-    <td style="width: 120px">
+    <td>
       WIN + `
     </td>
     
@@ -80,141 +80,141 @@ Quick reference for keyboard shortcuts
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 1
     </td>
     
-    <td valign="top">
+    <td>
       Rate song 1 Stars
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 2
     </td>
     
-    <td valign="top">
+    <td>
       Rate song 2 Stars
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 3
     </td>
     
-    <td valign="top">
+    <td>
       Rate song 3 Stars
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 4
     </td>
     
-    <td valign="top">
+    <td>
       Rate song 4 Stars
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 5
     </td>
     
-    <td valign="top">
+    <td>
       Rate song 5 Stars
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + 6
     </td>
     
-    <td valign="top">
+    <td>
       Show song rating
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + C
     </td>
     
-    <td valign="top">
+    <td>
       Show song info
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + SHIFT + S
     </td>
     
-    <td valign="top">
+    <td>
       Show/Hide iTunes window
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + V
     </td>
     
-    <td valign="top">
+    <td>
       Play Party Shuffle now
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + A
     </td>
     
-    <td valign="top">
+    <td>
       Play Next Artist in Playlist
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + SHIFT + A
     </td>
     
-    <td valign="top">
+    <td>
       Play Previous Artist
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + Z
     </td>
     
-    <td valign="top">
+    <td>
       Play Next Album
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + SHIFT + Z
     </td>
     
-    <td valign="top">
+    <td>
       Play Previous Album
     </td>
   </tr>
   
   <tr>
-    <td valign="top">
+    <td>
       WIN + X
     </td>
     
-    <td valign="top">
+    <td>
       Clear Search
     </td>
   </tr>

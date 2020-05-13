@@ -8,16 +8,14 @@ categories:
   - iTunes
   - Software
 ---
-For non-default Hotkey settings, see [this post](/2008/02/useful-itunes-keyboard-shortcuts/){.broken_link}
+For non-default Hotkey settings, see [this post]({% post_url 2008-02-22-useful-itunes-keyboard-shortcuts %})
 
-[<img id="image48" src="http://blog.andymadge.com/wp-content/uploads/screenshot-22_02_2008-17_52_57.png" alt="Display Options" />](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
+![Display Options](/assets/images/iTunesControlSettings1.png)
 
-[<!--more-->](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
+![Background Colour Picker](/assets/images/iTunesControlSettings2.png)
 
-[<img id="image49" src="http://blog.andymadge.com/wp-content/uploads/screenshot-22_02_2008-17_53_34.png" alt="Background Colour Picker" />](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
+![Album Art Options](/assets/images/iTunesControlSettings3.png)
 
- [](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}[<img id="image50" src="http://blog.andymadge.com/wp-content/uploads/screenshot-22_02_2008-17_54_16.png" alt="Album Art Options" />](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
+![Miscellaneous Options](/assets/images/iTunesControlSettings4.png)
 
- [](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}[<img id="image51" src="http://blog.andymadge.com/wp-content/uploads/screenshot-22_02_2008-17_55_15.png" alt="Miscellaneous Options" />](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
-
- [](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}[<img id="image52" src="http://blog.andymadge.com/wp-content/uploads/screenshot-22_02_2008-17_56_20.png" alt="Layout" />](http://blog.andymadge.com/computers/itunes/2008/02/22/useful-itunes-keyboard-shortcuts/){.broken_link}
+![Layout](/assets/images/iTunesControlSettings5.png)

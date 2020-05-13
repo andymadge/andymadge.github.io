@@ -11,20 +11,26 @@ Some notes on the way I use iTunes:
 
 ### Updating the Library
 
-iTunes assumes that you will be allowing it to manage your music, and that the only ways you will add music are buying it from the iTunes Store, or ripping CDs with iTunes. It also assumes you will delete music from within iTunes. If you download music from other sources, or delete/move the files around in Explorer, then the iTunes library will lose track of the MP3s.<!--more-->
+iTunes assumes that you will be allowing it to manage your music, and that the only ways you will add music are buying it from the iTunes Store, or ripping CDs with iTunes. It also assumes you will delete music from within iTunes. If you download music from other sources, or delete/move the files around in Explorer, then the iTunes library will lose track of the MP3s.
 
-There are a number of ways around these problems, but the best I have found is a utility called <a href="http://itlu.ownz.ch/wordpress/" target="_blank" class="broken_link">iTunes Library Updater</a> This has both GUI and command-line versions, so it can be scheduled to run every day to keep the library up to date.
+<!--more-->
+
+There are a number of ways around these problems, but the best I have found is a utility called [iTunes Library Updater](http://itlu.ownz.ch/wordpress/) This has both GUI and command-line versions, so it can be scheduled to run every day to keep the library up to date.
 
 To schedule it, first of all create a profile with the settings you need and then save the profile. Add a Windows scheduled task with the command line:
 
-> `iTLUConsole.exe /p:"c:\myprofile.itlu"`
+```batchfile
+iTLUConsole.exe /p:"c:\myprofile.itlu"
+```
 
 ### General Tips
 
-If you have more than one computer, it is a good idea to set up the library so it uses UNC paths instead of local ones (e.g. `\\mycomputer\mp3s` ) Then you can copy the iTunes library database to any other computer and it will work. The easiest way to achieve this is through iTunes Library Updater - just make sure the paths you point it at are the UNC ones not the local ones. When it comes to copying the library to different PCs, I have a .BAT file on the main iTunes PC that I can run from any other PC - BringiTunes.bat:
+If you have more than one computer, it is a good idea to set up the library so it uses UNC paths instead of local ones (e.g. `\\mycomputer\mp3s` ) Then you can copy the iTunes library database to any other computer and it will work. The easiest way to achieve this is through iTunes Library Updater - just make sure the paths you point it at are the UNC ones not the local ones. When it comes to copying the library to different PCs, I have a .BAT file on the main iTunes PC that I can run from any other PC - `BringiTunes.bat`:
 
-> `copy "\\mainpc\c$\Documents and Settings\username\My Documents\My Music\iTunes\iTunes Music Library.xml" "%userprofile%\My Documents\My Music\iTunes\"`  
->  `copy "``\\mainpc\c$\Documents and Settings\username\My Documents\``My Music\iTunes\iTunes Library.itl" "%userprofile%\My Documents\My Music\iTunes\"`
+```batchfile
+copy "\\mainpc\c$\Documents and Settings\username\My Documents\My Music\iTunes\iTunes Music Library.xml" "%userprofile%\My Documents\My Music\iTunes\"  
+copy "\\mainpc\c$\Documents and Settings\username\My Documents\My Music\iTunes\iTunes Library.itl" "%userprofile%\My Documents\My Music\iTunes\"
+```
 
 Obviously you will need to change the `\\mainpc\c$\Documents and Settings\username\My Documents\` path to point to your iTunes folder.
 

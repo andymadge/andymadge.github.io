@@ -13,5 +13,5 @@ Some speakers are better than others at dealing with the interference caused by 
 Executive summary is:
 
   * The interference affects the amplifier, not the speakers or the cable (most computer speakers have the amp built-in to one of the speakers) so the solution is a well shielded amplifier.
-  * Cheap solution is [DLO Portable Speakers <span class="style3">for iPhone</span>](http://www.dlo.com/Products/PortSpeakers_iPhone_Prod.tpl){.broken_link} (Apparently these are now distributed by Philips)
+  * Cheap solution is [DLO Portable Speakers for iPhone](http://www.dlo.com/Products/PortSpeakers_iPhone_Prod.tpl){.broken_link} (Apparently these are now distributed by Philips)
   * More expensive solution is [Sonic Impact T-Amp](http://www.amazon.co.uk/Sonic-Impact-Portable-T-Amp-Gen/dp/B000WCBKLE/ref=sr_1_1?ie=UTF8&s=electronics&qid=1214505419&sr=8-1) with high sensitivity (90dB) bookshelf speakers

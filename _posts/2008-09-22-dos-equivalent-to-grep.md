@@ -10,7 +10,8 @@ categories:
 ---
 In Unix you can pipe the output of a command into the GREP command in order to only display the lines that contain a required string.  This is means you don't have to scroll through pages of output to find the bit you're interested in.  The DOS equivalent of GREP is FIND:
 
-<pre>Searches for a text string in a file or files.
+```
+Searches for a text string in a file or files.
 
 FIND [/V] [/C] [/N] [/I] [/OFF[LINE]] "string" [[drive:][path]filename[ ...]]
 
@@ -23,16 +24,21 @@ FIND [/V] [/C] [/N] [/I] [/OFF[LINE]] "string" [[drive:][path]filename[ ...]]
 [drive:][path]filename
 Specifies a file or files to search.
 
-<em>If a path is not specified, FIND searches the text typed at the prompt
-or piped from another command.</em></pre>
+If a path is not specified, FIND searches the text typed at the prompt
+or piped from another command.
+```
 
 this can be useful with the netstat command:
 
-<pre>netstat -ano | find /i ":80"</pre>
+```batchfile
+netstat -ano | find /i ":80"
+```
 
 or when viewing the DNS cache:
 
-<pre>ipconfig /displaydns | find /i "google"</pre>
+```batchfile
+ipconfig /displaydns | find /i "google"
+```
 
 Although that isn't ideal since the output of ipconfig isn't really formatted to play nicely with the find command.
 

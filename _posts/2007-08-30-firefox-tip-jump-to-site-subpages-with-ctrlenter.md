@@ -11,4 +11,4 @@ from [Lifehacker:](http://lifehacker.com/software/firefox-tip/jump-to-site-subpa
 
 > You already know you can use Ctrl+Enter to [avoid typing http://www or .com](http://lifehacker.com/software/shortcut-screencast-contest/never-type-httpwww-or-com-again-274712.php) when entering URLs in the Firefox address bar. Along those same lines, you can even go to a web site's subpages without typing the protocol or top level domain. Try it: type `apple/trailers` into the Firefox address bar and press Ctrl+Enter (Cmd+Enter for Mac users). Her Foxiness will fill in the http://www and .com in all the right places and zip you right along to Apple's Trailers section of the site. Same works for `lifehacker/software/downloads`, too. Nifty!
 
-You can also use shift+enter in a similar way - wraps "www." and ".net" around whatever you type.
+You can also use shift+enter in a similar way, it wraps "www." and ".net" around whatever you type.
