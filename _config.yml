@@ -59,11 +59,11 @@ plugins:
 author:
   name   : "Andy Madge"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "Nothing much to see here, move along..."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/andymadge"
