@@ -23,6 +23,7 @@ twitter_username: andymadge
 github_username: andymadge
 minimal_mistakes_skin: sunrise
 search: true
+search_full_content: true
 
 # Build settings
 markdown: kramdown
