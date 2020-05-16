@@ -116,3 +116,9 @@ tag_archive:
   path: /tags/
 
 github: [metadata]
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-431050-5"
+    anonymize_ip: false # default
