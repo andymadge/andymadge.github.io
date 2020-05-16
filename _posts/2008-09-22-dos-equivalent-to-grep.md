@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2008/09/22/dos-equivalent-to-grep/
 categories:
   - Computers
-  - Windows
+tags:
+  - windows
 ---
 In Unix you can pipe the output of a command into the GREP command in order to only display the lines that contain a required string.  This is means you don't have to scroll through pages of output to find the bit you're interested in.  The DOS equivalent of GREP is FIND:
 

@@ -6,6 +6,8 @@ author: AndyM
 guid: http://andymadge.com/blog/?p=128
 categories:
   - Computers
+tags:
+  - software
 ---
 I've just upgraded to Firefox 3.5 and noticed that tooltips had stopped working.  I then checked Internet Explorer 8 and found tooltips were not working there either.
 

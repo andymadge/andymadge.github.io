@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2007/06/28/offline-files-tips/
 categories:
   - Computers
-  - Windows
+tags:
+  - windows
 ---
 ### "Incorrect Function" Error
 

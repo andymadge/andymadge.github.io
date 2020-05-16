@@ -5,8 +5,10 @@ date: 2008-02-22T16:33:30+00:00
 author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2008/02/22/useful-itunes-keyboard-shortcuts/
 categories:
-  - iTunes
   - Keyboard Shortcuts
+tags:
+  - windows
+  - itunes
 ---
 Quick reference for keyboard shortcuts
 

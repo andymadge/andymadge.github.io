@@ -6,6 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2007/08/30/firefox-tip-jump-to-site-subpages-with-ctrlenter/
 categories:
   - Computers
+tags:
+  - software
 ---
 from [Lifehacker:](http://lifehacker.com/software/firefox-tip/jump-to-site-subpages-with-ctrl%252Benter-294704.php)
 

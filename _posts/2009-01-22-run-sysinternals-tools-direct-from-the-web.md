@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2009/01/22/run-sysinternals-tools-direct-from-the-web/
 categories:
   - Computers
-  - Windows
+tags:
+  - windows
 ---
 SysInternals tools are a fantastic set of free utilities written by [Mark Russinovich](http://blogs.technet.com/markrussinovich/about.aspx) and Bryce Cogswell.  There are invaluable for system admins and Windows Power Users.  
 

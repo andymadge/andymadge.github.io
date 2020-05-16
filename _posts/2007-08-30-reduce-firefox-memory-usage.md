@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2007/08/30/reduce-firefox-memory-usage/
 categories:
   - Computers
-  - Software
+tags:
+  - software
 ---
 [How to reduce the memory usage on_Firefox](http://www.zolved.com/synapse/view_content/24939/How_to_reduce_the_memory_usage_on_Firefox)
 

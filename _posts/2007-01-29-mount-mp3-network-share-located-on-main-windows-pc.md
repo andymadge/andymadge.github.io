@@ -5,7 +5,10 @@ date: 2007-01-29T12:26:38+00:00
 author: AndyM
 guid: http://blog.andymadge.com/ubuntu/2007/01/29/mount-mp3-network-share-located-on-main-windows-pc/
 categories:
-  - Ubuntu Linux
+  - Computers
+tags:
+  - ubuntu
+  - linux
 ---
 SlimServer doesn't like the Music Folder path in the form `smb://computer/share` - presumably it can't use smbclient. I therefore need to mount this share in the filesystem.
 

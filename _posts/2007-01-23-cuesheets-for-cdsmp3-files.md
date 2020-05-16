@@ -5,9 +5,10 @@ date: 2007-01-23T23:56:20+00:00
 author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2007/01/23/cuesheets-for-cdsmp3-files/
 categories:
-  - MP3
   - Music
-  - Software
+tags:
+  - mp3
+  - software
 ---
 Since [Cuesheet Heaven](https://www.regeert.nl/cuesheet/) seems to be down, here are a couple of alternatives:
 

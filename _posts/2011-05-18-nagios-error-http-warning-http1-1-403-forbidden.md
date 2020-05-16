@@ -6,6 +6,8 @@ author: AndyM
 guid: http://www.andymadge.com/?p=243
 categories:
   - Computers
+tags:
+  - software
 ---
 When monitoring websites with Nagios, it's common to get the error "**HTTP WARNING: HTTP/1.1 403 Forbidden**".
 

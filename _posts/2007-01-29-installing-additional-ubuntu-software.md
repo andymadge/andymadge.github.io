@@ -6,7 +6,9 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2007/01/29/installing-additional-ubuntu-software/
 categories:
   - Computers
-  - Ubuntu Linux
+tags:
+  - ubuntu
+  - linux
 ---
 To install additional software required to support various types of multimedia:
 

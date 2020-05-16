@@ -6,8 +6,9 @@ author: AndyM
 guid: http://blog.andymadge.com/pc-help/2006/09/11/maintaining-privacy-at-an-internet-cafe/
 categories:
   - Computers
-  - Security
   - Useful Links
+tags:
+  - security
 link: http://www.experts-exchange.com/Security/Win_Security/Q_21496483.html
 ---
 Accessing any protected system from an Internet Cafe-type situation is always a risk. This is because you have no way of knowing whether there is any spy/sniffing/keylogging software on the PC - either installed by another user or by the sysadmin. The following are tips to minimise the risks

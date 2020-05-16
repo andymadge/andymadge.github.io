@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2008/07/06/recover-deleted-photos-from-memory-card/
 categories:
   - Computers
-  - Software
+tags:
+  - software
 ---
 This article is written from the point of view of recovering deleted photos from a digital camera memory card, but most of the software will work to recover any type of file from any disk drive.
 

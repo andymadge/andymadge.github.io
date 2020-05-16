@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/gadgets/2008/06/26/iphonegsm-speaker-buzz-solutions/
 categories:
   - Gadgets
-  - Mobile Phone
+tags:
+  - mobile phone
 ---
 Some speakers are better than others at dealing with the interference caused by GSM mobiles.  [This article](http://9to5mac.com/iPhone_GSM_Buzz4_solved){.broken_link} documents one bloke's extended quest to solve the problem.
 

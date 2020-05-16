@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2007/08/30/drag-and-drop-an-itunes-playlists-songs-into-a-folder/
 categories:
   - Computers
-  - iTunes
+tags:
+  - itunes
 ---
 from [Lifehacker](http://lifehacker.com/software/itunes/drag-and-drop-an-itunes-playlists-songs-into-a-folder-281055.php):  
 

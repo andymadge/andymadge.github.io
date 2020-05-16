@@ -5,7 +5,9 @@ date: 2008-01-13T01:56:47+00:00
 author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2008/01/13/itunes-notes/
 categories:
-  - iTunes
+  - Computers
+tags:
+  - itunes
 ---
 Some notes on the way I use iTunes:
 

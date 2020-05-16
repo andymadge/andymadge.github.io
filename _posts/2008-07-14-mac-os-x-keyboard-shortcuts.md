@@ -5,9 +5,9 @@ date: 2008-07-14T17:43:29+00:00
 author: AndyM
 guid: http://blog.andymadge.com/computers/2008/07/14/mac-os-x-keyboard-shortcuts/
 categories:
-  - Computers
   - Keyboard Shortcuts
-  - OS X
+tags:
+  - os x
 ---
 Useful OS X keyboard shortcuts, particularly if you're switching from Windows.  It's not exhaustive, but it's got the ones I use regularly.
 

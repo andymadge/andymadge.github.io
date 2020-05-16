@@ -5,7 +5,6 @@ date: 2007-01-29T14:53:45+00:00
 author: AndyM
 guid: http://blog.andymadge.com/computers/2007/01/29/pastebin-tools/
 categories:
-  - Computers
   - Useful Links
 ---
 A pastebin is a website that allows you to paste text in order to share it with someone else on the web. They are useful for troubleshooting all sorts of programming and configuration issues.

@@ -5,6 +5,8 @@ date: 2014-03-13T19:25:05+00:00
 author: AndyM
 guid: http://blog.andymadge.com/?p=31
 categories:
-  - Uncategorized
+  - Computers
+tags:
+  - linux
 ---
 edit the `/boot/grub/menu.lst`

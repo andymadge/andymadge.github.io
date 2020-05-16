@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2008/06/20/online-peer-to-peer-backup/
 categories:
   - Computers
-  - Software
+tags:
+  - software
 ---
 I've been assessing various backup options for both business and personal use recently so here's a summary of my findings
 

@@ -5,7 +5,6 @@ date: 2007-01-29T15:48:39+00:00
 author: AndyM
 guid: http://blog.andymadge.com/web-design/2007/01/29/ccs-code-to-allow-image-float-in-wordpress-themes/
 categories:
-  - CSS
   - Web Development
 ---
 To enable the ability to float images left or right, add the following code to the CSS stylesheet.

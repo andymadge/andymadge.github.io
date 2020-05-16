@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/computers/2008/08/27/windows-xp-dns-cache/
 categories:
   - Computers
-  - Windows
+tags:
+  - windows
 ---
 Windows caches DNS responses to speed up network access, but sometimes this can cause a problem.  Positive responses (i.e. successful lookups) are cached for 24 hours, and negative responses (i.e. failed lookups) for 5 minutes.
 

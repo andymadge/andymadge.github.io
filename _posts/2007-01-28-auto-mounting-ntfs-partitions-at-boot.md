@@ -5,7 +5,10 @@ date: 2007-01-28T23:53:48+00:00
 author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2007/01/28/ubuntu-continued/
 categories:
-  - Ubuntu Linux
+  - Computers
+tags:
+  - ubuntu
+  - linux
 ---
 There's a very useful Getting Started document over at [UbuntuGuide](http://ubuntuguide.org/wiki/Ubuntu_Edgy) which describes lots of basic configuration tasks.
 

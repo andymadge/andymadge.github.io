@@ -6,7 +6,8 @@ author: AndyM
 guid: http://blog.andymadge.com/pc-help/2007/01/05/deleteaction-a-large-number-of-messages-in-gmail/
 categories:
   - Computers
-  - Gmail
+tags:
+  - gmail
 ---
 When you search in Gmail the results are returned in pages of 20. If you press **Select: All**, then you only get the visible 20 selected. What if you want to perform an action on all of the matching messages?
 

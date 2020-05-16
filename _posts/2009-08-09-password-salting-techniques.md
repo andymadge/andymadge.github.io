@@ -6,8 +6,9 @@ author: AndyM
 guid: http://www.andymadge.com/?p=163
 categories:
   - Computers
-  - Security
   - Web Development
+tags:
+  - security
 ---
 This article is about using salting techniques to improve the security of authentication for websites.  Examples are in PHP but the techniques apply to any language.
 

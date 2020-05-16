@@ -5,8 +5,10 @@ date: 2008-07-14T17:26:51+00:00
 author: AndyM
 guid: http://blog.andymadge.com/computers/applemac/2008/07/14/restore-a-minimized-os-x-window/
 categories:
-  - Apple Mac
-  - OS X
+  - Keyboard Shortcuts
+tags:
+  - apple mac
+  - os x
 ---
 In OS X you can swap between applications in a similar way to Windows (Alt+Tab on Windows, &#8984;+Tab on OS X) however there's one important difference - Windows swaps between all open windows, but OS X only swaps between apps.  The problem is that in OS X you can switch to the right application but the window you want can be minimized.
 

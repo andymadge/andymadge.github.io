@@ -6,7 +6,8 @@ author: AndyM
 guid: http://www.andymadge.com/?p=181
 categories:
   - Computers
-  - Security
+tags:
+  - security
 ---
 This is a follow-on on from my article about [password salting]({% post_url 2009-08-09-password-salting-techniques %}). The descriptions of the attack types in that article were quite brief, and the wikipedia articles are a bit impenetrable. This is my attempt to explain them as simply as possible.
 

@@ -5,7 +5,10 @@ date: 2007-01-28T23:56:05+00:00
 author: AndyM
 guid: http://blog.andymadge.com/ubuntu/2007/01/28/installing-slimserver-651-on-ubuntu-610/
 categories:
-  - Ubuntu Linux
+  - Computers
+tags:
+  - ubuntu
+  - linux
 ---
 Ubuntu is based on Debian, so I followed the instructions on the Slim Devices website [here](http://wiki.slimdevices.com/index.php/Debian_Package) and it worked fine. It basically involves adding the Slim Devices repository to Synaptic Package Manager `Settings/Repository -> Third Party` and then installing using apt-get.
 

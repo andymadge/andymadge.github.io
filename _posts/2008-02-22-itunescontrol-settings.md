@@ -5,8 +5,9 @@ date: 2008-02-22T20:15:25+00:00
 author: AndyM
 guid: http://blog.andymadge.com/computers/software/2008/02/22/itunescontrol-settings/
 categories:
-  - iTunes
-  - Software
+  - Computers
+tags:
+  - itunes
 ---
 For non-default Hotkey settings, see [this post]({% post_url 2008-02-22-useful-itunes-keyboard-shortcuts %})
 
