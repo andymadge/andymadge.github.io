@@ -1,7 +1,6 @@
 ---
 id: 243
 title: 'Nagios Error "HTTP WARNING: HTTP/1.1 403 Forbidden"'
-date: 2011-05-18T23:55:02+00:00
 guid: http://www.andymadge.com/?p=243
 categories:
   - Computers

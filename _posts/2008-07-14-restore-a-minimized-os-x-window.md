@@ -1,7 +1,6 @@
 ---
 id: 58
 title: Restore a Minimized OS X Window
-date: 2008-07-14T17:26:51+00:00
 guid: http://blog.andymadge.com/computers/applemac/2008/07/14/restore-a-minimized-os-x-window/
 categories:
   - Keyboard Shortcuts

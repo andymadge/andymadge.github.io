@@ -1,7 +1,6 @@
 ---
 id: 19
 title: HP Waranty Lookup
-date: 2006-08-24T11:13:54+00:00
 guid: http://blog.andymadge.com/pc-help/2006/08/24/hp-waranty-lookup/
 categories:
   - Computers

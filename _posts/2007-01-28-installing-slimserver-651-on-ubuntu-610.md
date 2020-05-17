@@ -1,7 +1,6 @@
 ---
 id: 32
 title: Installing SlimServer 6.5.1 on Ubuntu 6.10
-date: 2007-01-28T23:56:05+00:00
 guid: http://blog.andymadge.com/ubuntu/2007/01/28/installing-slimserver-651-on-ubuntu-610/
 categories:
   - Computers

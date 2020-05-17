@@ -1,7 +1,6 @@
 ---
 id: 37
 title: View CHKDSK log
-date: 2007-04-26T08:19:38+00:00
 guid: http://blog.andymadge.com/uncategorized/2007/04/26/view-chkdsk-log/
 categories:
   - Computers

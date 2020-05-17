@@ -1,7 +1,6 @@
 ---
 id: 33
 title: Mount MP3 network share located on main Windows PC
-date: 2007-01-29T12:26:38+00:00
 guid: http://blog.andymadge.com/ubuntu/2007/01/29/mount-mp3-network-share-located-on-main-windows-pc/
 categories:
   - Computers

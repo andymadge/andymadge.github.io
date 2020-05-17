@@ -1,7 +1,6 @@
 ---
 id: 35
 title: CSS Code to allow Image Float in WordPress Themes
-date: 2007-01-29T15:48:39+00:00
 guid: http://blog.andymadge.com/web-design/2007/01/29/ccs-code-to-allow-image-float-in-wordpress-themes/
 categories:
   - Web Development

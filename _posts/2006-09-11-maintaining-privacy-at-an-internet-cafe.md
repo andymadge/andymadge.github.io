@@ -1,7 +1,6 @@
 ---
 id: 22
 title: Maintaining Privacy at an Internet Cafe
-date: 2006-09-11T17:28:45+00:00
 guid: http://blog.andymadge.com/pc-help/2006/09/11/maintaining-privacy-at-an-internet-cafe/
 categories:
   - Computers

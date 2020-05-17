@@ -1,7 +1,6 @@
 ---
 id: 63
 title: Windows XP DNS Cache
-date: 2008-08-27T10:34:10+00:00
 guid: http://blog.andymadge.com/computers/2008/08/27/windows-xp-dns-cache/
 categories:
   - Computers

@@ -1,7 +1,6 @@
 ---
 id: 56
 title: iPhone/GSM Speaker Buzz Solutions
-date: 2008-06-26T18:39:58+00:00
 guid: http://blog.andymadge.com/gadgets/2008/06/26/iphonegsm-speaker-buzz-solutions/
 categories:
   - Gadgets

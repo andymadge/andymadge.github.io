@@ -1,7 +1,6 @@
 ---
 id: 26
 title: Delete/action a large number of messages in Gmail
-date: 2007-01-05T16:17:38+00:00
 guid: http://blog.andymadge.com/pc-help/2007/01/05/deleteaction-a-large-number-of-messages-in-gmail/
 categories:
   - Computers

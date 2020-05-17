@@ -1,7 +1,6 @@
 ---
 id: 61
 title: Take screenshot on iPhone 2.0
-date: 2008-07-21T08:22:14+00:00
 guid: http://blog.andymadge.com/uncategorized/2008/07/21/take-screenshot-on-iphone-20/
 categories:
   - iPhone

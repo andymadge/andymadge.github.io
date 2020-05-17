@@ -1,7 +1,6 @@
 ---
 id: 7
 title: Enabling Network Access to Uniform Server
-date: 2014-03-13T19:25:05+00:00
 guid: http://blog.andymadge.com/?p=56
 categories:
   - Computers
