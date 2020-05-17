@@ -2,7 +2,6 @@
 id: 27
 title: FM Transmitter
 date: 2007-01-12T13:44:22+00:00
-author: AndyM
 guid: http://blog.andymadge.com/gadgets/2007/01/12/fm-transmitter/
 categories:
   - Gadgets

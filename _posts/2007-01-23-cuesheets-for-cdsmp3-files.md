@@ -2,7 +2,6 @@
 id: 28
 title: Cuesheets for CDs/MP3 files
 date: 2007-01-23T23:56:20+00:00
-author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2007/01/23/cuesheets-for-cdsmp3-files/
 categories:
   - Music

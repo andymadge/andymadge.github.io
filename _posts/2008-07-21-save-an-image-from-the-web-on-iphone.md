@@ -2,7 +2,6 @@
 id: 60
 title: Save an image from the web on iPhone
 date: 2008-07-21T08:12:56+00:00
-author: AndyM
 guid: http://blog.andymadge.com/iphone/2008/07/21/save-an-image-from-the-web-on-iphone/
 categories:
   - iPhone

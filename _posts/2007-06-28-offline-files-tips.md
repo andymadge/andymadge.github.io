@@ -2,7 +2,6 @@
 id: 41
 title: Offline Files tips
 date: 2007-06-28T11:09:33+00:00
-author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2007/06/28/offline-files-tips/
 categories:
   - Computers

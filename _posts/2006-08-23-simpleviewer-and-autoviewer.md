@@ -2,7 +2,6 @@
 id: 18
 title: SimpleViewer and AutoViewer
 date: 2006-08-23T15:14:44+00:00
-author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2006/08/23/simpleviewer-and-autoviewer/
 categories:
   - Web Development

@@ -2,7 +2,6 @@
 id: 65
 title: Run SysInternals tools direct from the web
 date: 2009-01-22T17:23:31+00:00
-author: AndyM
 guid: http://blog.andymadge.com/computers/2009/01/22/run-sysinternals-tools-direct-from-the-web/
 categories:
   - Computers

@@ -2,7 +2,6 @@
 id: 48
 title: Useful iTunes Keyboard Shortcuts
 date: 2008-02-22T16:33:30+00:00
-author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2008/02/22/useful-itunes-keyboard-shortcuts/
 categories:
   - Keyboard Shortcuts

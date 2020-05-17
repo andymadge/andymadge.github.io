@@ -2,7 +2,6 @@
 id: 263
 title: HTML/CSS/JavaScript Reference Sites
 date: 2012-11-24T11:59:47+00:00
-author: AndyM
 guid: http://www.andymadge.com/?p=263
 categories:
   - Useful Links

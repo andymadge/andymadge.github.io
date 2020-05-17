@@ -2,7 +2,6 @@
 id: 24
 title: Web based FTP client
 date: 2006-10-31T13:48:43+00:00
-author: AndyM
 guid: http://blog.andymadge.com/uncategorized/2006/10/31/web-based-ftp-client/
 categories:
   - Computers

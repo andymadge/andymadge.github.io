@@ -2,7 +2,6 @@
 id: 30
 title: 'First time Ubuntu experiences...'
 date: 2007-01-28T23:24:57+00:00
-author: AndyM
 guid: http://blog.andymadge.com/linux/ubuntu/2007/01/28/ubuntu-experiences/
 categories:
   - Computers

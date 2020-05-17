@@ -2,7 +2,6 @@
 id: 317
 title: Transfer iOS Notes Between Accounts
 date: 2014-03-12T23:10:27+00:00
-author: AndyM
 guid: http://www.andymadge.com/2014/03/268-revision-6/
 categories:
   - iPhone

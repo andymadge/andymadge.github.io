@@ -2,7 +2,6 @@
 id: 25
 title: 'Photography - Depth Of Field'
 date: 2006-10-31T21:42:42+00:00
-author: AndyM
 guid: http://blog.andymadge.com/useful-links/2006/10/31/photography-depth-of-field/
 categories:
   - Useful Links
