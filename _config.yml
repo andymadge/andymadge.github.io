@@ -24,6 +24,7 @@ github_username: andymadge
 minimal_mistakes_skin: sunrise
 search: true
 search_full_content: true
+locale: "en-GB"
 
 # Build settings
 markdown: kramdown
@@ -62,6 +63,7 @@ author:
   name   : "Andy Madge"
   avatar : "/assets/images/bio-photo.jpg"
   bio    : "Nothing much to see here, move along..."
+  location: "London, UK"
   links:
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
