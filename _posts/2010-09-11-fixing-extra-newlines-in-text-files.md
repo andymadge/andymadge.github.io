@@ -3,6 +3,7 @@ id: 193
 title: Fixing Extra Newlines in Text Files
 date: 2010-09-11T18:56:16+00:00
 guid: http://www.andymadge.com/?p=193
+toc: true
 categories:
   - Programming
 ---

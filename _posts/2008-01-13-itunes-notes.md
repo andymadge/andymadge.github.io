@@ -3,6 +3,7 @@ id: 47
 title: iTunes Notes
 date: 2008-01-13T01:56:47+00:00
 guid: http://blog.andymadge.com/uncategorized/2008/01/13/itunes-notes/
+toc: true
 categories:
   - Computers
 tags:
