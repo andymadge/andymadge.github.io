@@ -22,7 +22,6 @@ description: >- # this means to ignore newlines until "baseurl:"
   The personal website of Andy Madge
 twitter_username: andymadge
 github_username: andymadge
-minimal_mistakes_skin: sunrise
 search: true
 search_full_content: true
 locale: "en-GB"
@@ -30,6 +29,7 @@ locale: "en-GB"
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: air
 # Outputting
 permalink: /:year/:month/:day/:title/
 paginate: 5 # amount of posts to show
