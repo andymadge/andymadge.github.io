@@ -2,6 +2,8 @@
 id: 263
 title: HTML/CSS/JavaScript Reference Sites
 guid: http://www.andymadge.com/?p=263
+header:
+  image: assets/images/header-images/DSC02037.jpeg
 categories:
   - Useful Links
   - Web Development

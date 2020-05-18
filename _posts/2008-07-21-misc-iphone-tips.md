@@ -2,6 +2,8 @@
 id: 62
 title: Misc iPhone Tips
 guid: http://blog.andymadge.com/mobile-phone/iphone/2008/07/21/misc-iphone-tips/
+header:
+  image: assets/images/header-images/IMG_5232_w2500.jpeg
 categories:
   - iPhone
 ---

@@ -2,6 +2,8 @@
 id: 36
 title: Installing additional Ubuntu software
 guid: http://blog.andymadge.com/computers/2007/01/29/installing-additional-ubuntu-software/
+header:
+  image: assets/images/header-images/IMG_5370_w2500.jpeg
 categories:
   - Computers
 tags:

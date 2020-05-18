@@ -2,6 +2,8 @@
 id: 193
 title: Fixing Extra Newlines in Text Files
 guid: http://www.andymadge.com/?p=193
+header:
+  image: assets/images/header-images/IMG_2649_w2500.jpeg
 toc: true
 categories:
   - Programming

@@ -2,6 +2,8 @@
 id: 31
 title: Auto Mounting NTFS partitions at boot
 guid: http://blog.andymadge.com/uncategorized/2007/01/28/ubuntu-continued/
+header:
+  image: assets/images/header-images/IMG_4634_w2500.jpeg
 categories:
   - Computers
 tags:

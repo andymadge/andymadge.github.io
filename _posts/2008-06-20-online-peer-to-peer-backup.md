@@ -2,6 +2,8 @@
 id: 55
 title: 'Online &amp; Peer-To-Peer Backup'
 guid: http://blog.andymadge.com/computers/2008/06/20/online-peer-to-peer-backup/
+header:
+  image: assets/images/header-images/IMG_6913_w2500.jpeg
 toc: true
 categories:
   - Computers

@@ -2,6 +2,8 @@
 id: 163
 title: Password Salting Techniques
 guid: http://www.andymadge.com/?p=163
+header:
+  image: assets/images/header-images/IMG_6570_w2500.jpeg
 toc: true
 categories:
   - Computers

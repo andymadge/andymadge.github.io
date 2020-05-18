@@ -2,6 +2,8 @@
 id: 7
 title: Enabling Network Access to Uniform Server
 guid: http://blog.andymadge.com/?p=56
+header:
+  image: assets/images/header-images/IMG_0998_w2500.jpeg
 categories:
   - Computers
   - Web Development

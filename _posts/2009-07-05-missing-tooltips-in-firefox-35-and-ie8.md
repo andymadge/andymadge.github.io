@@ -2,6 +2,8 @@
 id: 128
 title: Missing tooltips in Firefox 3.5 and IE8
 guid: http://andymadge.com/blog/?p=128
+header:
+  image: assets/images/header-images/IMG_3054_w2500.jpeg
 categories:
   - Computers
 tags:

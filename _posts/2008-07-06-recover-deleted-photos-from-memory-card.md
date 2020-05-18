@@ -2,6 +2,8 @@
 id: 57
 title: Recover Deleted Photos from Memory Card
 guid: http://blog.andymadge.com/computers/2008/07/06/recover-deleted-photos-from-memory-card/
+header:
+  image: assets/images/header-images/IMG_6659_w2500.jpeg
 categories:
   - Computers
 tags:

@@ -2,6 +2,8 @@
 id: 47
 title: iTunes Notes
 guid: http://blog.andymadge.com/uncategorized/2008/01/13/itunes-notes/
+header:
+  image: assets/images/header-images/IMG_6898_w2500.jpeg
 toc: true
 categories:
   - Computers
