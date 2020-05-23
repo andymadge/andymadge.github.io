@@ -1,6 +1,6 @@
 ---
 title: "Post: Modified Date"
-last_modified_at: 2016-03-09T16:20:02-05:00
+last_modified_at: 2020-05-22T16:20:02-05:00
 categories:
   - Blog
 tags:
@@ -10,5 +10,7 @@ tags:
 ---
 
 This post has been updated and should show a modified date if used in a layout.
+
+NOTE: The URL for the page stays the same and is based on the date in the filename, however the modified date is used to place the post in the correct order in the post history. ACTUALLY I DON'T THINK THIS IS TRUE. Modified date doesn't seem to do anything at all. --AJM
 
 All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this. One day when she was two years old she was playing in a garden, and she plucked another flower and ran with it to her mother. I suppose she must have looked rather delightful, for Mrs. Darling put her hand to her heart and cried, "Oh, why can't you remain like this for ever!" This was all that passed between them on the subject, but henceforth Wendy knew that she must grow up. You always know after you are two. Two is the beginning of the end.
