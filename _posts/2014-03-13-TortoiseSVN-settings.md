@@ -2,6 +2,8 @@
 id: 6
 title: TortoiseSVN settings
 guid: http://blog.andymadge.com/?p=54
+header:
+  image: assets/images/header-images/IMG_4913_w2500.jpeg
 categories:
   - Computers
 tags:
