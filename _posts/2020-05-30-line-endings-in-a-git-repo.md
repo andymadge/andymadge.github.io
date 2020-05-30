@@ -108,7 +108,7 @@ Alternatively, if you want more fine grained control based on file types, you ca
 *.{bat,[bB][aA][tT]} text eol=crlf
 ```
 
-This will ensure that most files use LF line endings, apart from Windows Batch Files, which will use CRLF. However, it's not entirely certain whether CRLF is required for Windows Batch Files.
+This will ensure that most files use LF line endings, apart from Windows Batch Files, which will use CRLF. However, it's [not](https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings/429598#429598) [entirely](https://stackoverflow.com/questions/38836068/lf-versus-crlf-line-endings-in-windows-batch-files) [certain](https://serverfault.com/questions/429594/is-it-safe-to-write-batch-files-with-unix-line-endings/795638#795638) whether CRLF is required for Windows Batch Files.
 
 
 ## Fixing A Repo
