@@ -12,7 +12,7 @@ If your application or container needs to be directly on the network, or it need
 
 See <https://docs.docker.com/network/macvlan/>
 
-What is not obvious from the examples on the Docker docs and elsewhere the web, is that the values you use when creating the network can match your existing LAN. They don't _have_ to, since you may want a different subnet, but they _can_ do if you want docker containers to have their own interface and MAC address _on the existing network_.
+What is not obvious from the examples on the Docker docs and elsewhere the web, is that the values you use when creating the network **can match your existing LAN**. They don't _have_ to, since you may want a different subnet, but they _can_ do if you want docker containers to have their own interface and MAC address _on the existing network_.
 
 Assuming your home network is 192.168.1.0/24 with a router at 192.168.1.1, this command will create a Docker network called "macvlan_net" which you can then attach containers to:
 
