@@ -55,7 +55,7 @@ PUT syslog-2018.12.08/_settings
   }
 }
 ```
-NOTE: this will fail because both of those settings can only be modified for a closed index
+NOTE: this will fail because both of those settings can only be modified for a closed index. See [Templates section](#templates) below for the correct way to set these.
 
 
 ## Shards
