@@ -19,3 +19,27 @@
 .page__content {
     font-size: $type-size-6;
 }
+
+
+// This works, but the width of the sidebar remains the same so it's pointless
+// .sidebar {
+//     font-size: $type-size-6;
+// }
+
+
+// Suggestion from https://github.com/mmistakes/minimal-mistakes/issues/1219#issuecomment-326809412
+// html {
+//   font-size: 12px; // change to whatever
+
+//   @include breakpoint($medium) {
+//     font-size: 18px; // change to whatever
+//   }
+
+//   @include breakpoint($large) {
+//     font-size: 20px; // change to whatever
+//   }
+
+//   @include breakpoint($x-large) {
+//     font-size: 22px; // change to whatever
+//   }
+// }
