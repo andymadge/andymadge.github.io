@@ -28,8 +28,7 @@ locale: "en-GB"
 
 # Build settings
 markdown: kramdown
-# remote_theme: mmistakes/minimal-mistakes
-theme: minimal-mistakes-jekyll
+remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: air
 # Outputting
 permalink: /:year/:month/:day/:title/
