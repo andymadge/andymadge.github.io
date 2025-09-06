@@ -63,7 +63,7 @@ plugins:
 author:
   name   : "Andy Madge"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Senior Engineering Manager | Solution Architect, DevOps, AWS, Python"
+  bio    : "Senior Engineering Manager - Solution Architect, DevOps, AWS, Python"
   location: "London, UK"
   links:
     # - label: "Website"
