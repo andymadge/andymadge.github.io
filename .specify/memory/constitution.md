@@ -192,7 +192,7 @@ Build warnings MUST be investigated and resolved before deployment.
 
 **Install dependencies**:
 ```bash
-bundle install
+bundle install --path vendor/bundle
 ```
 
 **Local preview server**:

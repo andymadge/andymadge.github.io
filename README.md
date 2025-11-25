@@ -131,7 +131,7 @@ Technical reference material covering:
 
 2. Install dependencies:
    ```bash
-   bundle install
+   bundle install --path vendor/bundle
    ```
 
 3. Run local server:
@@ -148,6 +148,12 @@ bundle exec jekyll build
 ```
 
 Output will be in `_site/` directory (excluded from git).
+
+### Troubleshooting
+
+**Multi-Architecture Development (Intel & Apple Silicon)**
+
+If you work across both Intel and Apple Silicon Macs and encounter bundler or nokogiri errors, see [BUNDLE_SETUP.md](BUNDLE_SETUP.md) for detailed setup instructions for each architecture.
 
 ## Configuration
 
