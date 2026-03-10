@@ -7,7 +7,7 @@ duration_display: "1:25:54"
 excerpt: "Blah, blah blah, add a short description here (1-2 sentences)"
 waveform_file: "2025-11-29-armchair-clubbing-vol101/waveform.dat"
 header:
-  cover: assets/djmixes/2025-11-29-armchair-clubbing-vol101/cover.png  # Optional
+  cover: assets/djmixes/2025-11-29-armchair-clubbing-vol101/Armchair Clubbing - Vol 1 coverart.png  # Optional
   og_image: assets/djmixes/2025-11-29-armchair-clubbing-vol101/cover.png  # For social sharing
 classes: wide
 tracklist:
@@ -29,7 +29,7 @@ tracklist:
   - "[01:17:03] Jon Hopkins - Monsters Theme"
   - "[01:21:07] Underworld - Louisiana"
 mix_image: assets/djmixes/2025-11-29-armchair-clubbing-vol101/ableton.png
-mix_image_caption: "Screenshot from Ableton Live showing the arrangement and effects chain used in this mix."
+mix_image_caption: "Screenshot from Ableton Live showing the overall arrangement used in this mix. The red lines are automation lanes showing the changes in volume and hi, mid and low EQ for each track, and the one at the bottom is the master tempo automation. It also shows some slicing and looping of the tracks to make them work together."
 ---
 
 I used to make CDs all the time for friends or for listening in the car, but it's about 10 years since I last did one (mainly due to lack of CD players). Anyway, I've finally got around to making a mix.
