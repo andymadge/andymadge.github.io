@@ -35,6 +35,7 @@ class AudioPlayer {
     try {
       // Try to load pre-generated waveform data if available
       let peaks = null;
+      let waveformAvailable = false;
       if (config.waveformUrl) {
         try {
           console.log('Attempting to load waveform data from:', config.waveformUrl);
@@ -43,12 +44,19 @@ class AudioPlayer {
             const arrayBuffer = await response.arrayBuffer();
             peaks = new Int8Array(arrayBuffer);
             console.log('Waveform data loaded successfully:', peaks.length, 'data points');
+            waveformAvailable = true;
           } else {
-            console.warn('Waveform file not found (404), falling back to client-side generation (per FR-013)');
+            console.warn('Waveform file not found (404), showing placeholder');
           }
         } catch (error) {
-          console.warn('Failed to load waveform data, falling back to client-side generation:', error);
+          console.warn('Failed to load waveform data, showing placeholder:', error);
         }
+      }
+
+      // If waveform is not available, show placeholder and skip WaveSurfer initialization
+      if (!waveformAvailable) {
+        player._showWaveformPlaceholder(config.containerId);
+        return player;
       }
 
       // Create gradient for waveform (Soundcloud-style with blue/green colors)
@@ -237,6 +245,30 @@ class AudioPlayer {
       this.eventHandlers[event] = [];
     }
     this.eventHandlers[event].push(callback);
+  }
+
+  /**
+   * Show placeholder text when waveform is not available
+   * @param {string} containerId - DOM element ID for waveform container
+   * @private
+   */
+  _showWaveformPlaceholder(containerId) {
+    const container = document.getElementById(containerId);
+    if (container) {
+      // Add placeholder class for styling
+      container.classList.add('waveform-placeholder');
+
+      // Create and insert placeholder text
+      const placeholder = document.createElement('div');
+      placeholder.className = 'waveform-placeholder-text';
+      placeholder.textContent = 'Waveform not available';
+
+      // Clear any existing content and add placeholder
+      container.innerHTML = '';
+      container.appendChild(placeholder);
+
+      console.log('Waveform placeholder displayed');
+    }
   }
 }
 
