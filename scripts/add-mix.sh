@@ -182,7 +182,7 @@ fi
 
 # Generate waveform
 echo -e "${BLUE}⟳${NC} Generating waveform data..."
-if audiowaveform -i "$AUDIO_FILE" -o "$WAVEFORM_PATH" -b 8 -z 256 2>&1 | grep -q .; then
+if audiowaveform -i "$AUDIO_FILE" -o "$WAVEFORM_PATH" -b 8 -z 256 > /dev/null 2>&1; then
     echo -e "${GREEN}✓${NC} Waveform generated: $WAVEFORM_PATH"
 else
     echo -e "${RED}✗${NC} Failed to generate waveform"
