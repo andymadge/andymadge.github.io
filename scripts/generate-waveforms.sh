@@ -17,12 +17,61 @@
 
 set -e  # Exit on error
 
+VERSION="1.0.0"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
+
+# Show help
+show_help() {
+    echo "generate-waveforms.sh v${VERSION} - Scan for missing waveforms and generate them"
+    echo ""
+    echo "Usage:"
+    echo "  ./scripts/generate-waveforms.sh [audio_directory]"
+    echo "  ./scripts/generate-waveforms.sh --remote"
+    echo "  ./scripts/generate-waveforms.sh --url <url> <mix-file>"
+    echo "  ./scripts/generate-waveforms.sh --help"
+    echo "  ./scripts/generate-waveforms.sh --version"
+    echo ""
+    echo "Arguments:"
+    echo "  [audio_directory]    Optional directory containing audio files (default: audio_files)"
+    echo ""
+    echo "Options:"
+    echo "  --remote, -r         Download audio from audio_url in mix front matter"
+    echo "  --url <url> <mix>    Download from specified URL for a specific mix"
+    echo "  --help, -h           Show this help message"
+    echo "  --version, -v        Show version information"
+    echo ""
+    echo "Examples:"
+    echo "  ./scripts/generate-waveforms.sh                    # Use default audio_files directory"
+    echo "  ./scripts/generate-waveforms.sh /path/to/audio     # Use custom directory"
+    echo "  ./scripts/generate-waveforms.sh --remote           # Download from audio_url fields"
+    echo "  ./scripts/generate-waveforms.sh --url https://example.com/mix.mp3 2025-01-15-my-mix"
+    echo ""
+    echo "This script will:"
+    echo "  1. Scan _djmixes/ for mix files with waveform_file field"
+    echo "  2. Check if corresponding .dat file exists in assets/djmixes/"
+    echo "  3. If missing, either:"
+    echo "     a) Look for local audio file in specified directory"
+    echo "     b) Download from audio_url in mix front matter (--remote mode)"
+    echo "     c) Download from specified URL (--url mode)"
+    echo "  4. Generate waveform data using audiowaveform"
+}
+
+# Check for help/version flags
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    show_help
+    exit 0
+fi
+
+if [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
+    echo "generate-waveforms.sh v${VERSION}"
+    exit 0
+fi
 
 # Parse arguments
 REMOTE_MODE=false
@@ -38,7 +87,8 @@ if [ "$1" = "--url" ]; then
 
     if [ -z "$SPECIFIED_URL" ] || [ -z "$SPECIFIED_MIX" ]; then
         echo -e "${RED}Error: --url requires both a URL and a mix file${NC}"
-        echo "Usage: ./scripts/generate-waveforms.sh --url <url> <mix-file>"
+        echo ""
+        echo "For more information, run: $0 --help"
         exit 1
     fi
 

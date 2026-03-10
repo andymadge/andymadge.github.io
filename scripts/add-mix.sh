@@ -17,12 +17,55 @@
 
 set -e  # Exit on error
 
+VERSION="1.0.0"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
+
+# Show help
+show_help() {
+    echo "add-mix.sh v${VERSION} - Automate mix creation with waveform generation"
+    echo ""
+    echo "Usage:"
+    echo "  ./scripts/add-mix.sh <audio_file_or_url> <mix_slug> \"<title>\""
+    echo "  ./scripts/add-mix.sh --help"
+    echo "  ./scripts/add-mix.sh --version"
+    echo ""
+    echo "Arguments:"
+    echo "  <audio_file_or_url>  Path to local audio file or URL to download"
+    echo "  <mix_slug>           URL-friendly identifier (e.g., summer-vibes)"
+    echo "  <title>              Mix title (quoted if contains spaces)"
+    echo ""
+    echo "Options:"
+    echo "  --help               Show this help message"
+    echo "  --version            Show version information"
+    echo ""
+    echo "Examples:"
+    echo "  ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes \"Summer Vibes 2025\""
+    echo "  ./scripts/add-mix.sh \"https://example.com/mix.mp3\" summer-vibes \"Summer Vibes 2025\""
+    echo ""
+    echo "This script will:"
+    echo "  1. Download audio file if URL provided (or use local file)"
+    echo "  2. Generate waveform data from audio file"
+    echo "  3. Extract audio duration"
+    echo "  4. Create mix markdown file with front matter"
+    echo "  5. Provide next steps for uploading audio and publishing"
+}
+
+# Check for help/version flags
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    show_help
+    exit 0
+fi
+
+if [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
+    echo "add-mix.sh v${VERSION}"
+    exit 0
+fi
 
 # Parse arguments
 AUDIO_INPUT="$1"
@@ -35,9 +78,7 @@ if [ -z "$AUDIO_INPUT" ] || [ -z "$MIX_SLUG" ] || [ -z "$TITLE" ]; then
     echo ""
     echo "Usage: $0 <audio_file_or_url> <mix_slug> \"<title>\""
     echo ""
-    echo "Example:"
-    echo "  $0 audio_files/summer.mp3 summer-vibes \"Summer Vibes 2025\""
-    echo "  $0 \"https://example.com/mix.mp3\" summer-vibes \"Summer Vibes 2025\""
+    echo "For more information, run: $0 --help"
     exit 1
 fi
 
