@@ -118,7 +118,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-010**: System MUST be fully functional on mobile devices (responsive design, touch controls)
 - **FR-011**: Audio player MUST maintain playback state within a session (e.g., resume from same position after pause)
 - **FR-012**: System SHOULD persist playback position across sessions using browser localStorage so users can return later and resume from where they left off (per-browser/device)
-- **FR-013**: System SHOULD display a visual waveform representation of the audio using pre-generated waveform data. Fallback to simple progress bar if waveform data unavailable. (Note: Client-side generation is future enhancement, not in current scope)
+- **FR-013**: System SHOULD display a visual waveform representation of the audio using pre-generated waveform data. If waveform data unavailable use client-side generation with Wavesurfer.js or similar library.
 - **FR-014**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
 - **FR-015**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
 - **FR-016**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
