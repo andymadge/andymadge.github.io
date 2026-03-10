@@ -2,16 +2,18 @@
 # add-mix.sh - Automate mix creation with waveform generation
 #
 # Usage:
-#   ./scripts/add-mix.sh <audio_file> <mix_slug> "<title>"
+#   ./scripts/add-mix.sh <audio_file_or_url> <mix_slug> "<title>"
 #
-# Example:
+# Examples:
 #   ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes "Summer Vibes 2025"
+#   ./scripts/add-mix.sh "https://example.com/mix.mp3" summer-vibes "Summer Vibes 2025"
 #
 # This script:
-# 1. Generates waveform data from audio file
-# 2. Extracts audio duration
-# 3. Creates mix markdown file with front matter
-# 4. Provides next steps for uploading audio and publishing
+# 1. Downloads audio file if URL provided (or uses local file)
+# 2. Generates waveform data from audio file
+# 3. Extracts audio duration
+# 4. Creates mix markdown file with front matter
+# 5. Provides next steps for uploading audio and publishing
 
 set -e  # Exit on error
 
@@ -23,25 +25,56 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Parse arguments
-AUDIO_FILE="$1"
+AUDIO_INPUT="$1"
 MIX_SLUG="$2"
 TITLE="$3"
 
 # Validate arguments
-if [ -z "$AUDIO_FILE" ] || [ -z "$MIX_SLUG" ] || [ -z "$TITLE" ]; then
+if [ -z "$AUDIO_INPUT" ] || [ -z "$MIX_SLUG" ] || [ -z "$TITLE" ]; then
     echo -e "${RED}Error: Missing required arguments${NC}"
     echo ""
-    echo "Usage: $0 <audio_file> <mix_slug> \"<title>\""
+    echo "Usage: $0 <audio_file_or_url> <mix_slug> \"<title>\""
     echo ""
     echo "Example:"
     echo "  $0 audio_files/summer.mp3 summer-vibes \"Summer Vibes 2025\""
+    echo "  $0 \"https://example.com/mix.mp3\" summer-vibes \"Summer Vibes 2025\""
     exit 1
 fi
 
-# Check if audio file exists
-if [ ! -f "$AUDIO_FILE" ]; then
-    echo -e "${RED}Error: Audio file not found: $AUDIO_FILE${NC}"
-    exit 1
+# Check if input is a URL or local file
+TEMP_FILE=""
+if [[ "$AUDIO_INPUT" =~ ^https?:// ]]; then
+    echo -e "${BLUE}⟳${NC} Detected URL, downloading audio file..."
+
+    # Create temp file
+    TEMP_FILE=$(mktemp "${TMPDIR:-/tmp}/mix-XXXXXX.mp3")
+
+    # Set up cleanup trap
+    cleanup() {
+        if [ -n "$TEMP_FILE" ] && [ -f "$TEMP_FILE" ]; then
+            echo -e "\n${BLUE}⟳${NC} Cleaning up temporary file..."
+            rm -f "$TEMP_FILE"
+        fi
+    }
+    trap cleanup EXIT ERR INT TERM
+
+    # Download the file
+    if curl -L "$AUDIO_INPUT" -o "$TEMP_FILE" --fail --silent --show-error; then
+        echo -e "${GREEN}✓${NC} Download complete"
+        AUDIO_FILE="$TEMP_FILE"
+    else
+        echo -e "${RED}Error: Failed to download audio file from URL${NC}"
+        exit 1
+    fi
+else
+    # Local file
+    AUDIO_FILE="$AUDIO_INPUT"
+
+    # Check if audio file exists
+    if [ ! -f "$AUDIO_FILE" ]; then
+        echo -e "${RED}Error: Audio file not found: $AUDIO_FILE${NC}"
+        exit 1
+    fi
 fi
 
 # Check if audiowaveform is installed
@@ -90,6 +123,17 @@ echo ""
 if [ -f "$MIX_FILE" ]; then
     echo -e "${RED}Error: Mix file already exists: $MIX_FILE${NC}"
     exit 1
+fi
+
+# Check if waveform file already exists
+if [ -f "$WAVEFORM_PATH" ]; then
+    echo -e "${YELLOW}Warning: Waveform file already exists: $WAVEFORM_PATH${NC}"
+    read -p "Overwrite existing waveform file? (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo -e "${RED}Aborted: Not overwriting existing waveform file${NC}"
+        exit 1
+    fi
 fi
 
 # Generate waveform
