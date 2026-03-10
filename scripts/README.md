@@ -21,20 +21,25 @@ Creates a complete mix entry with waveform generation.
 
 **Usage:**
 ```bash
-./scripts/add-mix.sh <audio_file> <mix_slug> "<title>"
-./scripts/add-mix.sh --print-only <audio_file> <mix_slug> "<title>"
+./scripts/add-mix.sh [options] <audio_file> <mix_slug> "<title>"
 ```
 
 **Examples:**
 ```bash
-# Create mix file and waveform
+# Create mix file and waveform from local file
 ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes "Summer Vibes 2025"
+
+# Use URL as input - automatically sets audio_url field
+./scripts/add-mix.sh "https://dropbox.com/.../mix.mp3?dl=1" my-mix "My Mix"
+
+# Override auto-detected URL with custom one
+./scripts/add-mix.sh --audio-url "https://cdn.example.com/mix.mp3" audio_files/mix.mp3 my-mix "My Mix"
 
 # Print content only (useful for manual file creation)
 ./scripts/add-mix.sh --print-only audio_files/summer.mp3 summer-vibes "Summer Vibes 2025"
 
-# Redirect to existing file
-./scripts/add-mix.sh --print-only audio_files/mix.mp3 my-mix "My Mix" > _djmixes/my-mix.md
+# Print with URL input (skips download in print-only mode)
+./scripts/add-mix.sh --print-only "https://dropbox.com/.../mix.mp3?dl=1" my-mix "My Mix"
 ```
 
 **What it does:**
@@ -44,7 +49,8 @@ Creates a complete mix entry with waveform generation.
 4. ✅ Provides clear next steps for completion
 
 **Options:**
-- `--print-only`: Output mix file content to stdout without creating files or waveform. Useful when you want to manually create the mix file first with custom metadata fields, then copy-paste the generated content.
+- `--print-only`: Output mix file content to stdout without creating files or waveform. Useful when you want to manually create the mix file first with custom metadata fields, then copy-paste the generated content. When used with a URL input, skips downloading the audio file.
+- `--audio-url <url>`: Override the `audio_url` field with a custom URL. By default, if the audio input is a URL, it's automatically used for `audio_url`. Use this option to specify a different URL (e.g., CDN URL while using local file for waveform generation).
 
 **After running:**
 - Upload audio to Dropbox, get shareable link with &dl=1 parameter

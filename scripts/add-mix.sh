@@ -44,11 +44,13 @@ show_help() {
     echo "  --help               Show this help message"
     echo "  --version            Show version information"
     echo "  --print-only         Only print the mix file content to stdout (don't create files)"
+    echo "  --audio-url <url>    Use this URL for audio_url field (instead of placeholder)"
     echo ""
     echo "Examples:"
     echo "  ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes \"Summer Vibes 2025\""
     echo "  ./scripts/add-mix.sh \"https://example.com/mix.mp3\" summer-vibes \"Summer Vibes 2025\""
     echo "  ./scripts/add-mix.sh --print-only audio_files/mix.mp3 my-mix \"My Mix\" > _djmixes/mix.md"
+    echo "  ./scripts/add-mix.sh --print-only --audio-url \"https://dropbox.com/.../mix.mp3?dl=1\" audio_files/mix.mp3 my-mix \"My Mix\""
     echo ""
     echo "This script will:"
     echo "  1. Download audio file if URL provided (or use local file)"
@@ -71,10 +73,25 @@ fi
 
 # Parse arguments
 PRINT_ONLY=false
-if [ "$1" = "--print-only" ]; then
-    PRINT_ONLY=true
-    shift
-fi
+AUDIO_URL=""
+
+while [[ "$1" =~ ^-- ]]; do
+    case "$1" in
+        --print-only)
+            PRINT_ONLY=true
+            shift
+            ;;
+        --audio-url)
+            AUDIO_URL="$2"
+            shift 2
+            ;;
+        *)
+            echo -e "${RED}Error: Unknown option: $1${NC}"
+            echo "Run $0 --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
 AUDIO_INPUT="$1"
 MIX_SLUG="$2"
@@ -92,35 +109,48 @@ fi
 
 # Check if input is a URL or local file
 TEMP_FILE=""
+INPUT_IS_URL=false
+AUDIO_FILE=""
+
 if [[ "$AUDIO_INPUT" =~ ^https?:// ]]; then
-    echo -e "${BLUE}⟳${NC} Detected URL, downloading audio file..."
+    INPUT_IS_URL=true
 
-    # Create temp file
-    TEMP_FILE=$(mktemp "${TMPDIR:-/tmp}/mix-XXXXXX.mp3")
+    # If no explicit audio_url provided, use the input URL
+    if [ -z "$AUDIO_URL" ]; then
+        AUDIO_URL="$AUDIO_INPUT"
+    fi
 
-    # Set up cleanup trap
-    cleanup() {
-        if [ -n "$TEMP_FILE" ] && [ -f "$TEMP_FILE" ]; then
-            echo -e "\n${BLUE}⟳${NC} Cleaning up temporary file..."
-            rm -f "$TEMP_FILE"
+    # Only download if we need to process the audio (not in print-only mode)
+    if [ "$PRINT_ONLY" = false ]; then
+        echo -e "${BLUE}⟳${NC} Detected URL, downloading audio file..."
+
+        # Create temp file
+        TEMP_FILE=$(mktemp "${TMPDIR:-/tmp}/mix-XXXXXX.mp3")
+
+        # Set up cleanup trap
+        cleanup() {
+            if [ -n "$TEMP_FILE" ] && [ -f "$TEMP_FILE" ]; then
+                echo -e "\n${BLUE}⟳${NC} Cleaning up temporary file..."
+                rm -f "$TEMP_FILE"
+            fi
+        }
+        trap cleanup EXIT ERR INT TERM
+
+        # Download the file
+        if curl -L "$AUDIO_INPUT" -o "$TEMP_FILE" --fail --silent --show-error; then
+            echo -e "${GREEN}✓${NC} Download complete"
+            AUDIO_FILE="$TEMP_FILE"
+        else
+            echo -e "${RED}Error: Failed to download audio file from URL${NC}"
+            exit 1
         fi
-    }
-    trap cleanup EXIT ERR INT TERM
-
-    # Download the file
-    if curl -L "$AUDIO_INPUT" -o "$TEMP_FILE" --fail --silent --show-error; then
-        echo -e "${GREEN}✓${NC} Download complete"
-        AUDIO_FILE="$TEMP_FILE"
-    else
-        echo -e "${RED}Error: Failed to download audio file from URL${NC}"
-        exit 1
     fi
 else
     # Local file
     AUDIO_FILE="$AUDIO_INPUT"
 
-    # Check if audio file exists
-    if [ ! -f "$AUDIO_FILE" ]; then
+    # Check if audio file exists (only if we need to process it)
+    if [ "$PRINT_ONLY" = false ] && [ ! -f "$AUDIO_FILE" ]; then
         echo -e "${RED}Error: Audio file not found: $AUDIO_FILE${NC}"
         exit 1
     fi
@@ -135,18 +165,22 @@ if ! command -v audiowaveform &> /dev/null; then
     exit 1
 fi
 
-# Check if ffprobe is installed (for duration)
-if ! command -v ffprobe &> /dev/null; then
-    echo -e "${YELLOW}Warning: ffprobe not found (install ffmpeg)${NC}"
-    echo "Duration will need to be added manually"
-    DURATION=""
-else
-    # Get audio duration in seconds
-    DURATION=$(ffprobe -v error -show_entries format=duration \
-      -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" 2>/dev/null | cut -d. -f1)
+# Check if ffprobe is installed (for duration) - only if we have an audio file
+DURATION=""
+if [ -n "$AUDIO_FILE" ] && [ -f "$AUDIO_FILE" ]; then
+    if ! command -v ffprobe &> /dev/null; then
+        echo -e "${YELLOW}Warning: ffprobe not found (install ffmpeg)${NC}"
+        echo "Duration will need to be added manually"
+    else
+        # Get audio duration in seconds
+        DURATION=$(ffprobe -v error -show_entries format=duration \
+          -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" 2>/dev/null | cut -d. -f1)
 
-    if [ -z "$DURATION" ]; then
-        echo -e "${YELLOW}Warning: Could not extract duration${NC}"
+        # Check if duration is a valid number
+        if [ -z "$DURATION" ] || ! [[ "$DURATION" =~ ^[0-9]+$ ]]; then
+            echo -e "${YELLOW}Warning: Could not extract duration${NC}"
+            DURATION=""
+        fi
     fi
 fi
 
@@ -218,12 +252,19 @@ if [ -n "$DURATION" ]; then
     DURATION_LINE="duration: \"$DURATION_FORMATTED\""
 fi
 
+# Determine audio_url value
+if [ -n "$AUDIO_URL" ]; then
+    AUDIO_URL_VALUE="$AUDIO_URL"
+else
+    AUDIO_URL_VALUE="REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER"
+fi
+
 # Generate mix file content
 MIX_CONTENT=$(cat <<EOF
 ---
 title: "$TITLE"
 date: $DATE
-audio_url: "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER"
+audio_url: "$AUDIO_URL_VALUE"
 duration_seconds: ${DURATION:-3600}
 excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
