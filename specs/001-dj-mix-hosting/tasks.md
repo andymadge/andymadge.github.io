@@ -114,12 +114,12 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 **Goal**: Add pre-generated waveform visualization with click-to-seek functionality.
 
-- [ ] [T053] [US2] Update `AudioPlayer.init()` to fetch and load pre-generated waveform data from `config.waveformUrl`
-- [ ] [T054] [US2] Implement waveform fallback logic: if waveform fetch fails (404), display simple progress bar instead
-- [ ] [T055] [US2] Configure WaveSurfer waveform styling (colors, height) in `AudioPlayer.init()` (waveformColor: '#1976d2', progressColor: '#4caf50')
-- [ ] [T056] [US2] Enable WaveSurfer click-to-seek interaction on waveform canvas
-- [ ] [T057] [US2] Add visual playback progress indicator on waveform that updates during playback
-- [ ] [T058] [US2] Style waveform container for desktop and mobile in `music-player.scss`
+- [x] [T053] [US2] Update `AudioPlayer.init()` to fetch and load pre-generated waveform data from `config.waveformUrl`
+- [x] [T054] [US2] Implement waveform fallback logic: if waveform fetch fails (404), display simple progress bar instead
+- [x] [T055] [US2] Configure WaveSurfer waveform styling (colors, height) in `AudioPlayer.init()` (waveformColor: '#1976d2', progressColor: '#4caf50')
+- [x] [T056] [US2] Enable WaveSurfer click-to-seek interaction on waveform canvas
+- [x] [T057] [US2] Add visual playback progress indicator on waveform that updates during playback
+- [x] [T058] [US2] Style waveform container for desktop and mobile in `music-player.scss`
 - [ ] [T059] [US2] Test: Waveform renders on mix page when `waveform_file` is present in front matter
 - [ ] [T060] [US2] Test: Clicking waveform seeks audio to corresponding timestamp
 - [ ] [T061] [US2] Test: Progress indicator updates smoothly during playback
@@ -134,14 +134,14 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 **Goal**: Automatically highlight current track in tracklist as playback progresses.
 
-- [ ] [T064] [US3] Create `assets/js/track-highlighter.js` module with TrackHighlighter class
-- [ ] [T065] [US3] Implement tracklist parsing logic to extract tracks with timestamps from page content (regex: `\[(\d{2}:\d{2}:\d{2})\] (.+?) - (.+?)`)
-- [ ] [T066] [US3] Convert timestamp strings to seconds for comparison (e.g., "00:05:21" → 321)
-- [ ] [T067] [US3] Implement `TrackHighlighter.init()` to parse tracklist and register with AudioPlayer 'timeupdate' events
-- [ ] [T068] [US3] Implement highlighting logic: on timeupdate, find current track based on playback position and add CSS class
-- [ ] [T069] [US3] Implement highlighting update on seek: when user seeks, immediately highlight correct track
-- [ ] [T070] [US3] Add CSS styles in `music-player.scss` for highlighted track (background color, bold text, icon)
-- [ ] [T071] [US3] Integrate TrackHighlighter in `_layouts/mix.html` page initialization (conditionally load if tracklist exists)
+- [x] [T064] [US3] Create `assets/js/track-highlighter.js` module with TrackHighlighter class
+- [x] [T065] [US3] Implement tracklist parsing logic to extract tracks with timestamps from page content (regex: `\[(\d{2}:\d{2}:\d{2})\] (.+?) - (.+?)`)
+- [x] [T066] [US3] Convert timestamp strings to seconds for comparison (e.g., "00:05:21" → 321)
+- [x] [T067] [US3] Implement `TrackHighlighter.init()` to parse tracklist and register with AudioPlayer 'timeupdate' events
+- [x] [T068] [US3] Implement highlighting logic: on timeupdate, find current track based on playback position and add CSS class
+- [x] [T069] [US3] Implement highlighting update on seek: when user seeks, immediately highlight correct track
+- [x] [T070] [US3] Add CSS styles in `music-player.scss` for highlighted track (background color, bold text, icon)
+- [x] [T071] [US3] Integrate TrackHighlighter in `_layouts/mix.html` page initialization (conditionally load if tracklist exists)
 - [ ] [T072] [US3] Test: Track highlights when playback reaches its timestamp
 - [ ] [T073] [US3] Test: Highlighting updates when playback moves to next track
 - [ ] [T074] [US3] Test: Seeking updates highlighting immediately to correct track
@@ -155,15 +155,15 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 **Goal**: Save and restore playback position across browser sessions using localStorage.
 
-- [ ] [T076] [US4] Create `assets/js/playback-persistence.js` module implementing PlaybackPersistence per contract in `contracts/playback-persistence.md`
-- [ ] [T077] [US4] Implement `PlaybackPersistence.isAvailable()` to check localStorage availability (handles private browsing, disabled storage)
-- [ ] [T078] [US4] Implement `PlaybackPersistence.savePosition()` with quota exceeded error handling (cleanup oldest 25% on QuotaExceededError)
-- [ ] [T079] [US4] Implement `PlaybackPersistence.getPosition()` with expiration check (90-day TTL) and lazy cleanup of expired positions
-- [ ] [T080] [US4] Implement storage data structure: `{ positions: { [mixId]: { position, duration, lastPlayed, title } }, version: 1 }`
-- [ ] [T081] [US4] Integrate PlaybackPersistence in AudioPlayer: load saved position on init, restore if valid (>5s, <duration, <90 days old)
-- [ ] [T082] [US4] Implement position saving during playback: throttled save every 10 seconds on 'timeupdate' event
-- [ ] [T083] [US4] Implement position saving on pause and beforeunload events (critical saves)
-- [ ] [T084] [US4] Add graceful degradation: if localStorage unavailable, player functions normally without position persistence
+- [x] [T076] [US4] Create `assets/js/playback-persistence.js` module implementing PlaybackPersistence per contract in `contracts/playback-persistence.md`
+- [x] [T077] [US4] Implement `PlaybackPersistence.isAvailable()` to check localStorage availability (handles private browsing, disabled storage)
+- [x] [T078] [US4] Implement `PlaybackPersistence.savePosition()` with quota exceeded error handling (cleanup oldest 25% on QuotaExceededError)
+- [x] [T079] [US4] Implement `PlaybackPersistence.getPosition()` with expiration check (90-day TTL) and lazy cleanup of expired positions
+- [x] [T080] [US4] Implement storage data structure: `{ positions: { [mixId]: { position, duration, lastPlayed, title } }, version: 1 }`
+- [x] [T081] [US4] Integrate PlaybackPersistence in AudioPlayer: load saved position on init, restore if valid (>5s, <duration, <90 days old)
+- [x] [T082] [US4] Implement position saving during playback: throttled save every 10 seconds on 'timeupdate' event
+- [x] [T083] [US4] Implement position saving on pause and beforeunload events (critical saves)
+- [x] [T084] [US4] Add graceful degradation: if localStorage unavailable, player functions normally without position persistence
 - [ ] [T085] [US4] Test: Play mix, pause partway, reload page → playback position restores
 - [ ] [T086] [US4] Test: Play mix, close browser, reopen → position restores (if <90 days)
 - [ ] [T087] [US4] Test: Multiple mixes maintain independent positions

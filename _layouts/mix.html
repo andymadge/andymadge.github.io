@@ -12,6 +12,8 @@ layout: single
 
 <!-- Audio Player Initialization Script -->
 <script src="{{ '/assets/js/audio-player.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/track-highlighter.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/playback-persistence.js' | relative_url }}"></script>
 <script>
 (async function() {
   try {
@@ -27,6 +29,41 @@ layout: single
 
     // Initialize audio player
     const player = await AudioPlayer.init(config);
+
+    // Load saved playback position
+    const savedPosition = PlaybackPersistence.getPosition(config.mixId);
+    if (savedPosition && savedPosition.position > 5) {
+      console.log(`Restoring playback position: ${formatTime(savedPosition.position)}`);
+      player.seekTo(savedPosition.position);
+    }
+
+    // Set up position persistence
+    let saveThrottle = null;
+    const savePosition = () => {
+      const position = player.getCurrentTime();
+      const duration = player.getDuration();
+      PlaybackPersistence.savePosition(config.mixId, position, duration, config.mixTitle);
+    };
+
+    // Save position periodically during playback (throttled to every 10 seconds)
+    player.on('timeupdate', () => {
+      if (!saveThrottle) {
+        saveThrottle = setTimeout(() => {
+          savePosition();
+          saveThrottle = null;
+        }, 10000); // 10 seconds
+      }
+    });
+
+    // Save immediately on pause
+    player.on('pause', () => {
+      savePosition();
+    });
+
+    // Save on page unload
+    window.addEventListener('beforeunload', () => {
+      savePosition();
+    });
 
     // Wire up UI controls
     const playPauseBtn = document.getElementById('play-pause-btn');
@@ -84,13 +121,17 @@ layout: single
     // Store player globally for debugging
     window.mixPlayer = player;
 
+    // Format tracklist
+    formatTracklist();
+
+    // Initialize track highlighter (after tracklist is formatted)
+    const highlighter = TrackHighlighter.init(player);
+    window.mixHighlighter = highlighter;
+
   } catch (error) {
     console.error('Failed to initialize audio player:', error);
     showError('Failed to initialize the audio player. The audio file may be unavailable or in an unsupported format.');
   }
-
-  // Format tracklist
-  formatTracklist();
 })();
 
 /**

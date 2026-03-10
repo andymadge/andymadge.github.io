@@ -33,8 +33,26 @@ class AudioPlayer {
     player.eventHandlers = {};
 
     try {
+      // Try to load pre-generated waveform data if available
+      let peaks = null;
+      if (config.waveformUrl) {
+        try {
+          console.log('Attempting to load waveform data from:', config.waveformUrl);
+          const response = await fetch(config.waveformUrl);
+          if (response.ok) {
+            const arrayBuffer = await response.arrayBuffer();
+            peaks = new Int8Array(arrayBuffer);
+            console.log('Waveform data loaded successfully:', peaks.length, 'data points');
+          } else {
+            console.warn('Waveform file not found (404), falling back to progress bar');
+          }
+        } catch (error) {
+          console.warn('Failed to load waveform data, falling back to progress bar:', error);
+        }
+      }
+
       // Initialize WaveSurfer with MediaElement backend
-      player.wavesurfer = WaveSurfer.create({
+      const wavesurferConfig = {
         container: `#${config.containerId}`,
         waveColor: player.config.waveformColor,
         progressColor: player.config.progressColor,
@@ -44,10 +62,20 @@ class AudioPlayer {
         mediaControls: false,
         interact: true,
         cursorWidth: 1,
+        cursorColor: '#333',
         barWidth: 2,
         barGap: 1,
-        normalize: true
-      });
+        normalize: true,
+        hideScrollbar: true
+      };
+
+      // Add peaks data if available
+      if (peaks) {
+        wavesurferConfig.peaks = [peaks];
+        wavesurferConfig.duration = config.duration;
+      }
+
+      player.wavesurfer = WaveSurfer.create(wavesurferConfig);
 
       // Load audio
       player.wavesurfer.load(config.audioUrl);
@@ -57,8 +85,14 @@ class AudioPlayer {
 
       // Wait for ready
       await new Promise((resolve, reject) => {
-        player.wavesurfer.on('ready', () => resolve());
-        player.wavesurfer.on('error', (error) => reject(error));
+        player.wavesurfer.on('ready', () => {
+          console.log('Audio player ready, duration:', player.getDuration());
+          resolve();
+        });
+        player.wavesurfer.on('error', (error) => {
+          console.error('WaveSurfer error:', error);
+          reject(error);
+        });
       });
 
       return player;
