@@ -1,7 +1,7 @@
 ---
 title: "Example Mix - Deep House Journey"
 date: 2025-11-25
-audio_url: "http://127.0.0.1:4000/assets/local-tests/Armchair%20Clubbing%20-%20Vol%2001%20FINAL%20v1.mp3"
+audio_url: "/assets/local-tests/Armchair%20Clubbing%20-%20Vol%2001%20FINAL%20v1.mp3"
 duration_seconds: 3600
 excerpt: "A placeholder example mix demonstrating the DJ mix hosting feature. Replace this with real content."
 waveform_file: "example-mix.dat"
@@ -10,6 +10,24 @@ genre: "Deep House"
 header:
   image: /assets/images/mixes/headers/example-mix.png
   teaser: /assets/images/mixes/teasers/example-mix.png
+tracklist:
+  - "[00:00:00] Maps - Glory Verse"
+  - "[00:05:19] Nosaj Thing & Julianna Barwick - Blue Hour"
+  - "[00:08:39] Invisible Inc - Stars [Ambient Version]"
+  - "[00:13:49] Daniel Avery - Illusion of Time"
+  - "[00:17:19] Menual & Pensees - Planetary"
+  - "[00:21:20] Apparat - Dawan"
+  - "[00:24:58] Framewerk - Dark & Long (Framewerk Rewerk)"
+  - "[00:33:39] Framewerk - Seven Days and One Week (Framewerk Breaks Rewerk) (B.B.E. cover)"
+  - "[00:38:09] Ictus - The Look [Chris Lake Dirty Breaks Mix]"
+  - "[00:43:55] Acid Pauli - Nana"
+  - "[00:51:55] Tom Demac - Serenade"
+  - "[00:58:18] Röyksopp - A Higher Place"
+  - "[01:02:20] Daniel Avery - At First Sight"
+  - "[01:05:04] Hans Zimmer - A Time of Quiet Between the Storms"
+  - "[01:08:49] Underworld - Best Mamgu Ever"
+  - "[01:17:03] Jon Hopkins - Monsters Theme"
+  - "[01:21:07] Underworld - Louisiana"
 tags:
   - deep house
   - example
@@ -20,19 +38,4 @@ share: true
 
 This is an example DJ mix to demonstrate the functionality of the music hosting feature.
 
-**Note**: This is a placeholder. Replace the `audio_url` with a real audio file hosted on S3/CloudFront, and add real cover art images.
-
-## Tracklist
-
-[00:00:02] Example Artist - Example Track One
-[00:05:21] Another Artist - Second Track Title
-[00:10:15] DJ Example - Third Track [Original Mix]
-[00:15:30] Sample Producer - Track Four
-[00:20:45] Test Artist - Fifth Track [Remix]
-[00:25:00] Demo DJ - Sixth Track
-[00:30:15] Placeholder - Seventh Track
-[00:35:30] Sample - Eighth Track [Extended]
-[00:40:00] Example - Ninth Track
-[00:45:15] Test - Tenth Track [Club Mix]
-[00:50:00] Demo - Eleventh Track
-[00:55:00] Final - Last Track [Outro]
+**Note**: This is the description area where you can provide details about the mix, the artist, the context of the recording, or any other relevant information you'd like to share with your listeners.
