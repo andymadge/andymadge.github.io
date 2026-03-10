@@ -51,11 +51,34 @@ class AudioPlayer {
         }
       }
 
+      // Create gradient for waveform (Soundcloud-style with blue/green colors)
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Define the waveform gradient (Soundcloud style with blue tones)
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35);
+      gradient.addColorStop(0, '#1976d2'); // Top color - blue
+      gradient.addColorStop((canvas.height * 0.63) / canvas.height, '#1976d2'); // Top color
+      gradient.addColorStop((canvas.height * 0.63 + 1) / canvas.height, '#ffffff'); // White line
+      gradient.addColorStop((canvas.height * 0.63 + 2) / canvas.height, '#ffffff'); // White line
+      gradient.addColorStop((canvas.height * 0.63 + 3) / canvas.height, '#90caf9'); // Bottom color - light blue
+      gradient.addColorStop(1, '#90caf9'); // Bottom color
+
+      // Define the progress gradient (Soundcloud style with green tones)
+      const progressGradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35);
+      progressGradient.addColorStop(0, '#4caf50'); // Top color - green
+      progressGradient.addColorStop((canvas.height * 0.63) / canvas.height, '#388e3c'); // Mid color - darker green
+      progressGradient.addColorStop((canvas.height * 0.63 + 1) / canvas.height, '#ffffff'); // White line
+      progressGradient.addColorStop((canvas.height * 0.63 + 2) / canvas.height, '#ffffff'); // White line
+      progressGradient.addColorStop((canvas.height * 0.63 + 3) / canvas.height, '#a5d6a7'); // Bottom color - light green
+      progressGradient.addColorStop(1, '#a5d6a7'); // Bottom color
+
       // Initialize WaveSurfer with MediaElement backend
       const wavesurferConfig = {
         container: `#${config.containerId}`,
-        waveColor: player.config.waveformColor,
-        progressColor: player.config.progressColor,
+        waveColor: gradient,
+        progressColor: progressGradient,
+        barWidth: 2,
         height: player.config.height,
         responsive: player.config.responsive,
         backend: 'MediaElement', // Use MediaElement for streaming
@@ -63,7 +86,6 @@ class AudioPlayer {
         interact: true,
         cursorWidth: 1,
         cursorColor: '#333',
-        barWidth: 2,
         barGap: 1,
         normalize: true,
         hideScrollbar: true

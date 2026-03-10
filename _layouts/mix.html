@@ -72,10 +72,13 @@ layout: single
     const playPauseBtn = document.getElementById('play-pause-btn');
     const playIcon = document.getElementById('play-icon');
     const pauseIcon = document.getElementById('pause-icon');
-    const currentTimeSpan = document.getElementById('current-time');
-    const totalTimeSpan = document.getElementById('total-time');
-    const volumeSlider = document.getElementById('volume-slider');
-    const volumeLabel = document.getElementById('volume-label');
+    const restartBtn = document.getElementById('restart-btn');
+    const skipBackBtn = document.getElementById('skip-back-btn');
+    const skipForwardBtn = document.getElementById('skip-forward-btn');
+    const timeEl = document.getElementById('time');
+    const durationEl = document.getElementById('duration');
+    const waveformEl = document.getElementById('waveform');
+    const hover = document.getElementById('hover');
 
     // Play/Pause button
     playPauseBtn.addEventListener('click', () => {
@@ -84,6 +87,35 @@ layout: single
       } else {
         player.play();
       }
+    });
+
+    // Restart button - go to beginning and stop
+    restartBtn.addEventListener('click', () => {
+      player.seekTo(0);
+      player.pause();
+    });
+
+    // Skip back 10 seconds
+    skipBackBtn.addEventListener('click', () => {
+      const currentTime = player.getCurrentTime();
+      player.seekTo(Math.max(0, currentTime - 10));
+    });
+
+    // Skip forward 10 seconds
+    skipForwardBtn.addEventListener('click', () => {
+      const currentTime = player.getCurrentTime();
+      const duration = player.getDuration();
+      player.seekTo(Math.min(duration, currentTime + 10));
+    });
+
+    // Click on waveform to seek and play from that position
+    player.wavesurfer.on('interaction', () => {
+      player.play();
+    });
+
+    // Soundcloud-style: Hover indicator that follows mouse
+    waveformEl.addEventListener('pointermove', (e) => {
+      hover.style.width = `${e.offsetX}px`;
     });
 
     // Update play/pause button state
@@ -97,23 +129,20 @@ layout: single
       pauseIcon.style.display = 'none';
     });
 
-    // Update time display
+    // Update time display (Soundcloud-style using formatTime)
     player.on('timeupdate', (currentTime) => {
-      currentTimeSpan.textContent = formatTime(currentTime);
+      timeEl.textContent = formatTime(currentTime);
     });
 
-    // Set total time when ready
-    totalTimeSpan.textContent = formatTime(player.getDuration());
-
-    // Volume control
-    volumeSlider.addEventListener('input', (e) => {
-      const volume = e.target.value / 100;
-      player.wavesurfer.setVolume(volume);
-      volumeLabel.textContent = `🔊 ${e.target.value}%`;
+    // Set total duration when ready (Soundcloud-style)
+    player.wavesurfer.on('decode', (duration) => {
+      durationEl.textContent = formatTime(duration);
     });
 
-    // Set initial volume
-    player.wavesurfer.setVolume(volumeSlider.value / 100);
+    // Fallback: Set duration from player if decode event doesn't fire
+    if (player.getDuration() > 0) {
+      durationEl.textContent = formatTime(player.getDuration());
+    }
 
     // Error handling
     player.on('error', (error) => {
