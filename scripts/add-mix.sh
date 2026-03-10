@@ -204,8 +204,10 @@ format_duration() {
 }
 
 DURATION_FORMATTED=""
+DURATION_LINE=""
 if [ -n "$DURATION" ]; then
     DURATION_FORMATTED=$(format_duration "$DURATION")
+    DURATION_LINE="duration: \"$DURATION_FORMATTED\""
 fi
 
 # Create mix file with front matter
@@ -217,8 +219,8 @@ audio_url: "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER"
 duration_seconds: ${DURATION:-3600}
 excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
-${DURATION_FORMATTED:+duration: \"$DURATION_FORMATTED\"}
-header:
+${DURATION_LINE:+${DURATION_LINE}
+}header:
   cover: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # Optional
   og_image: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # For social sharing
 classes: wide
