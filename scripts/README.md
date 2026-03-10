@@ -50,26 +50,38 @@ Scans all mix files and generates missing waveforms.
 
 **Usage:**
 ```bash
+# Local mode: use audio files from a directory
 ./scripts/generate-waveforms.sh [audio_directory]
+
+# Remote mode: download from audio_url in mix files
+./scripts/generate-waveforms.sh --remote
 ```
 
-**Example:**
+**Examples:**
 ```bash
 # Default: looks for audio files in audio_files/
 ./scripts/generate-waveforms.sh
 
 # Custom directory:
 ./scripts/generate-waveforms.sh ~/Music/DJ_Mixes
+
+# Download from S3/CDN (uses audio_url from each mix file):
+./scripts/generate-waveforms.sh --remote
 ```
 
 **What it does:**
 1. 🔍 Scans `_djmixes/` for mix files with `waveform_file` field
 2. ✅ Checks if waveform `.dat` file already exists
-3. 🔍 Searches for matching audio file in specified directory
+3. 🎵 Gets audio file:
+   - **Local mode**: Searches for matching file in specified directory
+   - **Remote mode**: Downloads from `audio_url` in mix front matter
 4. ⚙️ Generates missing waveforms using audiowaveform
-5. 📊 Provides summary of generated/skipped/missing
+5. 🧹 Cleans up downloaded files (remote mode only)
+6. 📊 Provides summary of generated/skipped/missing
 
 **Use cases:**
+- **Local mode**: Before uploading audio to S3 (process local files)
+- **Remote mode**: After uploading to S3 (download and process)
 - Regenerate all waveforms after changing settings
 - Generate waveforms for mixes added manually
 - Check which mixes are missing waveform data
@@ -102,6 +114,7 @@ git push
 
 ### Batch Generating Waveforms
 
+**Option 1: From local audio files (before S3 upload)**
 ```bash
 # Place audio files in audio_files/ directory
 cp ~/Downloads/*.mp3 audio_files/
@@ -115,6 +128,18 @@ git add assets/waveforms/*.dat
 git commit -m "Generate waveforms for recent mixes"
 ```
 
+**Option 2: Download from S3/CDN (after upload)**
+```bash
+# Ensure audio_url is set in all mix files
+# Then download and generate waveforms
+./scripts/generate-waveforms.sh --remote
+
+# Review and commit
+git status
+git add assets/waveforms/*.dat
+git commit -m "Generate waveforms from hosted audio files"
+```
+
 ---
 
 ## Directory Structure
@@ -125,9 +150,12 @@ scripts/
 ├── add-mix.sh              # Create new mix with waveform
 └── generate-waveforms.sh   # Batch generate missing waveforms
 
-audio_files/                # Local audio storage (not committed)
-├── summer-vibes.mp3
-└── winter-chill.m4a
+audio_files/                # Local audio storage (gitignored, not committed)
+├── summer-vibes.mp3        # Audio files hosted on S3/CDN, kept locally
+└── winter-chill.m4a        # for waveform generation only
+
+.tmp/                       # Temporary downloads (gitignored, auto-created)
+└── audio/                  # Downloaded files (--remote mode)
 
 _djmixes/                   # Mix content files (committed)
 └── 2025-11-26-summer-vibes.md

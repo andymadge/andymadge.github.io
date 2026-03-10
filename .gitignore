@@ -7,3 +7,5 @@ vendor
 Gemfile.lock
 .claude/settings.local.json
 assets/local-tests/
+.tmp
+audio_files
