@@ -125,7 +125,7 @@ cat > "$MIX_FILE" <<EOF
 ---
 title: "$TITLE"
 date: $DATE
-audio_url: "REPLACE_WITH_S3_OR_CDN_URL"
+audio_url: "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER"
 duration_seconds: ${DURATION:-3600}
 excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
@@ -151,9 +151,14 @@ echo ""
 # Show next steps
 echo -e "${BLUE}=== Next Steps ===${NC}"
 echo ""
-echo -e "${YELLOW}1. Upload audio file to hosting:${NC}"
-echo "   • Upload $AUDIO_FILE to S3/CloudFront"
+echo -e "${YELLOW}1. Upload audio file to Dropbox:${NC}"
+echo "   • Upload $AUDIO_FILE to Dropbox (any folder)"
+echo "   • Get shareable link (right-click → Share → Copy link)"
+echo "   • Add &dl=1 parameter to the link"
 echo "   • Update audio_url in $MIX_FILE"
+echo "   • Example: https://www.dropbox.com/scl/fi/...?rlkey=...&dl=1"
+echo ""
+echo "   ${BLUE}Alternative:${NC} For S3/CloudFront hosting, see quickstart.md Appendix A"
 echo ""
 echo -e "${YELLOW}2. (Optional) Add cover art:${NC}"
 echo "   • Create teaser image (400x400px)"

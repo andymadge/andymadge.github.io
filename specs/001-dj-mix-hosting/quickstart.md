@@ -14,27 +14,40 @@ This guide walks through adding a new DJ mix to your personal blog, from audio f
 - Audio file (MP3 or AAC/M4A format)
 - Cover art image (optional but recommended)
 - Tracklist with timestamps (optional)
-- AWS S3 + CloudFront account (or alternative hosting)
+- Dropbox account (free tier sufficient)
 - BBC audiowaveform tool installed (for waveform generation)
 
 ---
 
 ## Step 1: Prepare Audio File
 
-### 1.1 Upload to S3/CloudFront
+### 1.1 Upload to Dropbox and Get Shareable Link
 
 ```bash
-# Example using AWS CLI
-aws s3 cp summer-vibes-2025.mp3 s3://your-bucket/mixes/
+# 1. Upload audio file to Dropbox
+# - Use Dropbox desktop app, web interface, or mobile app
+# - Recommended location: /Apps/DJ Mixes/ or any organized folder
 
-# Get CloudFront URL (configured during setup)
-# Example: https://d1a2b3c4d5e6.cloudfront.net/mixes/summer-vibes-2025.mp3
+# 2. Get shareable link
+# - Right-click file in Dropbox → "Share" or "Copy link"
+# - You'll get a link like:
+#   https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc
+
+# 3. Convert to direct download link by adding &dl=1
+# Example original link:
+https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc
+
+# Example direct download link (add &dl=1):
+https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc&dl=1
 ```
 
-**Note**: If using Dropbox initially (not recommended for production), use `?raw=1` parameter:
-```
-https://www.dropbox.com/s/abc123/summer-vibes-2025.mp3?raw=1
-```
+**IMPORTANT**: Always add `&dl=1` (or `?dl=1` if no other parameters) to force direct download/streaming instead of Dropbox preview page.
+
+**Link format variations:**
+- **New format** (current): `...dropbox.com/scl/fi/...?rlkey=...&dl=1`
+- **Old format** (legacy): `...dropbox.com/s/...?dl=1`
+
+Both formats work as long as you include the `dl=1` parameter.
 
 ### 1.2 Get Audio Duration
 
@@ -135,7 +148,7 @@ Edit `_djmixes/2025-06-15-summer-vibes.md`:
 ---
 title: "Summer Vibes 2025 - Deep House Journey"
 date: 2025-06-15
-audio_url: "https://d1a2b3c4d5e6.cloudfront.net/mixes/summer-vibes-2025.mp3"
+audio_url: "https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&dl=1"
 duration_seconds: 5025
 excerpt: "A 90-minute journey through deep house and melodic techno, perfect for summer evenings"
 waveform_file: "summer-vibes-2025.dat"
@@ -219,7 +232,7 @@ http://localhost:4000/music/summer-vibes/
 - [ ] Audio player displays
 - [ ] Waveform renders (or shows progress bar if missing)
 - [ ] Play/pause buttons work
-- [ ] Audio streams from S3/CloudFront
+- [ ] Audio streams from Dropbox (verify dl=1 parameter is present)
 - [ ] Tracklist displays (if provided)
 - [ ] Cover art shows in header/teaser
 - [ ] Page appears in `/music/` index
@@ -286,15 +299,17 @@ https://www.andymadge.com/music/summer-vibes/
 
 **Symptom**: Player shows but audio won't load
 **Causes**:
-- CORS issue with audio host
-- Invalid audio URL
+- Invalid audio URL or missing dl=1 parameter
 - Unsupported audio format
+- CORS issue with audio host
 
 **Solutions**:
 1. Check browser console for errors
-2. Verify audio URL works in new tab
-3. Ensure S3/CloudFront has CORS enabled
-4. Test with different audio format (MP3 vs AAC)
+2. Verify audio URL works in new tab (should download, not show preview)
+3. **Dropbox users**: Ensure URL has `dl=1` parameter (not `dl=0`)
+4. **Dropbox users**: If using old share link format, regenerate a new share link
+5. Test with different audio format (MP3 vs AAC)
+6. For advanced needs, consider S3/CloudFront (see Appendix A)
 
 ### Waveform Doesn't Display or Loads Slowly
 
@@ -364,7 +379,7 @@ Generates functional page at `/music/quick-test-mix/` with basic audio player.
 ---
 title: "Full Example Mix"
 date: 2025-06-15
-audio_url: "https://cloudfront.net/mix.mp3"
+audio_url: "https://www.dropbox.com/scl/fi/abc123xyz/mix.mp3?rlkey=xyz&dl=1"
 duration_seconds: 5025
 excerpt: "Complete example with all features"
 waveform_file: "example.dat"
@@ -441,5 +456,130 @@ For implementation details, see:
 - `data-model.md` - Full schema documentation
 - `contracts/` - JavaScript module specifications
 - `research.md` - Technical decision rationale
+
+---
+
+## Appendix A: Alternative Hosting - S3/CloudFront
+
+For users who need professional CDN performance, unlimited bandwidth, or are experiencing Dropbox limitations, you can migrate to Amazon S3 + CloudFront.
+
+### When to Use S3/CloudFront Instead of Dropbox
+
+Consider migration if you experience:
+- Traffic exceeding 20GB/day (Dropbox bandwidth limit)
+- Slow loading times or unreliable streaming
+- Need for guaranteed CORS support
+- Commercial/viral content requiring CDN
+- Advanced analytics requirements
+
+### S3/CloudFront Setup
+
+**Prerequisites:**
+- AWS account (free tier available)
+- AWS CLI installed (optional, can use web console)
+
+**Step 1: Create S3 Bucket**
+
+```bash
+# Using AWS CLI
+aws s3 mb s3://your-mixes-bucket
+aws s3 cp summer-vibes-2025.mp3 s3://your-mixes-bucket/mixes/
+
+# Or use AWS Console:
+# 1. Go to S3 console
+# 2. Create bucket (name must be globally unique)
+# 3. Upload audio files to /mixes/ folder
+```
+
+**Step 2: Create CloudFront Distribution**
+
+```bash
+# Using AWS Console:
+# 1. Go to CloudFront console
+# 2. Create distribution
+# 3. Origin domain: your-mixes-bucket.s3.amazonaws.com
+# 4. Origin path: /mixes
+# 5. Viewer protocol policy: Redirect HTTP to HTTPS
+# 6. Wait 10-15 minutes for deployment
+```
+
+**Step 3: Configure CORS (Optional)**
+
+```bash
+# Add CORS configuration to S3 bucket
+# (Usually not needed for audio streaming, but helpful for troubleshooting)
+
+cat > cors-config.json <<EOF
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": ["https://www.andymadge.com"],
+      "AllowedMethods": ["GET", "HEAD"],
+      "AllowedHeaders": ["*"],
+      "MaxAgeSeconds": 3600
+    }
+  ]
+}
+EOF
+
+aws s3api put-bucket-cors --bucket your-mixes-bucket --cors-configuration file://cors-config.json
+```
+
+**Step 4: Update Mix Files**
+
+```bash
+# Get CloudFront distribution URL (e.g., d1a2b3c4d5e6.cloudfront.net)
+# Update audio_url in your mix files:
+
+# Before (Dropbox):
+audio_url: "https://www.dropbox.com/scl/fi/abc/mix.mp3?dl=1"
+
+# After (CloudFront):
+audio_url: "https://d1a2b3c4d5e6.cloudfront.net/summer-vibes-2025.mp3"
+```
+
+**Step 5: Test and Deploy**
+
+```bash
+# Test locally
+bundle exec jekyll serve
+
+# Verify CloudFront URL works:
+curl -I https://d1a2b3c4d5e6.cloudfront.net/summer-vibes-2025.mp3
+
+# Commit changes
+git add _djmixes/*.md
+git commit -m "Migrate audio hosting from Dropbox to CloudFront"
+git push
+```
+
+### Cost Estimate
+
+**AWS Free Tier (first 12 months):**
+- S3: 5GB storage, 20,000 GET requests
+- CloudFront: 50GB data transfer out
+
+**After free tier (typical personal blog):**
+- S3 storage: $0.023/GB/month (~$0.50 for 20 mixes)
+- CloudFront transfer: $0.085/GB (~$1-3/month for typical traffic)
+- **Total**: $1-5/month depending on traffic
+
+**Dropbox comparison:**
+- Free: 2GB storage limit, 20GB/day bandwidth
+- Paid: $11.99/month for 2TB (overkill for mixes)
+
+### Migration Checklist
+
+- [ ] Create AWS account
+- [ ] Set up S3 bucket and upload files
+- [ ] Create CloudFront distribution
+- [ ] Test CloudFront URLs in browser
+- [ ] Update audio_url in all mix files
+- [ ] Test locally with Jekyll
+- [ ] Deploy to GitHub Pages
+- [ ] Verify all mixes play correctly
+- [ ] (Optional) Delete files from Dropbox
+
+---
 
 Happy mixing! 🎵

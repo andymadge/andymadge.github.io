@@ -39,7 +39,7 @@ _djmixes/YYYY-MM-DD-mix-slug.md
 
 title: string              # Display title for the mix
 date: YYYY-MM-DD           # Publication date (ISO 8601 format)
-audio_url: string          # Full URL to hosted audio file (S3/CloudFront)
+audio_url: string          # Full URL to hosted audio file (Dropbox with dl=1, or S3/CloudFront)
 duration_seconds: integer  # Total duration in seconds (for waveform/player)
 
 # OPTIONAL FIELDS (High Priority)
@@ -104,7 +104,7 @@ Optional tracklist in the format:
 |-------|------|------------|-------------|
 | `title` | string | Not empty | Display name of the mix |
 | `date` | date | YYYY-MM-DD | Publication date (for sorting) |
-| `audio_url` | URL | Valid HTTP/HTTPS | Full URL to audio file (S3/CloudFront) |
+| `audio_url` | URL | Valid HTTP/HTTPS | Full URL to audio file (Dropbox with dl=1, or S3/CloudFront) |
 | `duration_seconds` | integer | > 0 | Total duration in seconds |
 
 #### High Priority Optional Fields
@@ -147,7 +147,7 @@ Optional tracklist in the format:
 ---
 title: "Summer Vibes 2025 - Deep House Journey"
 date: 2025-06-15
-audio_url: "https://d1a2b3c4d5e6.cloudfront.net/mixes/summer-vibes-2025.mp3"
+audio_url: "https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&dl=1"
 duration_seconds: 5025
 excerpt: "A 90-minute journey through deep house and melodic techno, perfect for summer evenings"
 waveform_file: "summer-vibes-2025.dat"
@@ -284,8 +284,9 @@ Playback positions are stored client-side in browser localStorage.
 ### Mix → Audio File (External)
 - **Type**: Reference (URL)
 - **Cardinality**: 1:1 (each mix has one audio file)
-- **Storage**: Audio file hosted on S3/CloudFront (external to repository)
+- **Storage**: Audio file hosted on Dropbox (or S3/CloudFront for advanced users) - external to repository
 - **Link**: `audio_url` field in front matter
+- **Format**: Dropbox shareable link with `dl=1` parameter for direct download
 
 ### Mix → Waveform Data (Optional)
 - **Type**: Reference (filename)
@@ -373,12 +374,13 @@ try {
 ```
 1. Create file: _djmixes/2025-06-15-summer-vibes.md
 2. Add front matter: title, date, audio_url, duration_seconds, etc.
-3. Generate waveform: audiowaveform -i audio.mp3 -o assets/waveforms/summer-vibes.dat
-4. Add waveform_file: "summer-vibes.dat" to front matter
-5. Write tracklist in Markdown: [HH:MM:SS] Artist - Title
-6. Commit to git
-7. Jekyll generates: /music/summer-vibes/ page
-8. Page loads: fetches audio from S3, waveform from local assets
+3. Upload audio to Dropbox, get shareable link with dl=1 parameter
+4. Generate waveform: audiowaveform -i audio.mp3 -o assets/waveforms/summer-vibes.dat
+5. Add waveform_file: "summer-vibes.dat" to front matter
+6. Write tracklist in Markdown: [HH:MM:SS] Artist - Title
+7. Commit to git
+8. Jekyll generates: /music/summer-vibes/ page
+9. Page loads: fetches audio from Dropbox, waveform from local assets
 ```
 
 ### Playback Flow

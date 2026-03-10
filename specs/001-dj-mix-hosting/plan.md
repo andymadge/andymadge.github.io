@@ -7,7 +7,7 @@
 
 ## Summary
 
-Add DJ mix hosting functionality to the personal blog at `/music/` path. Mixes will be stored as Jekyll collection items with YAML front matter, each generating a dedicated page with audio player, cover art, and optional tracklist. Audio files hosted externally (Dropbox), with client-side waveform generation, localStorage for playback persistence, and mobile-responsive design using Minimal Mistakes theme capabilities.
+Add DJ mix hosting functionality to the personal blog at `/music/` path. Mixes will be stored as Jekyll collection items with YAML front matter, each generating a dedicated page with audio player, cover art, and optional tracklist. Audio files hosted externally on Dropbox (with S3/CloudFront as optional migration path), with pre-generated waveform data, localStorage for playback persistence, and mobile-responsive design using Minimal Mistakes theme capabilities.
 
 ## Technical Context
 
@@ -19,7 +19,7 @@ Add DJ mix hosting functionality to the personal blog at `/music/` path. Mixes w
 - HTML5 Audio API
 **Storage**:
 - Content: YAML front matter in Jekyll collection files (`_djmixes/`)
-- Audio files: External hosting (Dropbox, direct links)
+- Audio files: External hosting (Dropbox with dl=1 parameter, or S3/CloudFront)
 - Playback state: Browser localStorage (client-side)
 **Testing**:
 - `bundle exec jekyll serve` local preview
@@ -164,12 +164,13 @@ No violations at this stage. Conditional items to verify in Phase 1:
    - **Implementation**: Documented in tasks T038, T053-T054
 
 3. **External Audio Hosting (Dropbox)** ✅
-   - **Decision**: Migrate from Dropbox to S3/CloudFront for better reliability
+   - **Decision**: Use Dropbox as primary hosting with S3/CloudFront as optional migration path
    - **Rationale**:
-     - Dropbox direct links work but have rate limiting and CORS issues
-     - S3/CloudFront provides better performance, reliability, and CORS control
-     - Professional CDN distribution for audio streaming
-   - **Implementation**: Documented in quickstart.md, task T037
+     - Dropbox shareable links with `dl=1` parameter work reliably for personal blog scale
+     - Zero cost, simple file management
+     - 20GB/day bandwidth sufficient for expected traffic (10-50 mixes, 100-200 plays/day)
+     - S3/CloudFront available as migration path when needed (traffic growth, CDN requirements)
+   - **Implementation**: Documented in quickstart.md with detailed link format instructions, S3 migration in Appendix
 
 4. **Jekyll Collections Configuration** ✅
    - **Decision**: Use Jekyll collections (`_djmixes/`) with permalink `/music/:name/`
@@ -248,14 +249,14 @@ Phases 1-6 were implemented rapidly in a single session:
 
 3. **Tracklist Preprocessing**: Implemented server-side (Jekyll/Liquid) tracklist formatting instead of pure JavaScript parsing, improving performance and SEO.
 
-4. **Audio Hosting**: Migrated from Dropbox to S3/CloudFront for better reliability and CORS control.
+4. **Audio Hosting**: Retained Dropbox as primary method (simplified from original S3/CloudFront plan) with S3 as optional migration path for scaling.
 
 ### Lessons Learned
 
 - Pre-generated waveforms provide better UX than client-side generation for static sites
 - Jekyll preprocessing can reduce JavaScript complexity for static content
 - WaveSurfer.js v7 exceeded expectations for mobile compatibility
-- S3/CloudFront provides superior audio delivery compared to Dropbox direct links
+- Dropbox with dl=1 parameter provides sufficient reliability for personal blog scale, with S3/CloudFront as available migration path for growth
 
 ### Remaining Work
 

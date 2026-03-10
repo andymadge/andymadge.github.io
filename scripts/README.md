@@ -36,7 +36,7 @@ Creates a complete mix entry with waveform generation.
 4. ✅ Provides clear next steps for completion
 
 **After running:**
-- Upload audio to S3/CloudFront
+- Upload audio to Dropbox, get shareable link with &dl=1 parameter
 - Update `audio_url` in the generated mix file
 - Add description and tracklist
 - Test locally with `bundle exec jekyll serve`
@@ -96,12 +96,15 @@ Scans all mix files and generates missing waveforms.
 # 1. Run add-mix script
 ./scripts/add-mix.sh audio_files/my-mix.mp3 my-mix "My Amazing Mix"
 
-# 2. Upload audio to S3/CloudFront
-aws s3 cp audio_files/my-mix.mp3 s3://your-bucket/mixes/
+# 2. Upload audio to Dropbox
+# - Use Dropbox app or web interface
+# - Upload audio_files/my-mix.mp3 to any Dropbox folder
+# - Get shareable link: right-click → Share → Copy link
+# - Add &dl=1 parameter to the link
 
 # 3. Edit the generated mix file
 vim _djmixes/2025-11-26-my-mix.md
-# Update audio_url, add description, tracklist
+# Update audio_url with Dropbox link (include &dl=1), add description, tracklist
 
 # 4. Test locally
 bundle exec jekyll serve
@@ -151,7 +154,7 @@ scripts/
 └── generate-waveforms.sh   # Batch generate missing waveforms
 
 audio_files/                # Local audio storage (gitignored, not committed)
-├── summer-vibes.mp3        # Audio files hosted on S3/CDN, kept locally
+├── summer-vibes.mp3        # Audio files hosted on Dropbox, kept locally
 └── winter-chill.m4a        # for waveform generation only
 
 .tmp/                       # Temporary downloads (gitignored, auto-created)
@@ -163,6 +166,41 @@ _djmixes/                   # Mix content files (committed)
 assets/waveforms/           # Generated waveform data (committed)
 └── summer-vibes.dat
 ```
+
+---
+
+## Audio Hosting Options
+
+### Primary: Dropbox (Recommended for Most Users)
+
+**Pros:**
+- Free (2GB storage limit)
+- Simple file management
+- No AWS account needed
+- Sufficient for personal blogs (20GB/day bandwidth)
+
+**Setup:**
+1. Upload audio files to Dropbox
+2. Get shareable link (right-click → Share)
+3. Add `&dl=1` parameter for direct download
+4. Use link in mix front matter
+
+**Example link:**
+```
+https://www.dropbox.com/scl/fi/abc123xyz/mix.mp3?rlkey=xyz&dl=1
+```
+
+### Alternative: S3/CloudFront (For Scaling)
+
+**When to migrate:**
+- Traffic exceeds 20GB/day
+- Need CDN performance
+- Commercial use
+- Advanced analytics needed
+
+**See**: `quickstart.md` Appendix A for full S3/CloudFront setup instructions
+
+**Cost:** $1-5/month after AWS free tier (vs $0 for Dropbox)
 
 ---
 

@@ -10,7 +10,7 @@ class AudioPlayer {
    * Initialize audio player for a mix page
    * @param {Object} config - Configuration object
    * @param {string} config.containerId - DOM element ID for waveform container
-   * @param {string} config.audioUrl - Full URL to audio file (S3/CloudFront)
+   * @param {string} config.audioUrl - Full URL to audio file (Dropbox with dl=1, or S3/CloudFront)
    * @param {string} config.waveformUrl - URL to pre-generated waveform data (.dat file)
    * @param {number} config.duration - Total duration in seconds
    * @param {string} config.mixId - Unique mix identifier (for localStorage)

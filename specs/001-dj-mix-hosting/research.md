@@ -75,32 +75,74 @@ audiowaveform -i mix.mp3 -o assets/waveforms/mix.dat -b 8 -z 256
 ## 3. External Audio Hosting
 
 ### Decision
-**Amazon S3 + CloudFront** (NOT Dropbox)
+**Dropbox (Primary)** with S3 + CloudFront as optional migration path
 
-### Rationale
-Dropbox has significant limitations for production audio streaming:
+### Rationale for Dropbox
+Dropbox is acceptable for this personal blog use case given the specific constraints and scale:
 
-**Dropbox limitations:**
-- **CORS**: No official CORS header support (intentional)
-- **Bandwidth**: Only 20GB/day for Basic accounts (easily exceeded)
-- **Reliability**: Not optimized for streaming, slow loads
-- **Workarounds**: Unofficial `dl.dropboxusercontent.com` may break without notice
+**Why Dropbox works for this use case:**
+- **Scale**: Personal blog with 10-50 mixes expected (not commercial/viral)
+- **Bandwidth**: 20GB/day limit sufficient for personal traffic (100-200 plays/day max)
+- **Simplicity**: Zero cost, no AWS account needed, familiar interface
+- **CORS workaround**: Shareable links with `?dl=1` parameter work reliably
+- **Reliability**: Adequate for non-critical personal content
+- **File management**: Easy to organize, update, and manage mix files
+
+**Dropbox limitations acknowledged:**
+- **CORS**: Not officially supported, relies on `?dl=1` parameter workaround
+- **Bandwidth**: 20GB/day cap for Basic accounts (~67 hours of streaming at 320kbps)
+- **Scalability**: Not suitable for viral/commercial content
+- **Reliability**: Not optimized for streaming, may have slower initial loads
+
+**Trade-off analysis:**
+- **For personal blogs**: Dropbox's simplicity outweighs S3's technical advantages
+- **For scaling up**: S3/CloudFront migration path available (see Appendix)
+- **Cost comparison**: $0 (Dropbox) vs $1-5/month (S3) for expected traffic
+
+### Dropbox Implementation
+
+**Getting shareable Dropbox links:**
+
+1. **Upload audio file to Dropbox**
+   - Organize in folder: `/Apps/DJ Mixes/` (or your preference)
+   - Right-click file → "Share" or "Copy link"
+
+2. **Convert to direct download link**
+   - Original link: `https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc`
+   - Add `&dl=1` parameter to make it a direct download/streaming link
+   - Final link: `https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc&dl=1`
+
+3. **Link format variations**
+   - **Old format**: `https://www.dropbox.com/s/abc123/file.mp3?dl=1`
+   - **New format**: `https://www.dropbox.com/scl/fi/.../file.mp3?rlkey=...&dl=1`
+   - Both formats work with `dl=1` parameter
+
+**Important parameters:**
+- `dl=1` - Forces direct download/stream (bypasses Dropbox preview page)
+- `dl=0` (default) - Opens Dropbox preview page (NOT suitable for audio player)
+- `raw=1` - Legacy parameter, use `dl=1` instead
+
+### Migration Path: S3 + CloudFront (Appendix)
+
+When to migrate from Dropbox to S3/CloudFront:
+- Traffic exceeds 20GB/day bandwidth limit
+- Need professional CDN performance
+- Expanding to commercial use
+- Require guaranteed CORS support
+- Need advanced analytics
 
 **S3 + CloudFront advantages:**
-- **Free tier**: 5GB storage + CDN at $0/month (beats Dropbox's 2GB)
+- **Free tier**: 5GB storage + CDN, then $1-5/month for typical blog traffic
 - **Proper CORS**: Full support, production-ready
-- **No overage charges**: Flat-rate pricing, no bandwidth surprises
+- **No bandwidth caps**: Predictable pricing, no daily limits
 - **Streaming optimized**: Purpose-built CDN for media delivery
-- **Scalable**: Easy upgrade to $15/month Pro when needed
+- **Scalable**: Easy upgrade when needed
 
-### Alternative for Testing
-Internet Archive acceptable for initial testing (free, unlimited), but reliability issues reported for production use.
-
-### Setup Process
+**Setup process (see quickstart.md Appendix A for full instructions):**
 1. Create S3 bucket, upload audio files
 2. Create CloudFront distribution pointing to bucket
-3. Use CloudFront URLs in Jekyll front matter
-4. No special CORS configuration needed (automatic)
+3. Update audio_url in mix files to CloudFront URLs
+4. No code changes needed (just URL updates)
 
 ---
 

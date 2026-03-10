@@ -1,7 +1,9 @@
 ---
 title: "Example Mix - Deep House Journey"
-date: 2025-11-25
-audio_url: "/assets/local-tests/Armchair%20Clubbing%20-%20Vol%2001%20FINAL%20v1.mp3"
+date: 2025-11-28
+# NOTE: Replace with your actual Dropbox shareable link (must include &dl=1 parameter)
+# Example format: https://www.dropbox.com/scl/fi/.../file.mp3?rlkey=...&dl=1
+audio_url: "https://www.dropbox.com/scl/fi/example123/armchair-clubbing-vol-1.mp3?rlkey=example&dl=1"
 duration_seconds: 3600
 excerpt: "A placeholder example mix demonstrating the DJ mix hosting feature. Replace this with real content."
 waveform_file: "example-mix.dat"
