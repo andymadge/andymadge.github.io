@@ -15,14 +15,14 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 **Goal**: Configure Jekyll and create directory structure for the DJ mix hosting feature.
 
-- [ ] [T001] [P] Create `_djmixes/` collection directory at repository root
-- [ ] [T002] [P] Create `assets/waveforms/` directory for pre-generated waveform data
-- [ ] [T003] [P] Create `assets/images/mixes/teasers/` directory for mix cover thumbnails
-- [ ] [T004] [P] Create `assets/images/mixes/headers/` directory for mix header images
-- [ ] [T005] [P] Create `assets/js/` directory for JavaScript modules (if not exists)
-- [ ] [T006] [P] Create `assets/css/` directory for custom SCSS (if not exists)
-- [ ] [T007] Update `_config.yml` to add djmixes collection with permalink `/music/:name/`
-- [ ] [T008] Update `_config.yml` defaults to configure djmixes collection layout and options
+- [x] [T001] [P] Create `_djmixes/` collection directory at repository root
+- [x] [T002] [P] Create `assets/waveforms/` directory for pre-generated waveform data
+- [x] [T003] [P] Create `assets/images/mixes/teasers/` directory for mix cover thumbnails
+- [x] [T004] [P] Create `assets/images/mixes/headers/` directory for mix header images
+- [x] [T005] [P] Create `assets/js/` directory for JavaScript modules (if not exists)
+- [x] [T006] [P] Create `assets/css/` directory for custom SCSS (if not exists)
+- [x] [T007] Update `_config.yml` to add djmixes collection with permalink `/music/:name/`
+- [x] [T008] Update `_config.yml` defaults to configure djmixes collection layout and options
 
 **Acceptance**: Running `bundle exec jekyll serve` builds successfully with no collection configuration errors.
 
@@ -32,12 +32,12 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 **Goal**: Set up WaveSurfer.js library and base layout infrastructure.
 
-- [ ] [T009] [US1] Research and document WaveSurfer.js v7 CDN URL or local installation approach in `_includes/wavesurfer-loader.html`
-- [ ] [T010] [US1] Create `_layouts/mix.html` as base layout for individual mix pages (extends Minimal Mistakes `single` layout)
-- [ ] [T011] [US1] Create `_layouts/mix-index.html` as layout for `/music/` listing page (extends Minimal Mistakes `archive` layout)
-- [ ] [T012] [US1] Create `_pages/music.md` to define `/music/` index page using `mix-index.html` layout
-- [ ] [T013] [P] [US1] Create `assets/css/music-player.scss` for custom audio player styles
-- [ ] [T014] [P] [US1] Import `music-player.scss` in main SCSS file or add to site configuration
+- [x] [T009] [US1] Research and document WaveSurfer.js v7 CDN URL or local installation approach in `_includes/wavesurfer-loader.html`
+- [x] [T010] [US1] Create `_layouts/mix.html` as base layout for individual mix pages (extends Minimal Mistakes `single` layout)
+- [x] [T011] [US1] Create `_layouts/mix-index.html` as layout for `/music/` listing page (extends Minimal Mistakes `archive` layout)
+- [x] [T012] [US1] Create `_pages/music.md` to define `/music/` index page using `mix-index.html` layout
+- [x] [T013] [P] [US1] Create `_sass/music-player.scss` for custom audio player styles
+- [x] [T014] [P] [US1] Import `music-player.scss` in main SCSS file or add to site configuration
 
 **Acceptance**: Mix pages render with base layout structure and WaveSurfer.js library loads without errors.
 
@@ -49,47 +49,47 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 ### 3.1: Audio Player Component
 
-- [ ] [T015] [US1] Create `_includes/audio-player.html` with waveform container div and control buttons (play/pause, volume)
-- [ ] [T016] [US1] Create `assets/js/audio-player.js` implementing AudioPlayer class per contract in `contracts/audio-player.md`
-- [ ] [T017] [US1] Implement `AudioPlayer.init()` method to initialize WaveSurfer with MediaElement backend
-- [ ] [T018] [US1] Implement `play()`, `pause()`, `seekTo()`, `getCurrentTime()`, `getDuration()` methods in AudioPlayer class
-- [ ] [T019] [US1] Implement event system (`on()` method) with support for 'play', 'pause', 'timeupdate', 'finish', 'error' events
-- [ ] [T020] [US1] Add error handling in AudioPlayer for audio loading failures with user-friendly error messages
+- [x] [T015] [US1] Create `_includes/audio-player.html` with waveform container div and control buttons (play/pause, volume)
+- [x] [T016] [US1] Create `assets/js/audio-player.js` implementing AudioPlayer class per contract in `contracts/audio-player.md`
+- [x] [T017] [US1] Implement `AudioPlayer.init()` method to initialize WaveSurfer with MediaElement backend
+- [x] [T018] [US1] Implement `play()`, `pause()`, `seekTo()`, `getCurrentTime()`, `getDuration()` methods in AudioPlayer class
+- [x] [T019] [US1] Implement event system (`on()` method) with support for 'play', 'pause', 'timeupdate', 'finish', 'error' events
+- [x] [T020] [US1] Add error handling in AudioPlayer for audio loading failures with user-friendly error messages
 
 ### 3.2: Mix Page Layout
 
-- [ ] [T021] [US1] Update `_layouts/mix.html` to display mix front matter: title, date, cover art (header.image, header.teaser), genre, duration
-- [ ] [T022] [US1] Include `audio-player.html` in `_layouts/mix.html` with data attributes for audioUrl, waveformUrl, duration, mixId, mixTitle
-- [ ] [T023] [US1] Add page initialization script in `_layouts/mix.html` that calls `AudioPlayer.init()` with config from data attributes
-- [ ] [T024] [US1] Style mix page header with cover art using `music-player.scss` (full-width header image, overlay text)
-- [ ] [T025] [US1] Style audio player controls for desktop (play/pause buttons, volume slider, time display) in `music-player.scss`
+- [x] [T021] [US1] Update `_layouts/mix.html` to display mix front matter: title, date, cover art (header.image, header.teaser), genre, duration
+- [x] [T022] [US1] Include `audio-player.html` in `_layouts/mix.html` with data attributes for audioUrl, waveformUrl, duration, mixId, mixTitle
+- [x] [T023] [US1] Add page initialization script in `_layouts/mix.html` that calls `AudioPlayer.init()` with config from data attributes
+- [x] [T024] [US1] Style mix page header with cover art using `music-player.scss` (full-width header image, overlay text)
+- [x] [T025] [US1] Style audio player controls for desktop (play/pause buttons, volume slider, time display) in `music-player.scss`
 
 ### 3.3: Tracklist Display
 
-- [ ] [T026] [P] [US1] Create `_includes/tracklist.html` to render tracklist from page content (parse `[HH:MM:SS] Artist - Title` format)
-- [ ] [T027] [P] [US1] Include `tracklist.html` conditionally in `_layouts/mix.html` (only if tracklist content exists)
-- [ ] [T028] [P] [US1] Style tracklist display in `music-player.scss` (monospace timestamps, readable artist/title layout)
+- [x] [T026] [P] [US1] Create `_includes/tracklist.html` to render tracklist from page content (parse `[HH:MM:SS] Artist - Title` format)
+- [x] [T027] [P] [US1] Include `tracklist.html` conditionally in `_layouts/mix.html` (only if tracklist content exists)
+- [x] [T028] [P] [US1] Style tracklist display in `music-player.scss` (monospace timestamps, readable artist/title layout)
 
 ### 3.4: Mix Index Page
 
-- [ ] [T029] [US1] Implement `_layouts/mix-index.html` to loop through `site.djmixes` sorted by date (reverse chronological)
-- [ ] [T030] [US1] Display mix cards in grid layout with teaser image, title, date, genre, excerpt, and link to mix page
-- [ ] [T031] [US1] Style mix index grid for desktop in `music-player.scss` (responsive grid, card hover effects)
+- [x] [T029] [US1] Implement `_layouts/mix-index.html` to loop through `site.djmixes` sorted by date (reverse chronological)
+- [x] [T030] [US1] Display mix cards in grid layout with teaser image, title, date, genre, excerpt, and link to mix page
+- [x] [T031] [US1] Style mix index grid for desktop in `music-player.scss` (responsive grid, card hover effects)
 
 ### 3.5: Mobile Responsiveness
 
-- [ ] [T032] [US1] Add CSS media queries in `music-player.scss` for mobile screens (320px+)
+- [x] [T032] [US1] Add CSS media queries in `music-player.scss` for mobile screens (320px+)
 - [ ] [T033] [US1] Test and adjust audio player controls for touch interaction (larger tap targets, simplified layout)
 - [ ] [T034] [US1] Test and adjust mix index grid for mobile (single column, card sizing)
 - [ ] [T035] [US1] Test WaveSurfer responsive behavior on mobile devices (waveform width adjusts to viewport)
 
 ### 3.6: Example Mix Content
 
-- [ ] [T036] [US1] Create example mix file `_djmixes/2025-11-25-example-mix.md` with complete YAML front matter (all required fields)
-- [ ] [T037] [US1] Upload example audio file to S3/CloudFront and add URL to example mix front matter
-- [ ] [T038] [P] [US1] Generate example waveform using `audiowaveform -i example.mp3 -o assets/waveforms/example.dat -b 8 -z 256`
-- [ ] [T039] [P] [US1] Add example cover art images to `assets/images/mixes/teasers/` and `assets/images/mixes/headers/`
-- [ ] [T040] [US1] Add example tracklist to `_djmixes/2025-11-25-example-mix.md` in correct format
+- [x] [T036] [US1] Create example mix file `_djmixes/2025-11-25-example-mix.md` with complete YAML front matter (all required fields)
+- [ ] [T037] [US1] Upload example audio file to S3/CloudFront and add URL to example mix front matter (USER ACTION REQUIRED)
+- [ ] [T038] [P] [US1] Generate example waveform using `audiowaveform -i example.mp3 -o assets/waveforms/example.dat -b 8 -z 256` (USER ACTION REQUIRED)
+- [ ] [T039] [P] [US1] Add example cover art images to `assets/images/mixes/teasers/` and `assets/images/mixes/headers/` (USER ACTION REQUIRED)
+- [x] [T040] [US1] Add example tracklist to `_djmixes/2025-11-25-example-mix.md` in correct format
 
 ### 3.7: Testing & Validation
 

@@ -39,6 +39,12 @@ timezone: Europe/London # https://en.wikipedia.org/wiki/List_of_tz_database_time
 include:
   - _pages
 
+# Collections
+collections:
+  djmixes:
+    output: true
+    permalink: /music/:name/
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
@@ -122,6 +128,16 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _djmixes
+  - scope:
+      path: ""
+      type: djmixes
+    values:
+      layout: mix
+      author_profile: true
+      share: true
+      comments: false
+      classes: wide
 
 comments:
   provider: "disqus"

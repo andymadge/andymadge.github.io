@@ -1,0 +1,93 @@
+---
+layout: single
+---
+
+<!-- Audio Player Integration -->
+{% include audio-player.html %}
+
+<!-- Mix Content (description, tracklist, etc.) -->
+{{ content }}
+
+<!-- Tracklist (if present in content) -->
+{% include tracklist.html %}
+
+<!-- Audio Player Initialization Script -->
+<script src="{{ '/assets/js/audio-player.js' | relative_url }}"></script>
+<script>
+(async function() {
+  try {
+    // Get configuration from page front matter
+    const config = {
+      containerId: 'waveform',
+      audioUrl: '{{ page.audio_url }}',
+      waveformUrl: '{% if page.waveform_file %}/assets/waveforms/{{ page.waveform_file }}{% endif %}',
+      duration: {{ page.duration_seconds | default: 0 }},
+      mixId: '{{ page.slug | default: page.title | slugify }}',
+      mixTitle: '{{ page.title | escape }}'
+    };
+
+    // Initialize audio player
+    const player = await AudioPlayer.init(config);
+
+    // Wire up UI controls
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const currentTimeSpan = document.getElementById('current-time');
+    const totalTimeSpan = document.getElementById('total-time');
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeLabel = document.getElementById('volume-label');
+
+    // Play/Pause button
+    playPauseBtn.addEventListener('click', () => {
+      if (player.isPlaying()) {
+        player.pause();
+      } else {
+        player.play();
+      }
+    });
+
+    // Update play/pause button state
+    player.on('play', () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'inline';
+    });
+
+    player.on('pause', () => {
+      playIcon.style.display = 'inline';
+      pauseIcon.style.display = 'none';
+    });
+
+    // Update time display
+    player.on('timeupdate', (currentTime) => {
+      currentTimeSpan.textContent = formatTime(currentTime);
+    });
+
+    // Set total time when ready
+    totalTimeSpan.textContent = formatTime(player.getDuration());
+
+    // Volume control
+    volumeSlider.addEventListener('input', (e) => {
+      const volume = e.target.value / 100;
+      player.wavesurfer.setVolume(volume);
+      volumeLabel.textContent = `🔊 ${e.target.value}%`;
+    });
+
+    // Set initial volume
+    player.wavesurfer.setVolume(volumeSlider.value / 100);
+
+    // Error handling
+    player.on('error', (error) => {
+      console.error('Audio playback error:', error);
+      showError('Failed to load or play the audio. Please check your internet connection and try again.');
+    });
+
+    // Store player globally for debugging
+    window.mixPlayer = player;
+
+  } catch (error) {
+    console.error('Failed to initialize audio player:', error);
+    showError('Failed to initialize the audio player. The audio file may be unavailable or in an unsupported format.');
+  }
+})();
+</script>

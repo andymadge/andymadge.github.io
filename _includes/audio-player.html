@@ -1,0 +1,29 @@
+<!-- Audio Player Component -->
+<div class="audio-player">
+  <!-- Waveform visualization container -->
+  <div id="waveform"></div>
+
+  <!-- Playback controls -->
+  <div class="audio-controls">
+    <button id="play-pause-btn" aria-label="Play/Pause">
+      <span id="play-icon">▶️ Play</span>
+      <span id="pause-icon" style="display:none;">⏸️ Pause</span>
+    </button>
+
+    <div class="time-display">
+      <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+    </div>
+
+    <input type="range" id="volume-slider" min="0" max="100" value="80" aria-label="Volume" style="width: 100px;">
+    <span id="volume-label">🔊 80%</span>
+  </div>
+
+  <!-- Error message container (hidden by default) -->
+  <div id="audio-error" class="audio-error" style="display:none;">
+    <strong>Audio Playback Error</strong>
+    <p id="error-message"></p>
+  </div>
+</div>
+
+<!-- Load WaveSurfer.js -->
+{% include wavesurfer-loader.html %}

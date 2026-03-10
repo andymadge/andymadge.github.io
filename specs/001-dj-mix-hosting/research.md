@@ -162,7 +162,7 @@ sort_order: reverse
 
 **Option 2 - Custom Liquid:**
 ```liquid
-{% assign sorted_djmixes = site.mixes | sort: 'date' | reverse %}
+{% raw %}{% assign sorted_djmixes = site.djmixes | sort: 'date' | reverse %}{% endraw %}
 ```
 
 ### File Organization
