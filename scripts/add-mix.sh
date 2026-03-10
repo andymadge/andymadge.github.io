@@ -270,8 +270,8 @@ excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
 ${DURATION_LINE:+${DURATION_LINE}
 }header:
-  cover: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # Optional
-  og_image: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # For social sharing
+  # cover: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # Optional
+  # og_image: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # For social sharing
 classes: wide
 share: true
 ---
