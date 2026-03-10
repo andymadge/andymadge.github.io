@@ -34,29 +34,36 @@ WaveSurfer.js is the optimal choice because it combines native waveform visualiz
 ## 2. Waveform Generation Approach
 
 ### Decision
-**Pre-Generated Waveform Data using BBC audiowaveform**
+**Pre-Generated Waveform Data using BBC audiowaveform (Primary), Client-Side Generation with WaveSurfer.js (Fallback)**
 
 ### Rationale
-Client-side generation is unsuitable for 30-120 minute DJ mixes due to severe memory limitations:
+Pre-generated waveforms are strongly preferred for 30-120 minute DJ mixes, with client-side generation as fallback when pre-generated data is unavailable:
 
-**Why NOT client-side:**
-- A 70MB audio file can consume **~10GB RAM** during Web Audio API decoding
-- AudioBuffer is designed for snippets < 45 seconds, not hour-long mixes
-- Will crash browsers on desktop, fails immediately on mobile
-- CORS complications with Dropbox-hosted files
-
-**Why pre-generated:**
+**Why pre-generated is primary:**
 - **Performance**: Waveforms display instantly on page load
 - **File size**: 100MB audio → 800KB-1MB waveform data (binary .dat format)
 - **Static site alignment**: Jekyll builds assets at compile time
 - **Mobile compatible**: No memory spikes, works on all devices
-- **Dropbox-friendly**: Bypasses CORS issues entirely
+- **Memory efficient**: Avoids 70MB audio files consuming ~10GB RAM during Web Audio API decoding
+
+**Client-side generation limitations:**
+- AudioBuffer is designed for snippets < 45 seconds, not hour-long mixes
+- Can crash browsers on desktop, fails immediately on mobile for large files
+- CORS complications with externally-hosted audio files
+- Slow generation time for long mixes (3+ hours)
+
+**Fallback strategy (FR-013):**
+- If pre-generated waveform data is unavailable, use WaveSurfer.js client-side generation
+- WaveSurfer.js will attempt to generate waveform from audio file
+- For very long mixes, this may be slow or fail on mobile devices
+- Audio playback continues normally regardless of waveform generation success
 
 ### Implementation
-- **Tool**: BBC audiowaveform CLI
+- **Tool**: BBC audiowaveform CLI (for pre-generation)
 - **Format**: Binary .dat files (8-bit depth, gzipped)
 - **Storage**: Waveform data in Jekyll repo (`assets/waveforms/`), audio on external hosting
 - **Integration**: WaveSurfer.js + MediaElement backend natively supports audiowaveform format
+- **Fallback**: WaveSurfer.js handles client-side generation automatically when peaks data not provided
 
 **Command example:**
 ```bash

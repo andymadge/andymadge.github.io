@@ -155,12 +155,12 @@ No violations at this stage. Conditional items to verify in Phase 1:
    - **Implementation**: Selected and integrated in tasks T009-T020
 
 2. **Waveform Generation Best Practices** ✅
-   - **Decision**: Pre-generated waveforms as primary approach using audiowaveform tool
+   - **Decision**: Pre-generated waveforms as primary approach using audiowaveform tool, with client-side generation as fallback
    - **Rationale**:
      - Client-side generation performance poor for large files (3+ hour mixes)
      - Pre-generation provides instant waveform display on page load
      - audiowaveform tool generates JSON format compatible with WaveSurfer.js
-     - Fallback to simple progress bar if waveform data unavailable
+     - Fallback to client-side generation with WaveSurfer.js if waveform data unavailable (per FR-013)
    - **Implementation**: Documented in tasks T038, T053-T054
 
 3. **External Audio Hosting (Dropbox)** ✅

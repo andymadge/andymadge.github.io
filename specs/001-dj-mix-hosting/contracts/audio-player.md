@@ -180,8 +180,9 @@ document.getElementById('play-button').addEventListener('click', () => {
 
 ### Waveform Fallback
 - If waveform URL returns 404 or fails to load:
-  - Show simple progress bar instead
-  - Audio playback continues normally
+  - WaveSurfer.js attempts client-side waveform generation (per FR-013)
+  - For very long mixes, generation may be slow or fail on mobile devices
+  - Audio playback continues normally regardless of waveform status
   - Log warning to console (not user-facing error)
 
 ### Position Persistence
@@ -237,7 +238,7 @@ interface AudioPlayerConfig {
 - [ ] Audio plays on button click
 - [ ] Waveform renders and is interactive (click to seek)
 - [ ] Playback position restores on page reload
-- [ ] Player works without waveform data (fallback to progress bar)
+- [ ] Player works without waveform data (fallback to client-side generation)
 - [ ] Mobile: Touch controls work on iOS/Android
 - [ ] Mobile: Waveform is responsive on small screens
 - [ ] Error handling: Shows friendly message if audio fails to load

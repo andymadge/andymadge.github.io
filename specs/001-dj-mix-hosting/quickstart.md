@@ -296,19 +296,21 @@ https://www.andymadge.com/music/summer-vibes/
 3. Ensure S3/CloudFront has CORS enabled
 4. Test with different audio format (MP3 vs AAC)
 
-### Waveform Doesn't Display
+### Waveform Doesn't Display or Loads Slowly
 
-**Symptom**: Simple progress bar instead of waveform
+**Symptom**: Waveform takes time to appear or shows generic waveform
 **Causes**:
-- Waveform file not generated
+- Waveform file not generated (falling back to client-side generation)
 - Wrong filename in front matter
 - File not committed to git
+- Large audio file causing slow client-side generation
 
 **Solutions**:
 1. Check `assets/waveforms/[filename].dat` exists
 2. Verify `waveform_file` matches actual filename
 3. Re-run `audiowaveform` command if needed
-4. Fallback is intentional - audio still works
+4. For long mixes, pre-generated waveform is strongly recommended for performance
+5. Client-side generation is intentional fallback (per FR-013) - audio still works
 
 ### Mix Not in Index
 

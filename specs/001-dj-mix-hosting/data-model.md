@@ -292,7 +292,7 @@ Playback positions are stored client-side in browser localStorage.
 - **Cardinality**: 1:0..1 (mix may have pre-generated waveform)
 - **Storage**: Waveform `.dat` files in `assets/waveforms/` (committed to repository)
 - **Link**: `waveform_file` field in front matter
-- **Fallback**: If missing, player shows simple progress bar
+- **Fallback**: If missing, WaveSurfer.js performs client-side waveform generation (per FR-013)
 
 ### Mix → Tracks
 - **Type**: Composition (embedded in Markdown content)
@@ -333,7 +333,7 @@ Playback positions are stored client-side in browser localStorage.
 // Waveform file existence
 if (mix.waveform_file) {
   const waveformUrl = `/assets/waveforms/${mix.waveform_file}`;
-  // Fetch waveform, fallback to progress bar if 404
+  // Fetch waveform, fallback to client-side generation if 404
 }
 
 // Audio URL accessibility
@@ -399,7 +399,7 @@ try {
 1. Page loads → Check for waveform_file in front matter
 2. If present → Fetch /assets/waveforms/[filename]
 3. If 200 OK → Initialize WaveSurfer with pre-generated peaks
-4. If 404 → Fallback to simple progress bar
+4. If 404 → Fallback to client-side waveform generation with WaveSurfer.js
 5. User clicks waveform → Seek audio to timestamp
 6. Audio plays → Update waveform progress indicator
 ```

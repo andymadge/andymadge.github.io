@@ -44,10 +44,10 @@ class AudioPlayer {
             peaks = new Int8Array(arrayBuffer);
             console.log('Waveform data loaded successfully:', peaks.length, 'data points');
           } else {
-            console.warn('Waveform file not found (404), falling back to progress bar');
+            console.warn('Waveform file not found (404), falling back to client-side generation (per FR-013)');
           }
         } catch (error) {
-          console.warn('Failed to load waveform data, falling back to progress bar:', error);
+          console.warn('Failed to load waveform data, falling back to client-side generation:', error);
         }
       }
 
@@ -69,11 +69,13 @@ class AudioPlayer {
         hideScrollbar: true
       };
 
-      // Add peaks data if available
+      // Add peaks data if available, otherwise WaveSurfer.js will generate waveform client-side
       if (peaks) {
         wavesurferConfig.peaks = [peaks];
         wavesurferConfig.duration = config.duration;
       }
+      // Note: If peaks is null, WaveSurfer.js automatically performs client-side waveform
+      // generation from the audio file (per FR-013 fallback strategy)
 
       player.wavesurfer = WaveSurfer.create(wavesurferConfig);
 
