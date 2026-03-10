@@ -6,12 +6,12 @@ date: 2025-11-28
 audio_url: "https://www.dropbox.com/scl/fi/example123/armchair-clubbing-vol-1.mp3?rlkey=example&dl=1"
 duration_seconds: 3600
 excerpt: "A placeholder example mix demonstrating the DJ mix hosting feature. Replace this with real content."
-waveform_file: "example-mix.dat"
+waveform_file: "example-mix/waveform.dat"
 duration: "1:00:00"
 genre: "Deep House"
 header:
-  cover: /assets/images/mixes/covers/example-mix.png
-  og_image: /assets/images/mixes/covers/example-mix.png
+  cover: /assets/djmixes/example-mix/cover.png
+  og_image: /assets/djmixes/example-mix/cover.png
 tracklist:
   - "[00:00:00] Maps - Glory Verse"
   - "[00:05:19] Nosaj Thing & Julianna Barwick - Blue Hour"
@@ -30,7 +30,7 @@ tracklist:
   - "[01:08:49] Underworld - Best Mamgu Ever"
   - "[01:17:03] Jon Hopkins - Monsters Theme"
   - "[01:21:07] Underworld - Louisiana"
-mix_image: /assets/images/mixes/content/example-mix-ableton.png
+mix_image: /assets/djmixes/example-mix/example-mix-ableton.png
 mix_image_caption: "Screenshot from Ableton Live showing the arrangement and effects chain used in this mix."
 classes: wide
 share: true

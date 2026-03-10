@@ -103,13 +103,16 @@ fi
 
 # Create directories if needed
 mkdir -p _djmixes
-mkdir -p assets/waveforms
 
 # Generate date and filenames
 DATE=$(date +%Y-%m-%d)
 MIX_FILE="_djmixes/${DATE}-${MIX_SLUG}.md"
-WAVEFORM_FILE="${MIX_SLUG}.dat"
-WAVEFORM_PATH="assets/waveforms/${WAVEFORM_FILE}"
+MIX_ASSETS_DIR="assets/djmixes/${DATE}-${MIX_SLUG}"
+WAVEFORM_FILE="${DATE}-${MIX_SLUG}/waveform.dat"
+WAVEFORM_PATH="${MIX_ASSETS_DIR}/waveform.dat"
+
+# Create mix-specific assets directory
+mkdir -p "$MIX_ASSETS_DIR"
 
 echo -e "${BLUE}=== Adding New Mix ===${NC}\n"
 echo "Title:     $TITLE"
@@ -175,8 +178,8 @@ excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
 ${DURATION_FORMATTED:+duration: \"$DURATION_FORMATTED\"}
 header:
-  cover: /assets/images/mixes/covers/${MIX_SLUG}.jpg  # Optional
-  og_image: /assets/images/mixes/covers/${MIX_SLUG}.jpg  # For social sharing
+  cover: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # Optional
+  og_image: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # For social sharing
 classes: wide
 share: true
 ---
@@ -207,7 +210,7 @@ echo "   ${BLUE}Alternative:${NC} For S3/CloudFront hosting, see quickstart.md A
 echo ""
 echo -e "${YELLOW}2. (Optional) Add cover art:${NC}"
 echo "   • Create cover image (400x400px recommended)"
-echo "   • Save to: assets/images/mixes/covers/${MIX_SLUG}.jpg"
+echo "   • Save to: ${MIX_ASSETS_DIR}/cover.jpg"
 echo ""
 echo -e "${YELLOW}3. Edit mix file:${NC}"
 echo "   • Add description and tracklist"

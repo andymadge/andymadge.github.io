@@ -30,7 +30,7 @@ layout: single
     const config = {
       containerId: 'waveform',
       audioUrl: '{{ page.audio_url }}',
-      waveformUrl: '{% if page.waveform_file %}/assets/waveforms/{{ page.waveform_file }}{% endif %}',
+      waveformUrl: '{% if page.waveform_file %}/assets/djmixes/{{ page.waveform_file }}{% endif %}',
       duration: {{ page.duration_seconds | default: 0 }},
       mixId: '{{ page.slug | default: page.title | slugify }}',
       mixTitle: '{{ page.title | escape }}'

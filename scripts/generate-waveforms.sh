@@ -7,7 +7,7 @@
 #
 # This script:
 # 1. Scans _djmixes/ for mix files with waveform_file field
-# 2. Checks if corresponding .dat file exists in assets/waveforms/
+# 2. Checks if corresponding .dat file exists in assets/djmixes/
 # 3. If missing, either:
 #    a) Looks for local audio file in specified directory
 #    b) Downloads from audio_url in mix front matter (--remote mode)
@@ -50,7 +50,7 @@ if [ "$REMOTE_MODE" = true ] && ! command -v curl &> /dev/null; then
 fi
 
 # Create directories
-mkdir -p assets/waveforms
+mkdir -p assets/djmixes
 mkdir -p .tmp/audio 2>/dev/null || true
 
 echo -e "${BLUE}=== Waveform Generation Script ===${NC}\n"
@@ -77,7 +77,11 @@ for mix_file in _djmixes/*.md; do
         continue
     fi
 
-    waveform_path="assets/waveforms/$waveform_file"
+    waveform_path="assets/djmixes/$waveform_file"
+
+    # Create mix-specific directory if it doesn't exist
+    waveform_dir=$(dirname "$waveform_path")
+    mkdir -p "$waveform_dir"
 
     # Check if waveform already exists
     if [ -f "$waveform_path" ]; then
@@ -192,6 +196,6 @@ fi
 echo ""
 if [ $GENERATED -gt 0 ]; then
     echo -e "${GREEN}Done! Don't forget to:${NC}"
-    echo "1. git add assets/waveforms/*.dat"
+    echo "1. git add assets/djmixes/"
     echo "2. git commit -m 'Generate waveform data for mixes'"
 fi
