@@ -148,13 +148,15 @@
     border-bottom: 1px solid #f0f0f0;
     border-left: 4px solid transparent;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    transition: background 0.2s;
+    transition: background 0.2s, border-left-color 0.2s;
     display: flex;
     align-items: baseline;
     line-height: 1.2;
+    cursor: pointer;
 
     &:hover {
       background: #f8f9fa;
+      border-left-color: #90caf9;
     }
 
     &.current-track {
