@@ -3,10 +3,17 @@
   {% if page.mix_image_caption %}
     <p class="mix-image-caption">{{ page.mix_image_caption }}</p>
   {% endif %}
-  <a href="{{ page.mix_image | relative_url }}" target="_blank">
+  <a href="{{ page.mix_image | relative_url }}" target="_blank" rel="noopener">
     <img src="{{ page.mix_image | relative_url }}"
          alt="{{ page.mix_image_caption | default: 'Mix production screenshot' }}"
          class="mix-content-image">
   </a>
 </div>
+<script>
+  // The theme's main.min.js binds Magnific Popup to all a[href$='.png'] etc.
+  // Remove that handler so the native target="_blank" link behaviour is preserved.
+  jQuery(function($) {
+    $('.mix-image-section a').removeClass('image-popup').off('click');
+  });
+</script>
 {% endif %}
