@@ -157,6 +157,29 @@ layout: single
     const highlighter = TrackHighlighter.init(player);
     window.mixHighlighter = highlighter;
 
+    // Add click-to-play functionality for tracklist items
+    const tracklistItems = document.querySelectorAll('.tracklist-items li[data-timestamp]');
+    tracklistItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const timestamp = item.getAttribute('data-timestamp');
+        if (timestamp) {
+          // Convert timestamp (MM:SS or H:MM:SS) to seconds
+          const parts = timestamp.split(':').map(part => parseInt(part, 10));
+          let seconds = 0;
+          if (parts.length === 3) {
+            // H:MM:SS format
+            seconds = parts[0] * 3600 + parts[1] * 60 + parts[2];
+          } else if (parts.length === 2) {
+            // MM:SS format
+            seconds = parts[0] * 60 + parts[1];
+          }
+          // Seek to the track position and start playing
+          player.seekTo(seconds);
+          player.play();
+        }
+      });
+    });
+
   } catch (error) {
     console.error('Failed to initialize audio player:', error);
     showError('Failed to initialize the audio player. The audio file may be unavailable or in an unsupported format.');
