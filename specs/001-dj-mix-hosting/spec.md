@@ -21,6 +21,7 @@
 - Q: Should authoring scripts support a print-only mode for advanced workflows? → A: Yes, `--print-only` flag outputs content to stdout without creating files, enabling manual assembly of mix files with custom metadata
 - Q: How should the add-mix script handle URL inputs vs local file inputs? → A: Auto-detect URLs and populate `audio_url` automatically; support `--audio-url` flag for overriding the hosting URL independently of the source file
 - Q: How should the system handle Dropbox URLs that are missing the `dl=1` parameter or have `dl=0`? → A: Automatically convert to `dl=1` to ensure direct file access for streaming
+- Q: What format and tool should be used for pre-generated waveform data files? → A: BBC `audiowaveform` binary tool generating `.dat` files with `-b 8 -z 256` flags (8-bit samples, 256-sample zoom), stored at `assets/djmixes/{mix-slug}/waveform.dat`, referenced in front matter via `waveform_file: "mix-slug/waveform.dat"`
 
 ## User Scenarios & Testing
 
@@ -126,7 +127,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-010**: System MUST be fully functional on mobile devices (responsive design, touch controls)
 - **FR-011**: Audio player MUST maintain playback state within a session (e.g., resume from same position after pause)
 - **FR-012**: System SHOULD persist playback position across sessions using browser localStorage so users can return later and resume from where they left off (per-browser/device)
-- **FR-013**: System SHOULD display a visual waveform representation of the audio using pre-generated waveform data. If waveform data unavailable use client-side generation with Wavesurfer.js or similar library.
+- **FR-013**: System SHOULD display a visual waveform representation of the audio using pre-generated waveform data. Waveform data is stored as a binary `.dat` file produced by BBC's `audiowaveform` tool (`-b 8 -z 256`), located at `assets/djmixes/{mix-slug}/waveform.dat` and referenced in front matter via the `waveform_file` field. If waveform data is unavailable, the waveform display section is collapsed entirely.
 - **FR-014**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
 - **FR-015**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
 - **FR-016**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
@@ -140,7 +141,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-021**: The `add-mix.sh` script MUST support a `--print-only` flag that outputs the mix file content to stdout without creating any files, enabling advanced workflows where users manually assemble mix files with custom metadata
 - **FR-022**: The `add-mix.sh` script MUST auto-detect when the audio input is a URL (matching `^https?://`) and automatically populate the `audio_url` front matter field with that URL. In `--print-only` mode, URL inputs MUST NOT trigger a download
 - **FR-023**: The `add-mix.sh` script MUST support an `--audio-url` flag that overrides the `audio_url` front matter field, allowing users to specify a different hosting URL from the source audio file used for waveform generation
-- **FR-024**: System MUST provide a `generate-waveforms.sh` script that generates waveform data files for mixes, supporting local files (`--local`), remote Dropbox downloads (`--remote`), and arbitrary URL downloads (`--url`)
+- **FR-024**: System MUST provide a `generate-waveforms.sh` script that generates waveform `.dat` files for mixes using BBC's `audiowaveform` tool (`audiowaveform -i <audio> -o <output.dat> -b 8 -z 256`), supporting local audio files (default), remote Dropbox downloads (`--remote`), and arbitrary URL downloads (`--url <url> <mix-file>`). Output files are placed at `assets/djmixes/{mix-slug}/waveform.dat`.
 - **FR-025**: All shell scripts MUST use BSD-compatible commands and syntax to ensure correct operation on macOS without requiring GNU coreutils
 - **FR-026**: When a Dropbox URL is provided as audio input or via `--audio-url`, the `add-mix.sh` script MUST automatically ensure the URL includes the `dl=1` query parameter for direct file access. If `dl=0` is present, it MUST be replaced with `dl=1`. If the `dl` parameter is missing entirely, it MUST be appended. Non-Dropbox URLs MUST be passed through unchanged.
 - **FR-027**: The `add-mix.sh` script MUST generate the `cover:` and `og_image:` lines in the YAML front matter as commented-out placeholders by default, since cover art is optional and must be manually added by the user.
@@ -164,7 +165,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 
 ### Key Entities
 
-- **DJ Mix**: Represents a complete mix recording stored as an individual content file with YAML front matter containing metadata (title, cover art image URL, external audio file URL, publication date, optional description, optional tracklist, and optional pre-generated waveform data). Each mix file generates its own page with a static URL.
+- **DJ Mix**: Represents a complete mix recording stored as an individual content file with YAML front matter containing metadata (title, cover art image URL, external audio file URL, publication date, optional description, optional tracklist, and optional `waveform_file` path pointing to a pre-generated `.dat` file at `assets/djmixes/{mix-slug}/waveform.dat`). Each mix file generates its own page with a static URL.
 - **Track**: Represents an individual track within a mix, including artist name, track title, and timestamp position. Format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata (e.g., `[00:08:41] Invisible Inc - Stars [Ambient Version]`). Tracks are optional and can be added after initial publication.
 - **Mix Page**: A dedicated web page for each mix that combines the audio player component, cover art, and tracklist display (when available)
 - **Mix Index**: An automatically generated listing page at `/music/` that aggregates all mix content files and displays them as a browsable list
