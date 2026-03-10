@@ -386,47 +386,44 @@ Full description with tracklist.
 
 ---
 
-## Automation Ideas (Future)
+## Automation Scripts
 
-### Script to Generate Mix from Audio File
+The manual steps above can be automated using the provided scripts in the `scripts/` directory.
+
+### Quick Mix Creation
+
+Use `add-mix.sh` to automate waveform generation and file creation:
 
 ```bash
-#!/bin/bash
-# add-mix.sh - Automate mix creation
-
-AUDIO_FILE=$1
-MIX_SLUG=$2
-TITLE=$3
-
-# Get duration
-DURATION=$(ffprobe -v error -show_entries format=duration \
-  -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" | cut -d. -f1)
-
-# Generate waveform
-audiowaveform -i "$AUDIO_FILE" -o "assets/waveforms/${MIX_SLUG}.dat" -b 8 -z 256
-
-# Create mix file
-DATE=$(date +%Y-%m-%d)
-cat > "_djmixes/${DATE}-${MIX_SLUG}.md" <<EOF
----
-title: "$TITLE"
-date: $DATE
-audio_url: "REPLACE_WITH_S3_URL"
-duration_seconds: $DURATION
-waveform_file: "${MIX_SLUG}.dat"
----
-
-Mix description here.
-EOF
-
-echo "Created: _djmixes/${DATE}-${MIX_SLUG}.md"
-echo "TODO: Upload audio to S3 and update audio_url"
+./scripts/add-mix.sh audio_files/summer-2025.mp3 summer-vibes "Summer Vibes 2025"
 ```
 
-Usage:
+This automatically:
+- ✅ Generates waveform data
+- ✅ Extracts audio duration
+- ✅ Creates mix file with front matter
+- ✅ Provides next steps
+
+### Batch Waveform Generation
+
+Use `generate-waveforms.sh` to scan for missing waveforms:
+
 ```bash
-./add-mix.sh summer-2025.mp3 summer-vibes "Summer Vibes 2025"
+./scripts/generate-waveforms.sh audio_files/
 ```
+
+This automatically:
+- 🔍 Scans all mix files
+- ✅ Generates missing waveforms
+- 📊 Shows summary report
+
+### Full Documentation
+
+See `scripts/README.md` for:
+- Complete usage instructions
+- Prerequisites and installation
+- Workflow examples
+- Troubleshooting
 
 ---
 
