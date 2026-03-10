@@ -10,10 +10,15 @@
   </a>
 </div>
 <script>
-  // The theme's main.min.js binds Magnific Popup to all a[href$='.png'] etc.
-  // Remove that handler so the native target="_blank" link behaviour is preserved.
-  jQuery(function($) {
-    $('.mix-image-section a').removeClass('image-popup').off('click');
+  // The theme's main.min.js (loaded after this script) binds Magnific Popup to
+  // all a[href$='.png'] etc. using the namespace 'click.magnificPopup'.
+  // We must wait until window load — by which point all scripts have executed and
+  // Magnific Popup is initialised — before unbinding.
+  window.addEventListener('load', function() {
+    var link = document.querySelector('.mix-image-section a');
+    if (link && window.jQuery) {
+      jQuery(link).off('click.magnificPopup').removeClass('image-popup');
+    }
   });
 </script>
 {% endif %}
