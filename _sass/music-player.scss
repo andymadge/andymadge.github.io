@@ -317,3 +317,65 @@
     margin-bottom: 0.5rem;
   }
 }
+
+// Mix Image Section (optional content images)
+.mix-image-section {
+  margin: 0 0 1rem 0;
+  padding-top: 0.5rem;
+  border-top: 2px solid #e0e0e0;
+
+  a {
+    display: block;
+    cursor: pointer;
+  }
+
+  .mix-content-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+    transition: opacity 0.2s;
+  }
+
+  a:hover .mix-content-image {
+    opacity: 0.9;
+  }
+
+  .mix-image-caption {
+    margin: 0 0 0.75rem 0;
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+  }
+}
+
+// Responsive adjustments for mix images
+@media (max-width: 768px) {
+  .mix-image-section {
+    margin: 0 0 1rem 0;
+    padding-top: 0.5rem;
+
+    .mix-image-caption {
+      font-size: 0.85rem;
+      padding: 0 0.25rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .mix-image-section {
+    margin: 0 0 0.5rem 0;
+
+    .mix-content-image {
+      border-radius: 2px;
+    }
+
+    .mix-image-caption {
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -10,7 +10,7 @@ waveform_file: "example-mix.dat"
 duration: "1:00:00"
 genre: "Deep House"
 header:
-  image: /assets/images/mixes/headers/example-mix.png
+  image: 
   teaser: /assets/images/mixes/teasers/example-mix.png
 tracklist:
   - "[00:00:00] Maps - Glory Verse"
@@ -30,6 +30,8 @@ tracklist:
   - "[01:08:49] Underworld - Best Mamgu Ever"
   - "[01:17:03] Jon Hopkins - Monsters Theme"
   - "[01:21:07] Underworld - Louisiana"
+mix_image: /assets/images/mixes/content/example-mix-ableton.png
+mix_image_caption: "Screenshot from Ableton Live showing the arrangement and effects chain used in this mix."
 classes: wide
 share: true
 ---

@@ -1,0 +1,12 @@
+{% if page.mix_image %}
+<div class="mix-image-section">
+  {% if page.mix_image_caption %}
+    <p class="mix-image-caption">{{ page.mix_image_caption }}</p>
+  {% endif %}
+  <a href="{{ page.mix_image | relative_url }}" target="_blank">
+    <img src="{{ page.mix_image | relative_url }}"
+         alt="{{ page.mix_image_caption | default: 'Mix production screenshot' }}"
+         class="mix-content-image">
+  </a>
+</div>
+{% endif %}
