@@ -152,6 +152,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-030**: The mix index MUST NOT display any emoji icons alongside metadata fields (date, genre, duration). Metadata labels MUST be plain text only.
 - **FR-031**: Mix card dates MUST be displayed in `YYYY/MM/DD` format with zero-padded month and day (e.g. `2026/02/21`).
 - **FR-032**: Mix cards MUST NOT display the mix duration/length. The duration field MUST be omitted from the mix index card display.
+- **FR-033**: The `mix_image_caption` text MUST render at the same font size as the main body text. No explicit `font-size` override MUST be applied to `.mix-image-caption`; it MUST inherit the base font size.
 
 ### Out of Scope (Future Enhancements)
 
