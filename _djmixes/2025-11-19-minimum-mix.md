@@ -5,4 +5,4 @@ audio_url: "https://example.com/mix.mp3"
 duration_seconds: 3600
 ---
 
-Simple mix with no extras.
+Simple test file, doesn't actually contain a mix.
