@@ -42,7 +42,18 @@ class AudioPlayer {
           const response = await fetch(config.waveformUrl);
           if (response.ok) {
             const arrayBuffer = await response.arrayBuffer();
-            peaks = new Int8Array(arrayBuffer);
+            // Parse BBC audiowaveform binary format:
+            // - 20-byte header: version(int32), flags(int32), sample_rate(int32),
+            //   samples_per_pixel(int32), length(int32)
+            // - Data: pairs of signed int8 (min, max) per pixel
+            const HEADER_SIZE = 20;
+            const rawInt8 = new Int8Array(arrayBuffer, HEADER_SIZE);
+            // Normalize from int8 range [-128, 127] to WaveSurfer range [-1, 1]
+            const normalizedPeaks = new Float32Array(rawInt8.length);
+            for (let i = 0; i < rawInt8.length; i++) {
+              normalizedPeaks[i] = rawInt8[i] / 128;
+            }
+            peaks = normalizedPeaks;
             console.log('Waveform data loaded successfully:', peaks.length, 'data points');
             waveformAvailable = true;
           } else {
