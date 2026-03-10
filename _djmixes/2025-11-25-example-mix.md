@@ -1,15 +1,15 @@
 ---
 title: "Example Mix - Deep House Journey"
 date: 2025-11-25
-audio_url: "https://example.com/placeholder-audio.mp3"
+audio_url: "http://127.0.0.1:4000/assets/local-tests/Armchair%20Clubbing%20-%20Vol%2001%20FINAL%20v1.mp3"
 duration_seconds: 3600
 excerpt: "A placeholder example mix demonstrating the DJ mix hosting feature. Replace this with real content."
 waveform_file: "example-mix.dat"
 duration: "1:00:00"
 genre: "Deep House"
 header:
-  image: /assets/images/mixes/headers/example-mix.jpg
-  teaser: /assets/images/mixes/teasers/example-mix.jpg
+  image: /assets/images/mixes/headers/example-mix.png
+  teaser: /assets/images/mixes/teasers/example-mix.png
 tags:
   - deep house
   - example
