@@ -163,7 +163,7 @@ for mix_file in "${MIX_FILES[@]}"; do
     [ -e "$mix_file" ] || continue
 
     # Extract waveform_file field from front matter
-    waveform_file=$(grep "^waveform_file:" "$mix_file" | sed 's/^waveform_file: *"\?\([^"]*\)"\?/\1/' | tr -d '\r')
+    waveform_file=$(grep "^waveform_file:" "$mix_file" | sed 's/^waveform_file: *"\(.*\)"$/\1/' | tr -d '\r')
 
     # Skip if no waveform_file specified
     if [ -z "$waveform_file" ]; then
@@ -203,8 +203,26 @@ for mix_file in "${MIX_FILES[@]}"; do
             fi
         fi
 
+        # Convert Dropbox URLs to direct download format
+        if [[ "$audio_url" == *"dropbox.com"* ]]; then
+            if [[ "$audio_url" == *"dl=0"* ]]; then
+                # Change dl=0 to dl=1
+                audio_url="${audio_url/dl=0/dl=1}"
+                echo -e "${BLUE}ℹ${NC} Converted Dropbox URL to direct download (dl=1)"
+            elif [[ "$audio_url" != *"dl=1"* ]]; then
+                # Add dl=1 parameter
+                if [[ "$audio_url" == *"?"* ]]; then
+                    audio_url="${audio_url}&dl=1"
+                else
+                    audio_url="${audio_url}?dl=1"
+                fi
+                echo -e "${BLUE}ℹ${NC} Added direct download parameter to Dropbox URL (dl=1)"
+            fi
+        fi
+
         # Determine file extension from URL
-        audio_ext="${audio_url##*.}"
+        audio_ext="${audio_url%%\?*}"  # Remove query string first
+        audio_ext="${audio_ext##*.}"
         [ -z "$audio_ext" ] && audio_ext="mp3"
 
         # Download to temp directory
