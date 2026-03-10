@@ -184,7 +184,8 @@ title: "Summer Vibes 2025"
 date: 2025-06-15
 excerpt: "A deep house journey through summer sounds"
 header:
-  teaser: /assets/images/mixes/summer-vibes-2025-teaser.jpg
+  cover: /assets/images/mixes/covers/summer-vibes-2025.jpg
+  og_image: /assets/images/mixes/covers/summer-vibes-2025.jpg
 duration: "1:23:45"
 audio_url: "https://d123456.cloudfront.net/summer-2025.mp3"
 waveform_file: "summer-2025.dat"

@@ -10,8 +10,8 @@ waveform_file: "example-mix.dat"
 duration: "1:00:00"
 genre: "Deep House"
 header:
-  image: 
-  teaser: /assets/images/mixes/teasers/example-mix.png
+  cover: /assets/images/mixes/covers/example-mix.png
+  og_image: /assets/images/mixes/covers/example-mix.png
 tracklist:
   - "[00:00:00] Maps - Glory Verse"
   - "[00:05:19] Nosaj Thing & Julianna Barwick - Blue Hour"

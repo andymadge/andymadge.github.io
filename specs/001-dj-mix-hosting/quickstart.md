@@ -105,16 +105,12 @@ audiowaveform -i summer-vibes-2025.mp3 \
 ### 3.1 Resize Images
 
 **Recommended sizes**:
-- **Teaser**: 400x400px (for list/grid views)
-- **Header**: 1200x400px (for full-width header on mix page)
+- **Cover**: 400x400px (for mix page display, grid/list views, and social sharing)
 
 ```bash
 # Using ImageMagick
 convert original-cover.jpg -resize 400x400^ -gravity center \
-  -extent 400x400 assets/images/mixes/teasers/summer-vibes-2025.jpg
-
-convert original-cover.jpg -resize 1200x400^ -gravity center \
-  -extent 1200x400 assets/images/mixes/headers/summer-vibes-2025.jpg
+  -extent 400x400 assets/images/mixes/covers/summer-vibes-2025.jpg
 ```
 
 Or use any image editor (Photoshop, GIMP, etc.).
@@ -155,8 +151,8 @@ waveform_file: "summer-vibes-2025.dat"
 duration: "1:23:45"
 genre: "Deep House"
 header:
-  image: /assets/images/mixes/headers/summer-vibes-2025.jpg
-  teaser: /assets/images/mixes/teasers/summer-vibes-2025.jpg
+  cover: /assets/images/mixes/covers/summer-vibes-2025.jpg
+  og_image: /assets/images/mixes/covers/summer-vibes-2025.jpg
 tags:
   - deep house
   - summer
@@ -201,10 +197,10 @@ Perfect for sunset sessions, beach days, or late-night listening.
 **Highly Recommended**:
 - `excerpt` (for SEO and list views)
 - `waveform_file` (for interactive waveform)
-- `header.teaser` (for visual appeal)
+- `header.cover` (cover art for mix page, grid views, and social sharing)
 
 **Optional**:
-- `header.image`
+- `header.og_image` (if different from cover for social sharing)
 - `duration` (human-readable)
 - `genre`
 - `tags`
@@ -234,7 +230,7 @@ http://localhost:4000/music/summer-vibes/
 - [ ] Play/pause buttons work
 - [ ] Audio streams from Dropbox (verify dl=1 parameter is present)
 - [ ] Tracklist displays (if provided)
-- [ ] Cover art shows in header/teaser
+- [ ] Cover art shows on mix page and in grid view
 - [ ] Page appears in `/music/` index
 
 ### 5.4 Check Browser Console
@@ -262,8 +258,7 @@ ifconfig | grep "inet " | grep -v 127.0.0.1
 ```bash
 git add _djmixes/2025-06-15-summer-vibes.md
 git add assets/waveforms/summer-vibes-2025.dat
-git add assets/images/mixes/teasers/summer-vibes-2025.jpg
-git add assets/images/mixes/headers/summer-vibes-2025.jpg
+git add assets/images/mixes/covers/summer-vibes-2025.jpg
 ```
 
 ### 6.2 Commit
@@ -386,8 +381,8 @@ waveform_file: "example.dat"
 duration: "1:23:45"
 genre: "House"
 header:
-  image: /assets/images/mixes/headers/example.jpg
-  teaser: /assets/images/mixes/teasers/example.jpg
+  cover: /assets/images/mixes/covers/example.jpg
+  og_image: /assets/images/mixes/covers/example.jpg
 mixcloud_url: "https://mixcloud.com/..."
 tags: [house, 2025]
 ---

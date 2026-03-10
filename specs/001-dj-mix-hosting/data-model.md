@@ -51,8 +51,8 @@ waveform_file: string      # Filename of pre-generated waveform data (relative t
 # OPTIONAL FIELDS (Metadata & Display)
 
 header:
-  image: string            # Full-width header image URL (optional)
-  teaser: string           # Thumbnail/card image URL (shown in grid/list views)
+  cover: string            # Cover art image URL (shown in mix page, grid/list views, and social shares)
+  og_image: string         # Open Graph image for social sharing (usually same as cover)
 
 duration: string           # Human-readable duration (e.g., "1:23:45")
 genre: string              # Music genre (e.g., "Deep House", "Techno")
@@ -118,8 +118,8 @@ Optional tracklist in the format:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `header.image` | URL | null | Full-width header image |
-| `header.teaser` | URL | null | Thumbnail for grid/list views |
+| `header.cover` | URL | null | Cover art for mix page, grid/list views |
+| `header.og_image` | URL | null | Social sharing image (Open Graph) |
 | `duration` | string | null | Human-readable duration (H:MM:SS) |
 | `genre` | string | null | Music genre or style |
 
@@ -154,8 +154,8 @@ waveform_file: "summer-vibes-2025.dat"
 duration: "1:23:45"
 genre: "Deep House"
 header:
-  image: /assets/images/mixes/headers/summer-vibes-2025.jpg
-  teaser: /assets/images/mixes/teasers/summer-vibes-2025.jpg
+  cover: /assets/images/mixes/covers/summer-vibes-2025.jpg
+  og_image: /assets/images/mixes/covers/summer-vibes-2025.jpg
 mixcloud_url: "https://www.mixcloud.com/andymadge/summer-vibes-2025/"
 tags:
   - deep house
@@ -323,7 +323,7 @@ Playback positions are stored client-side in browser localStorage.
 
 # Optional field format check
 - waveform_file: IF present, MUST match pattern *.dat
-- header.teaser: IF present, MUST be valid path or URL
+- header.cover: IF present, MUST be valid path or URL
 - tags: IF present, MUST be array of strings
 - genre: IF present, MUST be string
 ```

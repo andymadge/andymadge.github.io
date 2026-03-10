@@ -1,6 +1,46 @@
 // Music Player Styles for DJ Mix Hosting Feature
 // ================================================
 
+// Mix Cover Image (right-aligned next to description)
+.mix-content-wrapper {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+
+  #mix-content {
+    flex: 1;
+    min-width: 0; // Allow text to wrap properly
+  }
+
+  .mix-cover-image {
+    flex-shrink: 0;
+    width: 300px;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: block;
+    }
+  }
+}
+
+// Mobile: Stack cover image above content
+@media (max-width: 768px) {
+  .mix-content-wrapper {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+
+    .mix-cover-image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+}
+
 // Audio Player Container
 .audio-player {
   margin: 0;

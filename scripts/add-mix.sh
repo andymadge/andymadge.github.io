@@ -175,7 +175,8 @@ excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
 ${DURATION_FORMATTED:+duration: \"$DURATION_FORMATTED\"}
 header:
-  teaser: /assets/images/mixes/teasers/${MIX_SLUG}.jpg  # Optional
+  cover: /assets/images/mixes/covers/${MIX_SLUG}.jpg  # Optional
+  og_image: /assets/images/mixes/covers/${MIX_SLUG}.jpg  # For social sharing
 classes: wide
 share: true
 ---
@@ -205,8 +206,8 @@ echo ""
 echo "   ${BLUE}Alternative:${NC} For S3/CloudFront hosting, see quickstart.md Appendix A"
 echo ""
 echo -e "${YELLOW}2. (Optional) Add cover art:${NC}"
-echo "   • Create teaser image (400x400px)"
-echo "   • Save to: assets/images/mixes/teasers/${MIX_SLUG}.jpg"
+echo "   • Create cover image (400x400px recommended)"
+echo "   • Save to: assets/images/mixes/covers/${MIX_SLUG}.jpg"
 echo ""
 echo -e "${YELLOW}3. Edit mix file:${NC}"
 echo "   • Add description and tracklist"

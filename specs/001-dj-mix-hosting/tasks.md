@@ -17,8 +17,7 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 - [x] [T001] [P] Create `_djmixes/` collection directory at repository root
 - [x] [T002] [P] Create `assets/waveforms/` directory for pre-generated waveform data
-- [x] [T003] [P] Create `assets/images/mixes/teasers/` directory for mix cover thumbnails
-- [x] [T004] [P] Create `assets/images/mixes/headers/` directory for mix header images
+- [x] [T003] [P] Create `assets/images/mixes/covers/` directory for mix cover images
 - [x] [T005] [P] Create `assets/js/` directory for JavaScript modules (if not exists)
 - [x] [T006] [P] Create `assets/css/` directory for custom SCSS (if not exists)
 - [x] [T007] Update `_config.yml` to add djmixes collection with permalink `/music/:name/`
@@ -58,7 +57,7 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 
 ### 3.2: Mix Page Layout
 
-- [x] [T021] [US1] Update `_layouts/mix.html` to display mix front matter: title, date, cover art (header.image, header.teaser), genre, duration
+- [x] [T021] [US1] Update `_layouts/mix.html` to display mix front matter: title, date, cover art (header.cover), genre, duration
 - [x] [T022] [US1] Include `audio-player.html` in `_layouts/mix.html` with data attributes for audioUrl, waveformUrl, duration, mixId, mixTitle
 - [x] [T023] [US1] Add page initialization script in `_layouts/mix.html` that calls `AudioPlayer.init()` with config from data attributes
 - [x] [T024] [US1] Style mix page header with cover art using `music-player.scss` (full-width header image, overlay text)
@@ -73,7 +72,7 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 ### 3.4: Mix Index Page
 
 - [x] [T029] [US1] Implement `_layouts/mix-index.html` to loop through `site.djmixes` sorted by date (reverse chronological)
-- [x] [T030] [US1] Display mix cards in grid layout with teaser image, title, date, genre, excerpt, and link to mix page
+- [x] [T030] [US1] Display mix cards in grid layout with cover image, title, date, genre, excerpt, and link to mix page
 - [x] [T031] [US1] Style mix index grid for desktop in `music-player.scss` (responsive grid, card hover effects)
 
 ### 3.5: Mobile Responsiveness
@@ -88,7 +87,7 @@ This file breaks down the implementation into dependency-ordered tasks. Each tas
 - [x] [T036] [US1] Create example mix file `_djmixes/2025-11-25-example-mix.md` with complete YAML front matter (all required fields)
 - [ ] [T037] [US1] Upload example audio file to S3/CloudFront and add URL to example mix front matter (USER ACTION REQUIRED)
 - [ ] [T038] [P] [US1] Generate example waveform using `audiowaveform -i example.mp3 -o assets/waveforms/example.dat -b 8 -z 256` (USER ACTION REQUIRED)
-- [ ] [T039] [P] [US1] Add example cover art images to `assets/images/mixes/teasers/` and `assets/images/mixes/headers/` (USER ACTION REQUIRED)
+- [ ] [T039] [P] [US1] Add example cover art images to `assets/images/mixes/covers/` (USER ACTION REQUIRED)
 - [x] [T040] [US1] Add example tracklist to `_djmixes/2025-11-25-example-mix.md` in correct format
 
 ### 3.7: Testing & Validation

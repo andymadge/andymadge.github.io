@@ -2,9 +2,12 @@
 layout: single
 ---
 
-<!-- Mix Content (description) -->
-<div id="mix-content">
-{{ content }}
+<!-- Mix Cover and Content (description) -->
+<div class="mix-content-wrapper">
+  {% include mix-cover.html %}
+  <div id="mix-content">
+  {{ content }}
+  </div>
 </div>
 
 <!-- Audio Player Integration -->

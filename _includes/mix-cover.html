@@ -1,0 +1,5 @@
+{% if page.header.cover %}
+<div class="mix-cover-image">
+  <img src="{{ page.header.cover | relative_url }}" alt="{{ page.title }} cover art" loading="lazy">
+</div>
+{% endif %}
