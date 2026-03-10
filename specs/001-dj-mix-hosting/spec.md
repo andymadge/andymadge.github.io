@@ -19,7 +19,7 @@ A visitor arrives at the website wanting to listen to a DJ mix. They navigate to
 
 1. **Given** a visitor is on the homepage, **When** they navigate to `/music/`, **Then** they see a list of available DJ mixes
 2. **Given** a visitor is viewing the list of mixes, **When** they click on a specific mix, **Then** they are taken to that mix's dedicated page with a static URL
-3. **Given** a visitor is on a mix page, **When** the page loads, **Then** they see the mix cover art, audio player with transport controls (play, pause, seek), and the full tracklist
+3. **Given** a visitor is on a mix page, **When** the page loads, **Then** they see the mix cover art, audio player with transport controls (play, pause, seek), and the full tracklist (if available)
 4. **Given** a visitor is on a mix page, **When** they click play, **Then** the audio begins streaming from the external hosting location (Dropbox or other)
 5. **Given** audio is playing, **When** they click pause, **Then** playback stops and can be resumed from the same position
 
@@ -43,9 +43,9 @@ A visitor wants to quickly jump to a specific part of a mix. They see a visual w
 
 ### User Story 3 - Live Track Highlighting (Priority: P3)
 
-A visitor listening to a mix can see which track is currently playing, with the tracklist automatically highlighting the active track as playback progresses.
+A visitor listening to a mix that has a tracklist can see which track is currently playing, with the tracklist automatically highlighting the active track as playback progresses.
 
-**Why this priority**: This is a nice-to-have enhancement that improves discoverability and engagement but isn't critical for the core listening experience. The static tracklist still provides value without it.
+**Why this priority**: This is a nice-to-have enhancement that improves discoverability and engagement but isn't critical for the core listening experience. The static tracklist still provides value without it. This feature only applies when a tracklist with timestamps is provided.
 
 **Independent Test**: Can be tested by implementing track timestamp data and highlighting logic on an existing mix page. Delivers value independently by helping listeners identify current tracks.
 
@@ -61,10 +61,11 @@ A visitor listening to a mix can see which track is currently playing, with the 
 
 - What happens when the externally hosted audio file is unavailable or returns an error?
 - How does the system handle extremely long mixes (e.g., 3+ hours)?
-- What happens if a mix has no tracklist data provided?
+- What happens if a mix has no tracklist data provided? (The audio player should still function fully, just without the tracklist display)
 - How does the waveform display render on mobile devices with limited screen width?
 - What happens if track timestamps overlap or are missing for some tracks?
 - How does the player handle slow network connections or buffering?
+- Can a tracklist be added or updated after a mix page is initially published?
 
 ## Requirements
 
@@ -75,21 +76,22 @@ A visitor listening to a mix can see which track is currently playing, with the 
 - **FR-003**: Each mix page MUST display cover art prominently
 - **FR-004**: Each mix page MUST include an audio player with standard transport controls (play, pause, seek/scrub, volume control)
 - **FR-005**: System MUST support streaming audio files hosted on external services (Dropbox and potentially others)
-- **FR-006**: Each mix page MUST display a tracklist showing all tracks in the mix
-- **FR-007**: Tracklist data MUST be provided in the format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata in brackets
+- **FR-006**: Each mix page SHOULD display a tracklist showing all tracks in the mix when tracklist data is available
+- **FR-007**: When provided, tracklist data MUST follow the format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata in brackets
 - **FR-008**: System MUST provide a reusable audio player component that can be used for any mix
 - **FR-009**: Audio player MUST maintain playback state (e.g., resume from same position after pause)
 - **FR-010**: System SHOULD display a visual waveform representation of the audio
 - **FR-011**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
-- **FR-012**: System SHOULD support automatic track highlighting that updates as playback progresses using manually authored timestamp data
-- **FR-013**: Track highlighting SHOULD respond to manual seeking by immediately updating to the correct track
-- **FR-014**: System MUST handle audio loading errors gracefully with user-friendly error messages
+- **FR-012**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
+- **FR-013**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
+- **FR-014**: Track highlighting SHOULD respond to manual seeking by immediately updating to the correct track
+- **FR-015**: System MUST handle audio loading errors gracefully with user-friendly error messages
 
 ### Key Entities
 
-- **DJ Mix**: Represents a complete mix recording with metadata including title, cover art image URL, external audio file URL, publication date, and optional description
-- **Track**: Represents an individual track within a mix, including artist name, track title, and timestamp position. Format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata (e.g., `[00:08:41] Invisible Inc - Stars [Ambient Version]`)
-- **Mix Page**: A dedicated web page for each mix that combines the audio player component, cover art, and tracklist display
+- **DJ Mix**: Represents a complete mix recording with metadata including title, cover art image URL, external audio file URL, publication date, optional description, and optional tracklist
+- **Track**: Represents an individual track within a mix, including artist name, track title, and timestamp position. Format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata (e.g., `[00:08:41] Invisible Inc - Stars [Ambient Version]`). Tracks are optional and can be added after initial publication.
+- **Mix Page**: A dedicated web page for each mix that combines the audio player component, cover art, and tracklist display (when available)
 
 ## Success Criteria
 

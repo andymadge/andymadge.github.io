@@ -34,4 +34,5 @@
 - All validation items passed successfully
 - Tracklist format confirmed: `[HH:MM:SS] Artist Name - Track Title`
 - Track timestamps will be manually authored for each mix
+- **Tracklists are optional**: Mixes can be published without tracklists and updated later
 - Specification is ready for `/speckit.plan`
