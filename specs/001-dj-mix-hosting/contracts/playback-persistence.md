@@ -19,9 +19,10 @@ const PlaybackPersistence = {
   STORAGE_KEY: 'andymadge_mixPositions',
 
   /**
-   * Expiration time in milliseconds (90 days)
+   * Maximum number of mix positions to store (LRU eviction when exceeded)
+   * Updated 2026-02-21: no TTL expiry — EXPIRATION_MS removed
    */
-  EXPIRATION_MS: 90 * 24 * 60 * 60 * 1000,
+  MAX_POSITIONS: 20,
 
   /**
    * Check if localStorage is available and writable

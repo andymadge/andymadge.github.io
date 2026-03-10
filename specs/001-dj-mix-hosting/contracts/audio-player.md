@@ -170,20 +170,21 @@ document.getElementById('play-button').addEventListener('click', () => {
 
 ## Implementation Requirements
 
-### Initialization
-- Load WaveSurfer.js library (CDN or local)
-- Create WaveSurfer instance with MediaElement backend
-- Fetch and load pre-generated waveform data
-- Configure waveform styling (colors, height, responsive)
+### Initialization *(Updated 2026-02-21)*
+- Load WaveSurfer.js v7 library (jsDelivr CDN — no MediaElement backend in v7)
+- Create WaveSurfer instance with streaming mode (`wavesurfer.load(url, peaks, duration)`)
+- Show loading spinner on play button; disable transport controls until `ready` event fires
+- Fetch and parse pre-generated waveform `.dat` file if `waveformUrl` provided
+- Configure waveform styling (gradient colors, height, responsive)
 - Load saved playback position from localStorage
-- Restore position if valid (> 5 seconds, < duration, < 90 days old)
+- Restore position if valid (> 5 seconds, < duration); no TTL expiry check
 
-### Waveform Fallback
-- If waveform URL returns 404 or fails to load:
-  - WaveSurfer.js attempts client-side waveform generation (per FR-013)
-  - For very long mixes, generation may be slow or fail on mobile devices
-  - Audio playback continues normally regardless of waveform status
-  - Log warning to console (not user-facing error)
+### Waveform Fallback *(Updated 2026-02-21)*
+- If waveform URL is absent or returns 404:
+  - Waveform display section is collapsed entirely (hidden from DOM)
+  - No client-side generation fallback
+  - Audio playback continues normally without waveform
+  - Log info to console (not user-facing error)
 
 ### Position Persistence
 - Integrate with PlaybackPersistence module
@@ -238,7 +239,7 @@ interface AudioPlayerConfig {
 - [ ] Audio plays on button click
 - [ ] Waveform renders and is interactive (click to seek)
 - [ ] Playback position restores on page reload
-- [ ] Player works without waveform data (fallback to client-side generation)
+- [ ] Player works without waveform data (waveform section collapsed, audio plays normally)
 - [ ] Mobile: Touch controls work on iOS/Android
 - [ ] Mobile: Waveform is responsive on small screens
 - [ ] Error handling: Shows friendly message if audio fails to load

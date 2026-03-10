@@ -1,6 +1,6 @@
 # Quickstart: Adding a New DJ Mix
 
-**Date**: 2025-11-25
+**Date**: 2025-11-25 | **Updated**: 2026-02-21
 **Phase**: 1 - Design & Contracts
 **Audience**: Content author (you!)
 
@@ -41,7 +41,7 @@ https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc
 https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&st=abc&dl=1
 ```
 
-**IMPORTANT**: Always add `&dl=1` (or `?dl=1` if no other parameters) to force direct download/streaming instead of Dropbox preview page.
+**IMPORTANT**: Always add `&dl=1` (or `?dl=1` if no other parameters) to force direct download/streaming instead of Dropbox preview page. The `add-mix.sh` script handles this automatically when a Dropbox URL is provided.
 
 **Link format variations:**
 - **New format** (current): `...dropbox.com/scl/fi/...?rlkey=...&dl=1`
@@ -83,9 +83,10 @@ sudo apt-get install audiowaveform
 ### 2.2 Generate Waveform File
 
 ```bash
-# Generate binary waveform data
+# Generate binary waveform data (Updated 2026-02-21: correct output path)
+mkdir -p assets/djmixes/2025-06-15-summer-vibes
 audiowaveform -i summer-vibes-2025.mp3 \
-              -o assets/waveforms/summer-vibes-2025.dat \
+              -o assets/djmixes/2025-06-15-summer-vibes/waveform.dat \
               -b 8 \
               -z 256
 
@@ -147,12 +148,11 @@ date: 2025-06-15
 audio_url: "https://www.dropbox.com/scl/fi/abc123xyz/summer-vibes-2025.mp3?rlkey=xyz&dl=1"
 duration_seconds: 5025
 excerpt: "A 90-minute journey through deep house and melodic techno, perfect for summer evenings"
-waveform_file: "summer-vibes-2025.dat"
-duration: "1:23:45"
+waveform_file: "2025-06-15-summer-vibes/waveform.dat"
+duration_display: "1:23:45"
 genre: "Deep House"
-header:
-  cover: /assets/images/mixes/covers/summer-vibes-2025.jpg
-  og_image: /assets/images/mixes/covers/summer-vibes-2025.jpg
+# cover: /assets/djmixes/2025-06-15-summer-vibes/cover.png
+# og_image: /assets/djmixes/2025-06-15-summer-vibes/cover.png
 tags:
   - deep house
   - summer
@@ -405,7 +405,14 @@ The manual steps above can be automated using the provided scripts in the `scrip
 Use `add-mix.sh` to automate waveform generation and file creation:
 
 ```bash
-./scripts/add-mix.sh audio_files/summer-2025.mp3 summer-vibes "Summer Vibes 2025"
+# Basic usage (local file)
+./scripts/add-mix.sh summer-vibes-2025.mp3 "Summer Vibes 2025"
+
+# With a Dropbox URL (dl=1 normalised automatically)
+./scripts/add-mix.sh --audio-url "https://www.dropbox.com/.../mix.mp3?rlkey=...&dl=1" summer-vibes-2025.mp3 "Summer Vibes 2025"
+
+# Print-only mode (outputs to stdout, no files created)
+./scripts/add-mix.sh --print-only summer-vibes-2025.mp3 "Summer Vibes 2025"
 ```
 
 This automatically:

@@ -1,8 +1,8 @@
 # Data Model: DJ Mix Hosting
 
-**Date**: 2025-11-25
+**Date**: 2025-11-25 | **Updated**: 2026-02-21
 **Phase**: 1 - Design & Contracts
-**Status**: COMPLETE
+**Status**: COMPLETE — corrections applied 2026-02-21
 
 This document defines the data structures, YAML front matter schemas, and relationships for the DJ mix hosting feature.
 
@@ -30,6 +30,8 @@ _djmixes/YYYY-MM-DD-mix-slug.md
 - Date prefix enables chronological sorting
 - Slug becomes URL (via `:name` permalink variable)
 - Example: `2025-06-15-summer-vibes.md` → `/music/summer-vibes/`
+- Slug is auto-generated from title by `add-mix.sh` (lowercase, spaces→hyphens, special chars stripped)
+- **MUST NOT be renamed after first publish** — the URL is permanent
 
 ### YAML Front Matter Schema
 
@@ -45,18 +47,26 @@ duration_seconds: integer  # Total duration in seconds (for waveform/player)
 # OPTIONAL FIELDS (High Priority)
 
 excerpt: string            # Short description (shown in list views, SEO meta)
-waveform_file: string      # Filename of pre-generated waveform data (relative to assets/waveforms/)
-                           # Example: "summer-2025.dat"
+waveform_file: string      # Path to pre-generated waveform data, relative to assets/djmixes/
+                           # Example: "2025-06-15-summer-vibes/waveform.dat"
+                           # Full path: assets/djmixes/{waveform_file}
+                           # If absent, waveform display section is collapsed entirely
 
 # OPTIONAL FIELDS (Metadata & Display)
 
 header:
   cover: string            # Cover art image URL (shown in mix page, grid/list views, and social shares)
   og_image: string         # Open Graph image for social sharing (usually same as cover)
+                           # Both commented-out by default in add-mix.sh output (must be added manually)
 
-duration: string           # Human-readable duration (e.g., "1:23:45")
+duration_display: string   # Human-readable duration (e.g., "1:23:45") — shown on mix page
 genre: string              # Music genre (e.g., "Deep House", "Techno")
-                     # Can use genres as tags for filtering
+                           # Can use genres as tags for filtering
+
+mix_image: string          # Optional path to secondary image (e.g. Ableton/DAW screenshot)
+                           # Example: /assets/djmixes/2025-06-15-summer-vibes/ableton.png
+                           # Displayed below tracklist; clicking opens image in new tab (no lightbox)
+mix_image_caption: string  # Caption for mix_image; inherits body font size (no override)
 
 # OPTIONAL FIELDS (External Links & Social)
 
@@ -118,10 +128,12 @@ Optional tracklist in the format:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `header.cover` | URL | null | Cover art for mix page, grid/list views |
-| `header.og_image` | URL | null | Social sharing image (Open Graph) |
-| `duration` | string | null | Human-readable duration (H:MM:SS) |
+| `header.cover` | URL/path | null | Cover art for mix page, grid/list views |
+| `header.og_image` | URL/path | null | Social sharing image (Open Graph) |
+| `duration_display` | string | null | Human-readable duration (H:MM:SS) |
 | `genre` | string | null | Music genre or style |
+| `mix_image` | path | null | Optional secondary image (DAW screenshot etc.); opens in new tab |
+| `mix_image_caption` | string | null | Caption for `mix_image`; inherits body font size |
 
 #### External Links
 
@@ -271,11 +283,12 @@ Playback positions are stored client-side in browser localStorage.
 
 ```
 [New Visitor] → No saved position → Start from 0:00
-[Returning < 90 days] → Load saved position → Resume playback
-[Returning > 90 days] → Position expired → Start from 0:00
+[Returning visitor] → Load saved position → Resume playback (no TTL expiry)
+[>20 mixes saved, new save] → LRU eviction of oldest entry → Save new position
 [localStorage unavailable] → No persistence → Start from 0:00
-[Quota exceeded] → Cleanup oldest 25% → Retry save
+[Quota exceeded] → Cleanup oldest 25% of positions → Retry save
 ```
+*(Updated 2026-02-21: no 90-day TTL — positions stored indefinitely, evicted by LRU cap only)*
 
 ---
 
@@ -289,11 +302,11 @@ Playback positions are stored client-side in browser localStorage.
 - **Format**: Dropbox shareable link with `dl=1` parameter for direct download
 
 ### Mix → Waveform Data (Optional)
-- **Type**: Reference (filename)
+- **Type**: Reference (path)
 - **Cardinality**: 1:0..1 (mix may have pre-generated waveform)
-- **Storage**: Waveform `.dat` files in `assets/waveforms/` (committed to repository)
-- **Link**: `waveform_file` field in front matter
-- **Fallback**: If missing, WaveSurfer.js performs client-side waveform generation (per FR-013)
+- **Storage**: Waveform `.dat` files in `assets/djmixes/{slug}/waveform.dat` (committed to repository)
+- **Link**: `waveform_file` field in front matter (path relative to `assets/djmixes/`)
+- **Fallback**: If missing or unavailable, waveform section collapsed entirely (no client-side generation)
 
 ### Mix → Tracks
 - **Type**: Composition (embedded in Markdown content)
@@ -306,7 +319,7 @@ Playback positions are stored client-side in browser localStorage.
 - **Cardinality**: 1:0..1 per browser/device (position may not exist)
 - **Storage**: Browser localStorage (per-device, per-browser)
 - **Key**: Mix slug/filename used as identifier
-- **Lifecycle**: 90-day TTL from last playback
+- **Lifecycle**: Indefinite; LRU eviction when >20 mixes stored
 
 ---
 
@@ -347,10 +360,10 @@ if (mix.waveform_file) {
 ### localStorage Validation
 
 ```javascript
-// Expiration check
-if (Date.now() - mixData.lastPlayed > 90 * 24 * 60 * 60 * 1000) {
-  // Remove expired position
-}
+// No TTL expiry — positions stored indefinitely
+// LRU eviction only: if positions.length > 20, remove least-recently-used
+
+// Position bounds check (still applies):
 
 // Position bounds check
 if (mixData.position > mixData.duration || mixData.position < 0) {
@@ -399,11 +412,12 @@ try {
 
 ```
 1. Page loads → Check for waveform_file in front matter
-2. If present → Fetch /assets/waveforms/[filename]
-3. If 200 OK → Initialize WaveSurfer with pre-generated peaks
-4. If 404 → Fallback to client-side waveform generation with WaveSurfer.js
-5. User clicks waveform → Seek audio to timestamp
-6. Audio plays → Update waveform progress indicator
+2. If absent → Collapse waveform section; skip to audio player only
+3. If present → Fetch /assets/djmixes/[waveform_file]
+4. If 200 OK → Parse binary .dat header, normalize peaks, initialize WaveSurfer
+5. If 404/error → Collapse waveform section (no client-side fallback generation)
+6. User clicks waveform → Seek audio to timestamp
+7. Audio plays → Update waveform progress indicator
 ```
 
 ---

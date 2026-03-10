@@ -1,8 +1,8 @@
 # Research: DJ Mix Hosting
 
-**Date**: 2025-11-25
+**Date**: 2025-11-25 | **Updated**: 2026-02-21
 **Phase**: 0 - Research & Unknowns
-**Status**: COMPLETE
+**Status**: COMPLETE — corrections applied 2026-02-21 (see individual sections)
 
 This document captures research findings for all technical unknowns identified in the implementation plan.
 
@@ -34,7 +34,7 @@ WaveSurfer.js is the optimal choice because it combines native waveform visualiz
 ## 2. Waveform Generation Approach
 
 ### Decision
-**Pre-Generated Waveform Data using BBC audiowaveform (Primary), Client-Side Generation with WaveSurfer.js (Fallback)**
+**Pre-Generated Waveform Data using BBC audiowaveform (Primary); waveform section collapsed if data unavailable** *(Updated 2026-02-21: fallback is collapse, not client-side generation — see FR-013)*
 
 ### Rationale
 Pre-generated waveforms are strongly preferred for 30-120 minute DJ mixes, with client-side generation as fallback when pre-generated data is unavailable:
@@ -52,16 +52,15 @@ Pre-generated waveforms are strongly preferred for 30-120 minute DJ mixes, with 
 - CORS complications with externally-hosted audio files
 - Slow generation time for long mixes (3+ hours)
 
-**Fallback strategy (FR-013):**
-- If pre-generated waveform data is unavailable, use WaveSurfer.js client-side generation
-- WaveSurfer.js will attempt to generate waveform from audio file
-- For very long mixes, this may be slow or fail on mobile devices
-- Audio playback continues normally regardless of waveform generation success
+**Fallback strategy (FR-013):** *(Updated 2026-02-21)*
+- If pre-generated waveform data is unavailable, the waveform display section is collapsed entirely
+- There is no client-side waveform generation fallback
+- Audio playback continues normally with controls but without waveform
 
 ### Implementation
 - **Tool**: BBC audiowaveform CLI (for pre-generation)
 - **Format**: Binary .dat files (8-bit depth, gzipped)
-- **Storage**: Waveform data in Jekyll repo (`assets/waveforms/`), audio on external hosting
+- **Storage**: Waveform data in Jekyll repo (`assets/djmixes/{slug}/waveform.dat`), audio on external hosting
 - **Integration**: WaveSurfer.js + MediaElement backend natively supports audiowaveform format
 - **Fallback**: WaveSurfer.js handles client-side generation automatically when peaks data not provided
 
@@ -75,7 +74,7 @@ audiowaveform -i mix.mp3 -o assets/waveforms/mix.dat -b 8 -z 256
 ## 3. External Audio Hosting
 
 ### Decision
-**Dropbox (Primary)** with S3 + CloudFront as optional migration path
+**Dropbox (Primary)** with S3 + CloudFront as optional migration path *(confirmed 2026-02-21: Dropbox is the actual primary hosting; the summary table below was wrong — see correction at end of document)*
 
 ### Rationale for Dropbox
 Dropbox is acceptable for this personal blog use case given the specific constraints and scale:
@@ -233,7 +232,7 @@ Generates URLs:
 ## 5. localStorage Best Practices
 
 ### Decision
-**Single namespaced key with JSON structure, 90-day expiration**
+**Single namespaced key with JSON structure, indefinite storage, LRU cap at 20 mixes** *(Updated 2026-02-21: no TTL expiry — positions stored indefinitely, evicted only by LRU cap)*
 
 ### Data Structure
 ```javascript
@@ -265,13 +264,13 @@ Generates URLs:
 - More efficient than multiple keys (uses less quota)
 - Simpler cleanup and expiration management
 
-### Expiration Strategy
-**90 days of inactivity with lazy expiration**
+### Eviction Strategy *(Updated 2026-02-21: TTL removed)*
+**Indefinite storage with LRU cap at 20 mixes**
 
-- Check `lastPlayed` timestamp when loading positions
-- Remove expired items during `loadPositions()` call
-- Balances user convenience with storage hygiene
+- Positions are stored indefinitely — no time-based expiry
+- When saving would exceed 20 stored positions, evict the least-recently-used entry
 - Automatic cleanup when quota issues occur (remove oldest 25%)
+- `lastPlayed` timestamp retained for LRU ordering only, not for expiry
 
 ### Implementation Pattern
 ```javascript
@@ -344,10 +343,10 @@ const MixPositionStore = {
 | Unknown | Decision | Key Factor |
 |---------|----------|------------|
 | Audio Player Library | WaveSurfer.js v7 | Native waveform + player in one package |
-| Waveform Generation | Pre-generated (audiowaveform) | Memory limits make client-side unsuitable for long mixes |
-| Audio Hosting | Amazon S3 + CloudFront | Proper CORS, free tier, production-ready (NOT Dropbox) |
+| Waveform Generation | Pre-generated (audiowaveform); collapse if missing | Memory limits make client-side unsuitable for long mixes |
+| Audio Hosting | **Dropbox (primary)**, S3/CloudFront as migration path | Zero cost, sufficient for personal scale; `dl=1` normalised by tooling |
 | Jekyll Structure | Collections (`_djmixes/`) | Best for grouped content, theme integration |
-| localStorage Pattern | Single namespaced key, 90-day TTL | Efficient, simple cleanup, graceful degradation |
+| localStorage Pattern | Single namespaced key, indefinite + LRU cap 20 | Efficient, LRU eviction, graceful degradation |
 
 ---
 
