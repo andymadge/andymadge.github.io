@@ -194,7 +194,7 @@ for mix_file in "${MIX_FILES[@]}"; do
             audio_url="$SPECIFIED_URL"
         else
             # Extract audio_url from front matter
-            audio_url=$(grep "^audio_url:" "$mix_file" | sed 's/^audio_url: *"\?\([^"]*\)"\?/\1/' | tr -d '\r')
+            audio_url=$(grep "^audio_url:" "$mix_file" | sed -E 's/^audio_url: *"?([^"]*)"?/\1/' | tr -d '\r')
 
             if [ -z "$audio_url" ] || [ "$audio_url" = "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER" ] || [ "$audio_url" = "REPLACE_WITH_S3_OR_CDN_URL" ] || [ "$audio_url" = "REPLACE_WITH_S3_URL" ]; then
                 echo -e "${YELLOW}⚠${NC} $(basename "$mix_file"): no valid audio_url specified"
