@@ -262,11 +262,11 @@ MIX_CONTENT=$(cat <<EOF
 title: "$TITLE"
 date: $DATE
 audio_url: "$AUDIO_URL_VALUE"
-duration_seconds: ${DURATION:-3600}
+duration_seconds: $EFFECTIVE_DURATION
+duration_display: "$DURATION_FORMATTED"
 excerpt: "Add a short description here (1-2 sentences)"
 waveform_file: "$WAVEFORM_FILE"
-${DURATION_LINE:+${DURATION_LINE}
-}header:
+header:
   # cover: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # Optional
   # og_image: /assets/djmixes/${DATE}-${MIX_SLUG}/cover.jpg  # For social sharing
 classes: wide

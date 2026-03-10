@@ -3,9 +3,9 @@ title: "Armchair Clubbing Vol 1 - A Long Time Coming"
 date: 2025-11-29
 audio_url: "https://www.dropbox.com/scl/fi/hn8n7g8ezx8yh1awns5h1/Armchair-Clubbing-Vol-01-A-Long-Time-Coming.mp3?rlkey=aosd6wdz3b20v4clsefgehkl7&st=pqeus61m&dl=1"
 duration_seconds: 5154
+duration_display: "1:25:54"
 excerpt: "Blah, blah blah, add a short description here (1-2 sentences)"
 waveform_file: "2025-11-29-armchair-clubbing-vol101/waveform.dat"
-duration: "1:25:54"
 header:
   cover: assets/djmixes/2025-11-29-armchair-clubbing-vol101/cover.png  # Optional
   og_image: assets/djmixes/2025-11-29-armchair-clubbing-vol101/cover.png  # For social sharing

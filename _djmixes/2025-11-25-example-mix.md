@@ -5,9 +5,9 @@ date: 2025-11-28
 # Example format: https://www.dropbox.com/scl/fi/.../file.mp3?rlkey=...&dl=1
 audio_url: "/assets/local-tests/Armchair Clubbing - Vol 01 FINAL v1.mp3"
 duration_seconds: 3600
+duration_display: "1:00:00"
 excerpt: "A placeholder example mix demonstrating the DJ mix hosting feature. Replace this with real content."
 waveform_file: "example-mix/waveform.dat"
-duration: "1:00:00"
 genre: "Deep House"
 header:
   # cover: /assets/djmixes/example-mix/cover.png
