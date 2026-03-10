@@ -135,7 +135,7 @@ defaults:
     values:
       layout: mix
       author_profile: true
-      share: true
+      share: false
       comments: false
       classes: wide
 
