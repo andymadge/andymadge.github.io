@@ -4,6 +4,7 @@
 # Usage:
 #   ./scripts/generate-waveforms.sh [audio_directory]
 #   ./scripts/generate-waveforms.sh --remote
+#   ./scripts/generate-waveforms.sh --url <url> <mix-file>
 #
 # This script:
 # 1. Scans _djmixes/ for mix files with waveform_file field
@@ -11,6 +12,7 @@
 # 3. If missing, either:
 #    a) Looks for local audio file in specified directory
 #    b) Downloads from audio_url in mix front matter (--remote mode)
+#    c) Downloads from specified URL (--url mode)
 # 4. Generates waveform data using audiowaveform
 
 set -e  # Exit on error
@@ -25,8 +27,36 @@ NC='\033[0m' # No Color
 # Parse arguments
 REMOTE_MODE=false
 AUDIO_DIR="audio_files"
+URL_MODE=false
+SPECIFIED_URL=""
+SPECIFIED_MIX=""
 
-if [ "$1" = "--remote" ] || [ "$1" = "-r" ]; then
+if [ "$1" = "--url" ]; then
+    URL_MODE=true
+    SPECIFIED_URL="$2"
+    SPECIFIED_MIX="$3"
+
+    if [ -z "$SPECIFIED_URL" ] || [ -z "$SPECIFIED_MIX" ]; then
+        echo -e "${RED}Error: --url requires both a URL and a mix file${NC}"
+        echo "Usage: ./scripts/generate-waveforms.sh --url <url> <mix-file>"
+        exit 1
+    fi
+
+    # Normalize mix file path
+    if [[ "$SPECIFIED_MIX" != _djmixes/* ]]; then
+        # If it doesn't have the path prefix, add it
+        if [[ "$SPECIFIED_MIX" != *.md ]]; then
+            SPECIFIED_MIX="_djmixes/${SPECIFIED_MIX}.md"
+        else
+            SPECIFIED_MIX="_djmixes/${SPECIFIED_MIX}"
+        fi
+    fi
+
+    if [ ! -f "$SPECIFIED_MIX" ]; then
+        echo -e "${RED}Error: Mix file not found: $SPECIFIED_MIX${NC}"
+        exit 1
+    fi
+elif [ "$1" = "--remote" ] || [ "$1" = "-r" ]; then
     REMOTE_MODE=true
     AUDIO_DIR="(download from audio_url)"
 elif [ -n "$1" ]; then
@@ -43,9 +73,9 @@ if ! command -v audiowaveform &> /dev/null; then
     exit 1
 fi
 
-# Check if curl is installed (needed for remote mode)
-if [ "$REMOTE_MODE" = true ] && ! command -v curl &> /dev/null; then
-    echo -e "${RED}Error: curl is not installed (required for --remote mode)${NC}"
+# Check if curl is installed (needed for remote mode or URL mode)
+if ([ "$REMOTE_MODE" = true ] || [ "$URL_MODE" = true ]) && ! command -v curl &> /dev/null; then
+    echo -e "${RED}Error: curl is not installed (required for --remote/--url mode)${NC}"
     exit 1
 fi
 
@@ -54,10 +84,16 @@ mkdir -p assets/djmixes
 mkdir -p .tmp/audio 2>/dev/null || true
 
 echo -e "${BLUE}=== Waveform Generation Script ===${NC}\n"
-echo "Mode: $([ "$REMOTE_MODE" = true ] && echo "Remote (download from audio_url)" || echo "Local audio files")"
-echo "Scanning _djmixes/ for missing waveforms..."
-if [ "$REMOTE_MODE" = false ]; then
-    echo "Audio directory: $AUDIO_DIR"
+if [ "$URL_MODE" = true ]; then
+    echo "Mode: URL (download from specified URL)"
+    echo "Mix file: $SPECIFIED_MIX"
+    echo "URL: $SPECIFIED_URL"
+else
+    echo "Mode: $([ "$REMOTE_MODE" = true ] && echo "Remote (download from audio_url)" || echo "Local audio files")"
+    echo "Scanning _djmixes/ for missing waveforms..."
+    if [ "$REMOTE_MODE" = false ]; then
+        echo "Audio directory: $AUDIO_DIR"
+    fi
 fi
 echo ""
 
@@ -65,8 +101,15 @@ GENERATED=0
 SKIPPED=0
 MISSING_AUDIO=0
 
-# Find all mix files
-for mix_file in _djmixes/*.md; do
+# Determine which mix files to process
+if [ "$URL_MODE" = true ]; then
+    MIX_FILES=("$SPECIFIED_MIX")
+else
+    MIX_FILES=(_djmixes/*.md)
+fi
+
+# Process mix files
+for mix_file in "${MIX_FILES[@]}"; do
     [ -e "$mix_file" ] || continue
 
     # Extract waveform_file field from front matter
@@ -95,14 +138,19 @@ for mix_file in _djmixes/*.md; do
     audio_file=""
     cleanup_audio=false
 
-    if [ "$REMOTE_MODE" = true ]; then
-        # Extract audio_url from front matter
-        audio_url=$(grep "^audio_url:" "$mix_file" | sed 's/^audio_url: *"\?\([^"]*\)"\?/\1/' | tr -d '\r')
+    if [ "$REMOTE_MODE" = true ] || [ "$URL_MODE" = true ]; then
+        # Determine audio URL
+        if [ "$URL_MODE" = true ]; then
+            audio_url="$SPECIFIED_URL"
+        else
+            # Extract audio_url from front matter
+            audio_url=$(grep "^audio_url:" "$mix_file" | sed 's/^audio_url: *"\?\([^"]*\)"\?/\1/' | tr -d '\r')
 
-        if [ -z "$audio_url" ] || [ "$audio_url" = "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER" ] || [ "$audio_url" = "REPLACE_WITH_S3_OR_CDN_URL" ] || [ "$audio_url" = "REPLACE_WITH_S3_URL" ]; then
-            echo -e "${YELLOW}⚠${NC} $(basename "$mix_file"): no valid audio_url specified"
-            ((MISSING_AUDIO++))
-            continue
+            if [ -z "$audio_url" ] || [ "$audio_url" = "REPLACE_WITH_DROPBOX_URL_INCLUDE_DL1_PARAMETER" ] || [ "$audio_url" = "REPLACE_WITH_S3_OR_CDN_URL" ] || [ "$audio_url" = "REPLACE_WITH_S3_URL" ]; then
+                echo -e "${YELLOW}⚠${NC} $(basename "$mix_file"): no valid audio_url specified"
+                ((MISSING_AUDIO++))
+                continue
+            fi
         fi
 
         # Determine file extension from URL
@@ -166,7 +214,7 @@ for mix_file in _djmixes/*.md; do
 done
 
 # Cleanup temp directory
-if [ "$REMOTE_MODE" = true ]; then
+if [ "$REMOTE_MODE" = true ] || [ "$URL_MODE" = true ]; then
     rm -rf .tmp/audio 2>/dev/null || true
 fi
 
