@@ -245,12 +245,9 @@ format_duration() {
     fi
 }
 
-DURATION_FORMATTED=""
-DURATION_LINE=""
-if [ -n "$DURATION" ]; then
-    DURATION_FORMATTED=$(format_duration "$DURATION")
-    DURATION_LINE="duration: \"$DURATION_FORMATTED\""
-fi
+EFFECTIVE_DURATION="${DURATION:-3600}"
+DURATION_FORMATTED=$(format_duration "$EFFECTIVE_DURATION")
+DURATION_LINE="duration: \"$DURATION_FORMATTED\""
 
 # Determine audio_url value
 if [ -n "$AUDIO_URL" ]; then
