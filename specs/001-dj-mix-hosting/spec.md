@@ -143,6 +143,15 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-024**: System MUST provide a `generate-waveforms.sh` script that generates waveform data files for mixes, supporting local files (`--local`), remote Dropbox downloads (`--remote`), and arbitrary URL downloads (`--url`)
 - **FR-025**: All shell scripts MUST use BSD-compatible commands and syntax to ensure correct operation on macOS without requiring GNU coreutils
 - **FR-026**: When a Dropbox URL is provided as audio input or via `--audio-url`, the `add-mix.sh` script MUST automatically ensure the URL includes the `dl=1` query parameter for direct file access. If `dl=0` is present, it MUST be replaced with `dl=1`. If the `dl` parameter is missing entirely, it MUST be appended. Non-Dropbox URLs MUST be passed through unchanged.
+- **FR-027**: The `add-mix.sh` script MUST generate the `cover:` and `og_image:` lines in the YAML front matter as commented-out placeholders by default, since cover art is optional and must be manually added by the user.
+
+#### Mix Index Page UI
+
+- **FR-028**: The mix index grid MUST use a dynamic column width so that more mix cards fit on wider screens. The minimum card width SHOULD be reduced to allow more cards per row (target: ~180px minimum).
+- **FR-029**: Mix cards MUST NOT display underlines on any text (title, date, genre, or excerpt). All text within `.mix-card` elements MUST have `text-decoration: none`.
+- **FR-030**: The mix index MUST NOT display any emoji icons alongside metadata fields (date, genre, duration). Metadata labels MUST be plain text only.
+- **FR-031**: Mix card dates MUST be displayed in `YYYY/MM/DD` format with zero-padded month and day (e.g. `2026/02/21`).
+- **FR-032**: Mix cards MUST NOT display the mix duration/length. The duration field MUST be omitted from the mix index card display.
 
 ### Out of Scope (Future Enhancements)
 
