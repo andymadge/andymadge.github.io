@@ -1,6 +1,8 @@
 main:
   - title: "Posts"
     url: /posts/
+  - title: "Music"
+    url: /music/
   - title: "Categories"
     url: /categories/
   - title: "Tags"
