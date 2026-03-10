@@ -43,16 +43,18 @@ show_help() {
     echo "Options:"
     echo "  --help               Show this help message"
     echo "  --version            Show version information"
+    echo "  --print-only         Only print the mix file content to stdout (don't create files)"
     echo ""
     echo "Examples:"
     echo "  ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes \"Summer Vibes 2025\""
     echo "  ./scripts/add-mix.sh \"https://example.com/mix.mp3\" summer-vibes \"Summer Vibes 2025\""
+    echo "  ./scripts/add-mix.sh --print-only audio_files/mix.mp3 my-mix \"My Mix\" > _djmixes/mix.md"
     echo ""
     echo "This script will:"
     echo "  1. Download audio file if URL provided (or use local file)"
     echo "  2. Generate waveform data from audio file"
     echo "  3. Extract audio duration"
-    echo "  4. Create mix markdown file with front matter"
+    echo "  4. Create mix markdown file with front matter (or print to stdout with --print-only)"
     echo "  5. Provide next steps for uploading audio and publishing"
 }
 
@@ -68,6 +70,12 @@ if [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
 fi
 
 # Parse arguments
+PRINT_ONLY=false
+if [ "$1" = "--print-only" ]; then
+    PRINT_ONLY=true
+    shift
+fi
+
 AUDIO_INPUT="$1"
 MIX_SLUG="$2"
 TITLE="$3"
@@ -142,9 +150,6 @@ else
     fi
 fi
 
-# Create directories if needed
-mkdir -p _djmixes
-
 # Generate date and filenames
 DATE=$(date +%Y-%m-%d)
 MIX_FILE="_djmixes/${DATE}-${MIX_SLUG}.md"
@@ -152,41 +157,44 @@ MIX_ASSETS_DIR="assets/djmixes/${DATE}-${MIX_SLUG}"
 WAVEFORM_FILE="${DATE}-${MIX_SLUG}/waveform.dat"
 WAVEFORM_PATH="${MIX_ASSETS_DIR}/waveform.dat"
 
-# Create mix-specific assets directory
-mkdir -p "$MIX_ASSETS_DIR"
+if [ "$PRINT_ONLY" = false ]; then
+    # Create directories if needed
+    mkdir -p _djmixes
+    mkdir -p "$MIX_ASSETS_DIR"
 
-echo -e "${BLUE}=== Adding New Mix ===${NC}\n"
-echo "Title:     $TITLE"
-echo "Slug:      $MIX_SLUG"
-echo "Date:      $DATE"
-echo "Audio:     $AUDIO_FILE"
-echo "Duration:  ${DURATION:-UNKNOWN} seconds"
-echo ""
+    echo -e "${BLUE}=== Adding New Mix ===${NC}\n"
+    echo "Title:     $TITLE"
+    echo "Slug:      $MIX_SLUG"
+    echo "Date:      $DATE"
+    echo "Audio:     $AUDIO_FILE"
+    echo "Duration:  ${DURATION:-UNKNOWN} seconds"
+    echo ""
 
-# Check if mix file already exists
-if [ -f "$MIX_FILE" ]; then
-    echo -e "${RED}Error: Mix file already exists: $MIX_FILE${NC}"
-    exit 1
-fi
-
-# Check if waveform file already exists
-if [ -f "$WAVEFORM_PATH" ]; then
-    echo -e "${YELLOW}Warning: Waveform file already exists: $WAVEFORM_PATH${NC}"
-    read -p "Overwrite existing waveform file? (y/N): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo -e "${RED}Aborted: Not overwriting existing waveform file${NC}"
+    # Check if mix file already exists
+    if [ -f "$MIX_FILE" ]; then
+        echo -e "${RED}Error: Mix file already exists: $MIX_FILE${NC}"
         exit 1
     fi
-fi
 
-# Generate waveform
-echo -e "${BLUE}⟳${NC} Generating waveform data..."
-if audiowaveform -i "$AUDIO_FILE" -o "$WAVEFORM_PATH" -b 8 -z 256 > /dev/null 2>&1; then
-    echo -e "${GREEN}✓${NC} Waveform generated: $WAVEFORM_PATH"
-else
-    echo -e "${RED}✗${NC} Failed to generate waveform"
-    exit 1
+    # Check if waveform file already exists
+    if [ -f "$WAVEFORM_PATH" ]; then
+        echo -e "${YELLOW}Warning: Waveform file already exists: $WAVEFORM_PATH${NC}"
+        read -p "Overwrite existing waveform file? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo -e "${RED}Aborted: Not overwriting existing waveform file${NC}"
+            exit 1
+        fi
+    fi
+
+    # Generate waveform
+    echo -e "${BLUE}⟳${NC} Generating waveform data..."
+    if audiowaveform -i "$AUDIO_FILE" -o "$WAVEFORM_PATH" -b 8 -z 256 > /dev/null 2>&1; then
+        echo -e "${GREEN}✓${NC} Waveform generated: $WAVEFORM_PATH"
+    else
+        echo -e "${RED}✗${NC} Failed to generate waveform"
+        exit 1
+    fi
 fi
 
 # Format duration as H:MM:SS or M:SS
@@ -210,8 +218,8 @@ if [ -n "$DURATION" ]; then
     DURATION_LINE="duration: \"$DURATION_FORMATTED\""
 fi
 
-# Create mix file with front matter
-cat > "$MIX_FILE" <<EOF
+# Generate mix file content
+MIX_CONTENT=$(cat <<EOF
 ---
 title: "$TITLE"
 date: $DATE
@@ -235,39 +243,48 @@ Add your mix description here. You can use Markdown formatting.
 [00:05:30] Another Artist - Another Track
 <!-- Add more tracks with timestamps -->
 EOF
+)
 
-echo -e "${GREEN}✓${NC} Mix file created: $MIX_FILE"
-echo ""
+if [ "$PRINT_ONLY" = true ]; then
+    # Print to stdout
+    echo "$MIX_CONTENT"
+else
+    # Write to file
+    echo "$MIX_CONTENT" > "$MIX_FILE"
 
-# Show next steps
-echo -e "${BLUE}=== Next Steps ===${NC}"
-echo ""
-echo -e "${YELLOW}1. Upload audio file to Dropbox:${NC}"
-echo "   • Upload $AUDIO_FILE to Dropbox (any folder)"
-echo "   • Get shareable link (right-click → Share → Copy link)"
-echo "   • Add &dl=1 parameter to the link"
-echo "   • Update audio_url in $MIX_FILE"
-echo "   • Example: https://www.dropbox.com/scl/fi/...?rlkey=...&dl=1"
-echo ""
-echo -e "   ${BLUE}Alternative:${NC} For S3/CloudFront hosting, see quickstart.md Appendix A"
-echo ""
-echo -e "${YELLOW}2. (Optional) Add cover art:${NC}"
-echo "   • Create cover image (400x400px recommended)"
-echo "   • Save to: ${MIX_ASSETS_DIR}/cover.jpg"
-echo ""
-echo -e "${YELLOW}3. Edit mix file:${NC}"
-echo "   • Add description and tracklist"
-echo "   • Update excerpt field"
-echo "   • Edit: $MIX_FILE"
-echo ""
-echo -e "${YELLOW}4. Test locally:${NC}"
-echo "   bundle exec jekyll serve"
-echo "   Visit: http://localhost:4000/music/${MIX_SLUG}/"
-echo ""
-echo -e "${YELLOW}5. Commit and push:${NC}"
-echo "   git add $MIX_FILE"
-echo "   git add $WAVEFORM_PATH"
-echo "   git commit -m \"Add new mix: $TITLE\""
-echo "   git push"
-echo ""
-echo -e "${GREEN}Done!${NC} Mix scaffolding created successfully."
+    echo -e "${GREEN}✓${NC} Mix file created: $MIX_FILE"
+    echo ""
+
+    # Show next steps
+    echo -e "${BLUE}=== Next Steps ===${NC}"
+    echo ""
+    echo -e "${YELLOW}1. Upload audio file to Dropbox:${NC}"
+    echo "   • Upload $AUDIO_FILE to Dropbox (any folder)"
+    echo "   • Get shareable link (right-click → Share → Copy link)"
+    echo "   • Add &dl=1 parameter to the link"
+    echo "   • Update audio_url in $MIX_FILE"
+    echo "   • Example: https://www.dropbox.com/scl/fi/...?rlkey=...&dl=1"
+    echo ""
+    echo -e "   ${BLUE}Alternative:${NC} For S3/CloudFront hosting, see quickstart.md Appendix A"
+    echo ""
+    echo -e "${YELLOW}2. (Optional) Add cover art:${NC}"
+    echo "   • Create cover image (400x400px recommended)"
+    echo "   • Save to: ${MIX_ASSETS_DIR}/cover.jpg"
+    echo ""
+    echo -e "${YELLOW}3. Edit mix file:${NC}"
+    echo "   • Add description and tracklist"
+    echo "   • Update excerpt field"
+    echo "   • Edit: $MIX_FILE"
+    echo ""
+    echo -e "${YELLOW}4. Test locally:${NC}"
+    echo "   bundle exec jekyll serve"
+    echo "   Visit: http://localhost:4000/music/${MIX_SLUG}/"
+    echo ""
+    echo -e "${YELLOW}5. Commit and push:${NC}"
+    echo "   git add $MIX_FILE"
+    echo "   git add $WAVEFORM_PATH"
+    echo "   git commit -m \"Add new mix: $TITLE\""
+    echo "   git push"
+    echo ""
+    echo -e "${GREEN}Done!${NC} Mix scaffolding created successfully."
+fi

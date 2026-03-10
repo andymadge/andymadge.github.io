@@ -22,18 +22,29 @@ Creates a complete mix entry with waveform generation.
 **Usage:**
 ```bash
 ./scripts/add-mix.sh <audio_file> <mix_slug> "<title>"
+./scripts/add-mix.sh --print-only <audio_file> <mix_slug> "<title>"
 ```
 
-**Example:**
+**Examples:**
 ```bash
+# Create mix file and waveform
 ./scripts/add-mix.sh audio_files/summer.mp3 summer-vibes "Summer Vibes 2025"
+
+# Print content only (useful for manual file creation)
+./scripts/add-mix.sh --print-only audio_files/summer.mp3 summer-vibes "Summer Vibes 2025"
+
+# Redirect to existing file
+./scripts/add-mix.sh --print-only audio_files/mix.mp3 my-mix "My Mix" > _djmixes/my-mix.md
 ```
 
 **What it does:**
-1. ✅ Generates waveform data (.dat file)
+1. ✅ Generates waveform data (.dat file) - skipped in `--print-only` mode
 2. ✅ Extracts audio duration automatically
-3. ✅ Creates mix markdown file with front matter
+3. ✅ Creates mix markdown file with front matter (or prints to stdout)
 4. ✅ Provides clear next steps for completion
+
+**Options:**
+- `--print-only`: Output mix file content to stdout without creating files or waveform. Useful when you want to manually create the mix file first with custom metadata fields, then copy-paste the generated content.
 
 **After running:**
 - Upload audio to Dropbox, get shareable link with &dl=1 parameter
