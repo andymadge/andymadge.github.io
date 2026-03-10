@@ -9,11 +9,11 @@
 
 ### User Story 1 - Listen to a DJ Mix (Priority: P1)
 
-A visitor arrives at the website wanting to listen to a DJ mix. They navigate to the music section, select a specific mix, and play it using standard audio controls while viewing the cover art and tracklist.
+A visitor arrives at the website (on desktop or mobile) wanting to listen to a DJ mix. They navigate to the music section, select a specific mix, and play it using standard audio controls while viewing the cover art and tracklist.
 
 **Why this priority**: This is the core functionality - without this, the feature has no value. It represents the minimum viable product that delivers immediate user value.
 
-**Independent Test**: Can be fully tested by navigating to a mix page URL and playing the audio. Delivers standalone value as a functional audio player with metadata.
+**Independent Test**: Can be fully tested by navigating to a mix page URL and playing the audio on both desktop and mobile devices. Delivers standalone value as a functional audio player with metadata.
 
 **Acceptance Scenarios**:
 
@@ -22,6 +22,7 @@ A visitor arrives at the website wanting to listen to a DJ mix. They navigate to
 3. **Given** a visitor is on a mix page, **When** the page loads, **Then** they see the mix cover art, audio player with transport controls (play, pause, seek), and the full tracklist (if available)
 4. **Given** a visitor is on a mix page, **When** they click play, **Then** the audio begins streaming from the external hosting location (Dropbox or other)
 5. **Given** audio is playing, **When** they click pause, **Then** playback stops and can be resumed from the same position
+6. **Given** a visitor is on a mobile device, **When** they access a mix page, **Then** the page layout, controls, and audio player are fully functional and properly sized for the mobile screen
 
 ---
 
@@ -57,6 +58,23 @@ A visitor listening to a mix that has a tracklist can see which track is current
 
 ---
 
+### User Story 4 - Persistent Playback Position (Priority: P4)
+
+A visitor starts listening to a mix but needs to leave. When they return to the website hours or days later, they can resume playback from where they left off without manually seeking to find their position.
+
+**Why this priority**: This is a quality-of-life enhancement that significantly improves the user experience for longer mixes, but the core functionality works fine without it. Users can manually seek if needed.
+
+**Independent Test**: Can be tested by playing a mix, pausing partway through, closing the browser, and returning later to verify the position was saved. Delivers value independently by improving user convenience.
+
+**Acceptance Scenarios**:
+
+1. **Given** a visitor is listening to a mix, **When** they pause and close their browser, **Then** the playback position is saved
+2. **Given** a visitor returns to a mix page they previously listened to, **When** the page loads, **Then** the audio player shows their last playback position
+3. **Given** a saved playback position exists, **When** the visitor clicks play, **Then** playback resumes from the saved position
+4. **Given** a visitor has listened to multiple mixes, **When** they return to any mix, **Then** each mix remembers its own independent playback position
+
+---
+
 ### Edge Cases
 
 - What happens when the externally hosted audio file is unavailable or returns an error?
@@ -66,6 +84,10 @@ A visitor listening to a mix that has a tracklist can see which track is current
 - What happens if track timestamps overlap or are missing for some tracks?
 - How does the player handle slow network connections or buffering?
 - Can a tracklist be added or updated after a mix page is initially published?
+- How does touch interaction work on mobile devices (tap to play/pause, swipe for seek, pinch for waveform)?
+- What happens if a user clears their browser data and loses their saved playback positions?
+- How long should playback positions be stored (indefinitely, or expire after a certain time)?
+- How does the system handle mobile browsers that may restrict autoplay or background audio?
 
 ## Requirements
 
@@ -79,13 +101,15 @@ A visitor listening to a mix that has a tracklist can see which track is current
 - **FR-006**: Each mix page SHOULD display a tracklist showing all tracks in the mix when tracklist data is available
 - **FR-007**: When provided, tracklist data MUST follow the format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata in brackets
 - **FR-008**: System MUST provide a reusable audio player component that can be used for any mix
-- **FR-009**: Audio player MUST maintain playback state (e.g., resume from same position after pause)
-- **FR-010**: System SHOULD display a visual waveform representation of the audio
-- **FR-011**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
-- **FR-012**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
-- **FR-013**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
-- **FR-014**: Track highlighting SHOULD respond to manual seeking by immediately updating to the correct track
-- **FR-015**: System MUST handle audio loading errors gracefully with user-friendly error messages
+- **FR-009**: System MUST be fully functional on mobile devices (responsive design, touch controls)
+- **FR-010**: Audio player MUST maintain playback state within a session (e.g., resume from same position after pause)
+- **FR-011**: System SHOULD persist playback position across sessions so users can return later and resume from where they left off
+- **FR-012**: System SHOULD display a visual waveform representation of the audio
+- **FR-013**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
+- **FR-014**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
+- **FR-015**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
+- **FR-016**: Track highlighting SHOULD respond to manual seeking by immediately updating to the correct track
+- **FR-017**: System MUST handle audio loading errors gracefully with user-friendly error messages
 
 ### Key Entities
 
@@ -101,6 +125,9 @@ A visitor listening to a mix that has a tracklist can see which track is current
 - **SC-002**: Audio player controls respond to user interactions (play, pause, seek) within 100 milliseconds
 - **SC-003**: Each mix has a permanent, bookmarkable URL that remains accessible over time
 - **SC-004**: The audio player component can be reused for any mix without code modifications (only data/content changes required)
-- **SC-005**: Waveform visualization (if implemented) renders accurately across desktop and mobile viewports
-- **SC-006**: Track highlighting (if implemented) updates within 500 milliseconds of playback position change
-- **SC-007**: System gracefully handles audio loading failures with clear feedback to the user rather than silent failure
+- **SC-005**: Mix pages render correctly and remain fully functional on mobile devices with screens as small as 320px wide
+- **SC-006**: Touch controls on mobile devices (tap, swipe, pinch) work as intuitively as mouse interactions on desktop
+- **SC-007**: Waveform visualization (if implemented) renders accurately across desktop and mobile viewports
+- **SC-008**: Track highlighting (if implemented) updates within 500 milliseconds of playback position change
+- **SC-009**: Playback position persistence (if implemented) saves and restores position with 95% reliability across browser sessions
+- **SC-010**: System gracefully handles audio loading failures with clear feedback to the user rather than silent failure
