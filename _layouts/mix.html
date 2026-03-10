@@ -6,10 +6,9 @@ layout: single
 {% include audio-player.html %}
 
 <!-- Mix Content (description, tracklist, etc.) -->
+<div id="mix-content">
 {{ content }}
-
-<!-- Tracklist (if present in content) -->
-{% include tracklist.html %}
+</div>
 
 <!-- Audio Player Initialization Script -->
 <script src="{{ '/assets/js/audio-player.js' | relative_url }}"></script>
@@ -89,5 +88,68 @@ layout: single
     console.error('Failed to initialize audio player:', error);
     showError('Failed to initialize the audio player. The audio file may be unavailable or in an unsupported format.');
   }
+
+  // Format tracklist
+  formatTracklist();
 })();
+
+/**
+ * Parse and format tracklist from content
+ */
+function formatTracklist() {
+  const content = document.getElementById('mix-content');
+  if (!content) return;
+
+  // Find all paragraphs in the content
+  const paragraphs = content.querySelectorAll('p');
+
+  paragraphs.forEach(p => {
+    const text = p.textContent;
+
+    // Check if this paragraph contains tracklist entries
+    // Pattern: [HH:MM:SS] Artist - Title
+    const trackPattern = /\[(\d{2}:\d{2}:\d{2})\]\s+(.+?)\s+-\s+(.+)/;
+
+    if (trackPattern.test(text)) {
+      // This paragraph contains tracklist entries - split into lines
+      const lines = text.split(/\[(?=\d{2}:\d{2}:\d{2}\])/);
+
+      // Create a proper list
+      const ul = document.createElement('ul');
+      ul.className = 'tracklist-items';
+
+      lines.forEach(line => {
+        if (!line.trim()) return;
+
+        // Add opening bracket back if it was split
+        const fullLine = line.startsWith('[') ? line : '[' + line;
+        const match = fullLine.match(/\[(\d{2}:\d{2}:\d{2})\]\s+(.+)/);
+
+        if (match) {
+          const li = document.createElement('li');
+          li.setAttribute('data-timestamp', match[1]);
+
+          const timestampSpan = document.createElement('span');
+          timestampSpan.className = 'timestamp';
+          timestampSpan.textContent = `[${match[1]}]`;
+
+          const artistTitleSpan = document.createElement('span');
+          artistTitleSpan.className = 'artist-title';
+          artistTitleSpan.textContent = match[2].trim();
+
+          li.appendChild(timestampSpan);
+          li.appendChild(document.createTextNode(' '));
+          li.appendChild(artistTitleSpan);
+
+          ul.appendChild(li);
+        }
+      });
+
+      // Replace the paragraph with the formatted list
+      if (ul.children.length > 0) {
+        p.replaceWith(ul);
+      }
+    }
+  });
+}
 </script>
