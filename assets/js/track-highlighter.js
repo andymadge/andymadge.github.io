@@ -131,13 +131,6 @@ class TrackHighlighter {
       if (newTrackIndex >= 0 && this.tracks[newTrackIndex]) {
         this.tracks[newTrackIndex].element.classList.add('current-track');
 
-        // Scroll track into view (smooth scroll)
-        this.tracks[newTrackIndex].element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'nearest'
-        });
-
         console.log(`Now playing: ${this.tracks[newTrackIndex].text}`);
       }
 
