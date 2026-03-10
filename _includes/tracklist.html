@@ -1,6 +1,6 @@
 {% if page.tracklist and page.tracklist.size > 0 %}
 <div class="tracklist">
-  <h4>Tracklist</h4>
+  <h4>Tracklist <small>(click to jump to a track)</small></h4>
   <ul class="tracklist-items">
     {% for track in page.tracklist %}
       {% assign track_cleaned = track | strip %}
