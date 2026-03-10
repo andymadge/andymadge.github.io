@@ -68,6 +68,8 @@ It's extremely lightweight (~2kB, no dependencies), fast, and transparent - you 
 
 Husky has no hook registry so you need to write each hook manually. There is also no environment isolation - hooks run against whatever is available in `node_modules` or on `PATH`. Framework and tool version drift between developers is your problem to manage.
 
+See [https://github.com/andymadge/husky-node](https://github.com/andymadge/husky-node) for a sample repo which uses Husky. It includes a very basic Node application and 3 hooks - `pre-commit`, `commit-msg` and `post-commit`. The scripts are described in the README along with instructions for setting up in a different repo.
+
 `NOTE:` Husky is only practical if the repo already has a `package.json`. Adding one purely to get git hooks contaminates a non-JS project with npm infrastructure - `node_modules` in a Java repo, `package.json` for CI systems to trip over, and confusion for anyone new to the codebase. The fact that full-stack developers will have Node installed doesn't change this.
 
 ## pre-commit
