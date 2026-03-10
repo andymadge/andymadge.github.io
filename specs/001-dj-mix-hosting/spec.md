@@ -22,6 +22,9 @@
 - Q: How should the add-mix script handle URL inputs vs local file inputs? → A: Auto-detect URLs and populate `audio_url` automatically; support `--audio-url` flag for overriding the hosting URL independently of the source file
 - Q: How should the system handle Dropbox URLs that are missing the `dl=1` parameter or have `dl=0`? → A: Automatically convert to `dl=1` to ensure direct file access for streaming
 - Q: What format and tool should be used for pre-generated waveform data files? → A: BBC `audiowaveform` binary tool generating `.dat` files with `-b 8 -z 256` flags (8-bit samples, 256-sample zoom), stored at `assets/djmixes/{mix-slug}/waveform.dat`, referenced in front matter via `waveform_file: "mix-slug/waveform.dat"`
+- Q: How long should playback positions be stored in localStorage? → A: Store indefinitely, cap at last 20 mixes using LRU eviction to prevent unbounded storage growth
+- Q: How is the URL slug for each mix derived? → A: Auto-generated from title by `add-mix.sh` (lowercase, spaces→hyphens, strip special chars); user may rename file before first publish
+- Q: What UI is shown while audio is loading or buffering? → A: Loading spinner on the play button, controls disabled until audio is ready to play
 
 ## User Scenarios & Testing
 
@@ -101,12 +104,12 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - What happens if a mix has no tracklist data provided? (The audio player should still function fully, just without the tracklist display)
 - How does the waveform display render on mobile devices with limited screen width?
 - What happens if track timestamps overlap or are missing for some tracks?
-- How does the player handle slow network connections or buffering?
+- During slow network connections or mid-stream buffering stalls, the play button shows a loading spinner and transport controls are disabled until playback can resume.
 - Can a tracklist be added or updated after a mix page is initially published?
 - What happens if client-side waveform generation fails (browser incompatibility, large file size, etc.)? System should fall back to pre-generated waveform or display without waveform.
 - How does touch interaction work on mobile devices (tap to play/pause, swipe for seek, pinch for waveform)?
 - What happens if a user clears their browser data (localStorage) and loses their saved playback positions? System should gracefully handle missing data and start from beginning.
-- How long should playback positions be stored in localStorage (indefinitely, or expire after a certain time)?
+- Playback positions are stored in localStorage indefinitely, with LRU eviction capping storage at the last 20 mixes to prevent unbounded growth.
 - What happens if localStorage is disabled or unavailable? System should function normally without position persistence.
 - How does the system handle mobile browsers that may restrict autoplay or background audio?
 - What happens if a Dropbox URL is provided without `dl=1` or with `dl=0`? (System should automatically fix the URL)
@@ -119,14 +122,14 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-002**: System MUST generate a unique, static URL for each individual DJ mix (e.g., `/music/mix-name/`)
 - **FR-003**: Each mix MUST be stored as an individual content file with YAML front matter containing all metadata (title, audio URL, cover art URL, tracklist, etc.)
 - **FR-004**: Each mix page MUST display cover art prominently
-- **FR-005**: Each mix page MUST include an audio player with standard transport controls (play, pause, seek/scrub, volume control)
+- **FR-005**: Each mix page MUST include an audio player with standard transport controls (play, pause, seek/scrub, volume control). While audio is loading or buffering, the play button MUST display a loading spinner and all transport controls MUST be disabled until the audio is ready to play.
 - **FR-006**: System MUST support streaming audio files in MP3 and AAC/M4A formats hosted on external services (Dropbox and potentially others)
 - **FR-007**: Each mix page SHOULD display a tracklist showing all tracks in the mix when tracklist data is available
 - **FR-008**: When provided, tracklist data MUST follow the format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata in brackets
 - **FR-009**: System MUST provide a reusable audio player component that can be used for any mix
 - **FR-010**: System MUST be fully functional on mobile devices (responsive design, touch controls)
 - **FR-011**: Audio player MUST maintain playback state within a session (e.g., resume from same position after pause)
-- **FR-012**: System SHOULD persist playback position across sessions using browser localStorage so users can return later and resume from where they left off (per-browser/device)
+- **FR-012**: System SHOULD persist playback position across sessions using browser localStorage so users can return later and resume from where they left off (per-browser/device). Positions are stored indefinitely; when more than 20 mixes have saved positions, the least-recently-used entry is evicted.
 - **FR-013**: System SHOULD display a visual waveform representation of the audio using pre-generated waveform data. Waveform data is stored as a binary `.dat` file produced by BBC's `audiowaveform` tool (`-b 8 -z 256`), located at `assets/djmixes/{mix-slug}/waveform.dat` and referenced in front matter via the `waveform_file` field. If waveform data is unavailable, the waveform display section is collapsed entirely.
 - **FR-014**: Waveform SHOULD be interactive, allowing users to click to jump to specific timestamps
 - **FR-015**: Mix pages MUST function fully (audio playback, controls, cover art) even when no tracklist data is provided
@@ -137,7 +140,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 
 #### Authoring Tooling
 
-- **FR-020**: System MUST provide an `add-mix.sh` script that creates a new mix content file with correct YAML front matter from an audio file input, including automatic duration extraction and waveform generation
+- **FR-020**: System MUST provide an `add-mix.sh` script that creates a new mix content file with correct YAML front matter from an audio file input, including automatic duration extraction and waveform generation. The output filename (and thus the mix URL slug) is auto-generated from the mix title: lowercased, spaces replaced with hyphens, special characters stripped (Jekyll-style). The user may rename the file before first publish to customise the slug, but MUST NOT rename it after publishing as the URL is permanent.
 - **FR-021**: The `add-mix.sh` script MUST support a `--print-only` flag that outputs the mix file content to stdout without creating any files, enabling advanced workflows where users manually assemble mix files with custom metadata
 - **FR-022**: The `add-mix.sh` script MUST auto-detect when the audio input is a URL (matching `^https?://`) and automatically populate the `audio_url` front matter field with that URL. In `--print-only` mode, URL inputs MUST NOT trigger a download
 - **FR-023**: The `add-mix.sh` script MUST support an `--audio-url` flag that overrides the `audio_url` front matter field, allowing users to specify a different hosting URL from the source audio file used for waveform generation
@@ -165,7 +168,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 
 ### Key Entities
 
-- **DJ Mix**: Represents a complete mix recording stored as an individual content file with YAML front matter containing metadata (title, cover art image URL, external audio file URL, publication date, optional description, optional tracklist, and optional `waveform_file` path pointing to a pre-generated `.dat` file at `assets/djmixes/{mix-slug}/waveform.dat`). Each mix file generates its own page with a static URL.
+- **DJ Mix**: Represents a complete mix recording stored as an individual content file with YAML front matter containing metadata (title, cover art image URL, external audio file URL, publication date, optional description, optional tracklist, and optional `waveform_file` path pointing to a pre-generated `.dat` file at `assets/djmixes/{mix-slug}/waveform.dat`). The content filename determines the static URL slug (e.g., `my-mix-title.md` → `/music/my-mix-title/`). Slugs are auto-generated from the title by `add-mix.sh` (lowercase, spaces→hyphens, special chars stripped) and MUST NOT be changed after first publish. Each mix file generates its own page with a static URL.
 - **Track**: Represents an individual track within a mix, including artist name, track title, and timestamp position. Format: `[HH:MM:SS] Artist Name - Track Title` with optional metadata (e.g., `[00:08:41] Invisible Inc - Stars [Ambient Version]`). Tracks are optional and can be added after initial publication.
 - **Mix Page**: A dedicated web page for each mix that combines the audio player component, cover art, and tracklist display (when available)
 - **Mix Index**: An automatically generated listing page at `/music/` that aggregates all mix content files and displays them as a browsable list
