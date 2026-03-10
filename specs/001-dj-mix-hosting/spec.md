@@ -20,6 +20,7 @@
 - Q: Should the optional mix image (e.g. Ableton screenshot) open in a lightbox or navigate directly to the image? → A: Navigate directly to the image in a new tab (no lightbox)
 - Q: Should authoring scripts support a print-only mode for advanced workflows? → A: Yes, `--print-only` flag outputs content to stdout without creating files, enabling manual assembly of mix files with custom metadata
 - Q: How should the add-mix script handle URL inputs vs local file inputs? → A: Auto-detect URLs and populate `audio_url` automatically; support `--audio-url` flag for overriding the hosting URL independently of the source file
+- Q: How should the system handle Dropbox URLs that are missing the `dl=1` parameter or have `dl=0`? → A: Automatically convert to `dl=1` to ensure direct file access for streaming
 
 ## User Scenarios & Testing
 
@@ -107,6 +108,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - How long should playback positions be stored in localStorage (indefinitely, or expire after a certain time)?
 - What happens if localStorage is disabled or unavailable? System should function normally without position persistence.
 - How does the system handle mobile browsers that may restrict autoplay or background audio?
+- What happens if a Dropbox URL is provided without `dl=1` or with `dl=0`? (System should automatically fix the URL)
 
 ## Requirements
 
@@ -140,6 +142,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-023**: The `add-mix.sh` script MUST support an `--audio-url` flag that overrides the `audio_url` front matter field, allowing users to specify a different hosting URL from the source audio file used for waveform generation
 - **FR-024**: System MUST provide a `generate-waveforms.sh` script that generates waveform data files for mixes, supporting local files (`--local`), remote Dropbox downloads (`--remote`), and arbitrary URL downloads (`--url`)
 - **FR-025**: All shell scripts MUST use BSD-compatible commands and syntax to ensure correct operation on macOS without requiring GNU coreutils
+- **FR-026**: When a Dropbox URL is provided as audio input or via `--audio-url`, the `add-mix.sh` script MUST automatically ensure the URL includes the `dl=1` query parameter for direct file access. If `dl=0` is present, it MUST be replaced with `dl=1`. If the `dl` parameter is missing entirely, it MUST be appended. Non-Dropbox URLs MUST be passed through unchanged.
 
 ### Out of Scope (Future Enhancements)
 
