@@ -115,9 +115,11 @@ layout: single
     });
 
     // Click on waveform to seek and play from that position
-    player.wavesurfer.on('interaction', () => {
-      player.play();
-    });
+    if (player.wavesurfer) {
+      player.wavesurfer.on('interaction', () => {
+        player.play();
+      });
+    }
 
     // Soundcloud-style: Hover indicator that follows mouse
     waveformEl.addEventListener('pointermove', (e) => {
@@ -141,9 +143,11 @@ layout: single
     });
 
     // Set total duration when ready (Soundcloud-style)
-    player.wavesurfer.on('decode', (duration) => {
-      durationEl.textContent = formatTime(duration);
-    });
+    if (player.wavesurfer) {
+      player.wavesurfer.on('decode', (duration) => {
+        durationEl.textContent = formatTime(duration);
+      });
+    }
 
     // Fallback: Set duration from player if decode event doesn't fire
     if (player.getDuration() > 0) {

@@ -92,16 +92,13 @@ class AudioPlayer {
       progressGradient.addColorStop((canvas.height * 0.63 + 3) / canvas.height, '#a5d6a7'); // Bottom color - light green
       progressGradient.addColorStop(1, '#a5d6a7'); // Bottom color
 
-      // Initialize WaveSurfer with MediaElement backend
+      // Initialize WaveSurfer (v7 API - no 'backend' option, streaming via peaks+duration)
       const wavesurferConfig = {
         container: `#${config.containerId}`,
         waveColor: gradient,
         progressColor: progressGradient,
         barWidth: 2,
         height: player.config.height,
-        responsive: player.config.responsive,
-        backend: 'MediaElement', // Use MediaElement for streaming
-        mediaControls: false,
         interact: true,
         cursorWidth: 1,
         cursorColor: '#333',
@@ -110,18 +107,17 @@ class AudioPlayer {
         hideScrollbar: true
       };
 
-      // Add peaks data if available, otherwise WaveSurfer.js will generate waveform client-side
-      if (peaks) {
-        wavesurferConfig.peaks = [peaks];
-        wavesurferConfig.duration = config.duration;
-      }
-      // Note: If peaks is null, WaveSurfer.js automatically performs client-side waveform
-      // generation from the audio file (per FR-013 fallback strategy)
-
       player.wavesurfer = WaveSurfer.create(wavesurferConfig);
 
-      // Load audio
-      player.wavesurfer.load(config.audioUrl);
+      // Load audio with peaks if available.
+      // In WaveSurfer v7, passing peaks+duration to load() enables streaming mode
+      // (audio element backend) rather than full WebAudio decoding of the entire file.
+      // Without peaks, v7 downloads and fully decodes the file — unusable for large mixes.
+      if (peaks) {
+        player.wavesurfer.load(config.audioUrl, [peaks], config.duration);
+      } else {
+        player.wavesurfer.load(config.audioUrl);
+      }
 
       // Set up event forwarding
       player._setupEvents();
