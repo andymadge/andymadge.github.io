@@ -151,7 +151,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 
 #### Mix Index Page UI
 
-- **FR-028**: The mix index grid MUST use a dynamic column width so that more mix cards fit on wider screens. The minimum card width SHOULD be reduced to allow more cards per row (target: ~180px minimum).
+- **FR-028**: The mix index grid MUST use a dynamic column width so that more mix cards fit on wider screens. The `/music/` index page MUST use `classes: wide` layout (full-width content area) to maximise grid space. The minimum card width is 280px.
 - **FR-029**: Mix cards MUST NOT display underlines on any text (title, date, genre, or excerpt). All text within `.mix-card` elements MUST have `text-decoration: none`.
 - **FR-030**: The mix index MUST NOT display any emoji icons alongside metadata fields (date, genre, duration). Metadata labels MUST be plain text only.
 - **FR-031**: Mix card dates MUST be displayed in `YYYY/MM/DD` format with zero-padded month and day (e.g. `2026/02/21`).

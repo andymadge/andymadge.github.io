@@ -22,15 +22,11 @@ layout: archive
         <h3>{{ mix.title }}</h3>
 
         {% if mix.date %}
-          <div class="mix-meta">📅 {{ mix.date | date: "%B %d, %Y" }}</div>
+          <div class="mix-meta">{{ mix.date | date: "%Y/%m/%d" }}</div>
         {% endif %}
 
         {% if mix.genre %}
-          <div class="mix-meta">🎵 {{ mix.genre }}</div>
-        {% endif %}
-
-        {% if mix.duration_display %}
-          <div class="mix-meta">⏱️ {{ mix.duration_display }}</div>
+          <div class="mix-meta">{{ mix.genre }}</div>
         {% endif %}
 
         {% if mix.excerpt %}

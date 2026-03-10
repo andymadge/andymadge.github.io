@@ -12,9 +12,9 @@ const PlaybackPersistence = {
   STORAGE_KEY: 'andymadge_mixPositions',
 
   /**
-   * Expiration time in milliseconds (90 days)
+   * Maximum number of mix positions to store (LRU eviction when exceeded)
    */
-  EXPIRATION_MS: 90 * 24 * 60 * 60 * 1000,
+  MAX_POSITIONS: 20,
 
   /**
    * Minimum position to save (don't save if < 5 seconds)
@@ -61,9 +61,6 @@ const PlaybackPersistence = {
         console.warn('Invalid position data structure, resetting');
         return { positions: {}, version: 1 };
       }
-
-      // Clean up expired positions
-      this._cleanExpired(parsed);
 
       return parsed;
     } catch (e) {
@@ -117,6 +114,14 @@ const PlaybackPersistence = {
 
     try {
       const data = this._loadPositions();
+
+      // LRU eviction: if at cap and this is a new entry, remove the least-recently-used
+      if (!data.positions[mixId] && Object.keys(data.positions).length >= this.MAX_POSITIONS) {
+        const lruId = Object.entries(data.positions)
+          .sort((a, b) => a[1].lastPlayed - b[1].lastPlayed)[0][0];
+        delete data.positions[lruId];
+      }
+
       data.positions[mixId] = {
         position: position,
         duration: duration,
@@ -144,12 +149,6 @@ const PlaybackPersistence = {
     const mixData = data.positions[mixId];
 
     if (!mixData) {
-      return null;
-    }
-
-    // Check expiration
-    if (this.isExpired(mixData.lastPlayed)) {
-      this.removePosition(mixId); // Lazy cleanup
       return null;
     }
 
@@ -200,37 +199,6 @@ const PlaybackPersistence = {
    */
   getAllPositions() {
     return this._loadPositions();
-  },
-
-  /**
-   * Check if a position is expired
-   * @param {number} lastPlayed - Unix timestamp (ms)
-   * @returns {boolean} - True if expired (> 90 days old)
-   */
-  isExpired(lastPlayed) {
-    return (Date.now() - lastPlayed) > this.EXPIRATION_MS;
-  },
-
-  /**
-   * Clean up expired positions
-   * @param {Object} data - Position data structure
-   * @private
-   */
-  _cleanExpired(data) {
-    let cleaned = false;
-
-    for (const [mixId, mixData] of Object.entries(data.positions)) {
-      if (this.isExpired(mixData.lastPlayed)) {
-        delete data.positions[mixId];
-        cleaned = true;
-      }
-    }
-
-    // Save cleaned data
-    if (cleaned && this.isAvailable()) {
-      this._savePositions(data);
-      console.log('Cleaned up expired positions');
-    }
   },
 
   /**

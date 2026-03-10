@@ -103,16 +103,17 @@ No violations requiring justification beyond the WaveSurfer.js CDN pinning note 
 
 ## Outstanding Items at Plan Time
 
-The following requirements are identified as not yet fully implemented and will drive task generation:
+All items resolved as of 2026-02-21. See `tasks.md` for implementation details.
 
-| Requirement | Description | Gap |
-|-------------|-------------|-----|
-| FR-005 (clarified) | Loading spinner on play button; controls disabled until ready | Loading state UI not confirmed in audio-player.js |
-| FR-012 (clarified) | Indefinite localStorage storage (no TTL) | `playback-persistence.js` has 90-day TTL — contradicts spec |
-| FR-028 | Mix grid min card width ~180px | Current min-width is 280px in `.mix-grid` |
-| FR-029 | No text underlines on `.mix-card` elements | Not confirmed in music-player.scss |
-| FR-030 | No emoji in metadata labels | Not confirmed in mix-index.html template |
-| FR-031 | Date displayed as `YYYY/MM/DD` | Not confirmed in mix-index.html |
-| FR-032 | Duration omitted from mix cards | mix-index.html shows duration field |
-| FR-033 | `mix_image_caption` inherits body font size | Not confirmed in music-player.scss |
-| Dependency | WaveSurfer.js CDN pinned at `@7` (minor float) | Pin to exact version in wavesurfer-loader.html |
+| Requirement | Resolution |
+|-------------|------------|
+| FR-005 (clarified) | Loading spinner + disabled controls added in `_layouts/mix.html`; buffering stalls also handled via `waiting`/`canplay` events |
+| FR-012 (clarified) | 90-day TTL removed from `playback-persistence.js`; replaced with LRU cap of 20 entries (`MAX_POSITIONS`) |
+| FR-028 | `/music/` index page uses `classes: wide` (full-width layout) for more grid space; card min-width remains 280px |
+| FR-029 | `text-decoration: none` added to `.mix-card` and descendant text elements in `music-player.scss` |
+| FR-030 | Emoji removed from metadata labels in `mix-index.html` |
+| FR-031 | Date format updated to `YYYY/MM/DD` in `mix-index.html` |
+| FR-032 | Duration field removed from mix card display in `mix-index.html` |
+| FR-033 | `.mix-image-caption` confirmed to have no `font-size` override — inherits body font |
+| Dependency | WaveSurfer.js CDN pinned to `7.12.1` in `wavesurfer-loader.html` |
+| Bug | Playback position restore: time display now updated immediately after `seekTo()` so it matches the restored position before playback begins |

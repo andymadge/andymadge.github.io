@@ -93,6 +93,16 @@
       transform: scale(0.98);
     }
 
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+
+      &:hover {
+        background: #1976d2;
+        transform: none;
+      }
+    }
+
     span {
       line-height: 1;
     }
@@ -250,10 +260,17 @@
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  h3,
+  .mix-meta,
+  .mix-excerpt {
+    text-decoration: none;
   }
 
   img {
