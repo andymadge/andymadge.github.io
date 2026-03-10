@@ -15,6 +15,12 @@
 - Q: What audio file format(s) should the player support? → A: MP3 and AAC/M4A (universal browser support with quality options)
 - Q: How should mixes be ordered on the `/music/` index page? → A: Reverse chronological by date (newest first) with future support for user-selectable sort order
 
+### Session 2026-02-21
+
+- Q: Should the optional mix image (e.g. Ableton screenshot) open in a lightbox or navigate directly to the image? → A: Navigate directly to the image in a new tab (no lightbox)
+- Q: Should authoring scripts support a print-only mode for advanced workflows? → A: Yes, `--print-only` flag outputs content to stdout without creating files, enabling manual assembly of mix files with custom metadata
+- Q: How should the add-mix script handle URL inputs vs local file inputs? → A: Auto-detect URLs and populate `audio_url` automatically; support `--audio-url` flag for overriding the hosting URL independently of the source file
+
 ## User Scenarios & Testing
 
 ### User Story 1 - Listen to a DJ Mix (Priority: P1)
@@ -124,6 +130,16 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-016**: System SHOULD support automatic track highlighting that updates as playback progresses when tracklist timestamp data is available
 - **FR-017**: Track highlighting SHOULD respond to manual seeking by immediately updating to the correct track
 - **FR-018**: System MUST handle audio loading errors gracefully with user-friendly error messages
+- **FR-019**: When a mix includes an optional image (e.g. Ableton screenshot), clicking it MUST open the full-size image directly in a new browser tab (standard navigation), NOT in a lightbox overlay. The theme's default lightbox behavior MUST be bypassed for mix images.
+
+#### Authoring Tooling
+
+- **FR-020**: System MUST provide an `add-mix.sh` script that creates a new mix content file with correct YAML front matter from an audio file input, including automatic duration extraction and waveform generation
+- **FR-021**: The `add-mix.sh` script MUST support a `--print-only` flag that outputs the mix file content to stdout without creating any files, enabling advanced workflows where users manually assemble mix files with custom metadata
+- **FR-022**: The `add-mix.sh` script MUST auto-detect when the audio input is a URL (matching `^https?://`) and automatically populate the `audio_url` front matter field with that URL. In `--print-only` mode, URL inputs MUST NOT trigger a download
+- **FR-023**: The `add-mix.sh` script MUST support an `--audio-url` flag that overrides the `audio_url` front matter field, allowing users to specify a different hosting URL from the source audio file used for waveform generation
+- **FR-024**: System MUST provide a `generate-waveforms.sh` script that generates waveform data files for mixes, supporting local files (`--local`), remote Dropbox downloads (`--remote`), and arbitrary URL downloads (`--url`)
+- **FR-025**: All shell scripts MUST use BSD-compatible commands and syntax to ensure correct operation on macOS without requiring GNU coreutils
 
 ### Out of Scope (Future Enhancements)
 
