@@ -28,10 +28,6 @@ tracklist:
   - "[01:08:49] Underworld - Best Mamgu Ever"
   - "[01:17:03] Jon Hopkins - Monsters Theme"
   - "[01:21:07] Underworld - Louisiana"
-tags:
-  - deep house
-  - example
-  - test
 classes: wide
 share: true
 ---

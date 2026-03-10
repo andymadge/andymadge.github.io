@@ -132,9 +132,6 @@ waveform_file: "$WAVEFORM_FILE"
 ${DURATION_FORMATTED:+duration: \"$DURATION_FORMATTED\"}
 header:
   teaser: /assets/images/mixes/teasers/${MIX_SLUG}.jpg  # Optional
-tags:
-  - tag1
-  - tag2
 classes: wide
 share: true
 ---
@@ -163,7 +160,7 @@ echo "   • Create teaser image (400x400px)"
 echo "   • Save to: assets/images/mixes/teasers/${MIX_SLUG}.jpg"
 echo ""
 echo -e "${YELLOW}3. Edit mix file:${NC}"
-echo "   • Add description, tracklist, tags"
+echo "   • Add description and tracklist"
 echo "   • Update excerpt field"
 echo "   • Edit: $MIX_FILE"
 echo ""
