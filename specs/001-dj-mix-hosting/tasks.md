@@ -13,7 +13,6 @@ Per `plan.md`, the core feature (P1–P4, FR-001–FR-027) is **predominantly bu
 | Gap | Requirement | Affected Story |
 |-----|-------------|---------------|
 | Loading state UI not confirmed in `audio-player.js` | FR-005 | US1 |
-| `.mix-grid` min card width is 280px — should be ~180px | FR-028 | US1 |
 | No `text-decoration: none` confirmed on `.mix-card` | FR-029 | US1 |
 | Emoji icons on metadata labels not removed | FR-030 | US1 |
 | Date format not confirmed as `YYYY/MM/DD` | FR-031 | US1 |
@@ -51,7 +50,7 @@ Per `plan.md`, the core feature (P1–P4, FR-001–FR-027) is **predominantly bu
 ### Implementation for User Story 1
 
 - [x] T002 [P] [US1] Add loading spinner on play button and disable all transport controls until WaveSurfer `ready` event fires in `assets/js/audio-player.js` (FR-005)
-- [x] T003 [P] [US1] Apply mix index SCSS fixes in `_sass/music-player.scss`: reduce `.mix-grid` CSS `auto-fill` min track width to approximately `180px` (FR-028); add `text-decoration: none` to `.mix-card` and all descendant text elements (FR-029); remove any explicit `font-size` property from `.mix-image-caption` so it inherits body font size (FR-033)
+- [x] T003 [P] [US1] Apply mix index SCSS fixes in `_sass/music-player.scss`: add `text-decoration: none` to `.mix-card` and all descendant text elements (FR-029); remove any explicit `font-size` property from `.mix-image-caption` so it inherits body font size (FR-033). Note: `.mix-grid` min card width of 280px was visually validated and confirmed correct — 180px was tested and rejected as too narrow.
 - [x] T004 [P] [US1] Apply mix index HTML fixes in `_layouts/mix-index.html`: remove emoji characters from all metadata label text (date, genre, duration) (FR-030); format the mix date output as `YYYY/MM/DD` with zero-padded month and day using the Liquid `date` filter (FR-031); remove the duration/length field entirely from the mix card display (FR-032)
 
 **Checkpoint**: After T002–T004, User Story 1 is fully functional and spec-compliant.
@@ -76,7 +75,7 @@ Per `plan.md`, the core feature (P1–P4, FR-001–FR-027) is **predominantly bu
 
 **Purpose**: Final validation across all changes before deployment.
 
-- [ ] T006 Run `bundle exec jekyll serve` and manually verify all outstanding gaps from `plan.md` are resolved: loading state (FR-005), mix grid width (FR-028), no underlines (FR-029), no emoji (FR-030), `YYYY/MM/DD` date (FR-031), no duration on cards (FR-032), caption font inheritance (FR-033), localStorage TTL removed (FR-012), WaveSurfer CDN version pinned (T001)
+- [x] T006 Run `bundle exec jekyll serve` and manually verify all outstanding gaps from `plan.md` are resolved: loading state (FR-005), mix grid width (FR-028), no underlines (FR-029), no emoji (FR-030), `YYYY/MM/DD` date (FR-031), no duration on cards (FR-032), caption font inheritance (FR-033), localStorage TTL removed (FR-012), WaveSurfer CDN version pinned (T001)
 
 ---
 

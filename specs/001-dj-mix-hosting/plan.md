@@ -109,7 +109,7 @@ All items resolved as of 2026-02-21. See `tasks.md` for implementation details.
 |-------------|------------|
 | FR-005 (clarified) | Loading spinner + disabled controls added in `_layouts/mix.html`; buffering stalls also handled via `waiting`/`canplay` events |
 | FR-012 (clarified) | 90-day TTL removed from `playback-persistence.js`; replaced with LRU cap of 20 entries (`MAX_POSITIONS`) |
-| FR-028 | `/music/` index page uses `classes: wide` (full-width layout) for more grid space; card min-width remains 280px |
+| FR-028 | `/music/` index page uses `classes: wide` (full-width layout) for more grid space; card min-width confirmed at 280px (visually validated — 180px tested and rejected as too narrow) |
 | FR-029 | `text-decoration: none` added to `.mix-card` and descendant text elements in `music-player.scss` |
 | FR-030 | Emoji removed from metadata labels in `mix-index.html` |
 | FR-031 | Date format updated to `YYYY/MM/DD` in `mix-index.html` |
