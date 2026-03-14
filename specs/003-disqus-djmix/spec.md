@@ -37,6 +37,9 @@ A visitor views a DJ mix page and wants to leave a comment or read existing comm
 - **FR-003**: The Disqus shortname used MUST be the same as that used for blog posts (`andymadge`).
 - **FR-004**: Comments MUST only render in the production environment (consistent with blog post behaviour).
 - **FR-005**: The Disqus thread identifier for each mix page MUST be unique and stable (based on the page URL).
+- **FR-006**: A "Comment on this mix" link MUST appear alongside the "Download mix" link on mix pages where comments are enabled.
+- **FR-007**: Clicking "Comment on this mix" MUST scroll the page to the Disqus comment section.
+- **FR-008**: The "Comment on this mix" link MUST NOT appear on mix pages where `comments: false` is set.
 
 ## Success Criteria *(mandatory)*
 
@@ -44,8 +47,9 @@ A visitor views a DJ mix page and wants to leave a comment or read existing comm
 
 - **SC-001**: A Disqus comment thread appears at the bottom of every DJ mix page when viewed in production.
 - **SC-002**: No Disqus thread appears on mix pages viewed via the local development server.
-- **SC-003**: A mix with `comments: false` in its front matter shows no comment thread.
+- **SC-003**: A mix with `comments: false` in its front matter shows no comment thread and no "Comment on this mix" link.
 - **SC-004**: The same Disqus account (shortname) is used across both blog posts and mix pages — no new account or configuration required.
+- **SC-005**: Clicking "Comment on this mix" scrolls the visitor directly to the comment thread without a page reload.
 
 ## Assumptions
 
