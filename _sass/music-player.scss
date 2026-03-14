@@ -383,6 +383,25 @@
   }
 }
 
+// Mix Download Link
+.mix-download {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.85rem;
+
+  a {
+    color: #1976d2;
+    text-decoration: none;
+
+    &::before {
+      content: "⬇ ";
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 // Error Message Display
 .audio-error {
   padding: 1rem;

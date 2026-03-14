@@ -1,0 +1,6 @@
+{% assign download_url = page.audio_download_url | default: page.audio_url %}
+{% if download_url %}
+<p class="mix-download">
+  <a href="{{ download_url }}" download>Download mix</a>
+</p>
+{% endif %}
