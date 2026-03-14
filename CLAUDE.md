@@ -9,6 +9,7 @@ Auto-generated from all feature plans. Last updated: 2025-11-25
 - Jekyll collection files (`_djmixes/*.md` YAML front matter); browser localStorage (playback positions, LRU cap 20 mixes); filesystem binary assets (`assets/djmixes/{slug}/waveform.dat`) (001-dj-mix-hosting)
 - Ruby 3.x / Jekyll 3.9+ (GitHub Pages gem); Liquid templating; HTML5 + Jekyll (via `github-pages` gem) — no new dependencies (002-mix-download-link)
 - YAML front matter in `_djmixes/*.md` files (new optional field `audio_download_url`) (002-mix-download-link)
+- Ruby 3.x / Jekyll 3.9+ (via `github-pages` gem); Liquid templates; HTML + Minimal Mistakes theme v4.19.3 (remote); Disqus (already configured, shortname: `andymadge`) (003-disqus-djmix)
 
 - Ruby 2.x+ (Jekyll 3.9+), JavaScript (ES6+), HTML5, CSS3 (001-dj-mix-hosting)
 
@@ -54,9 +55,9 @@ docker compose run --rm jekyll bundle exec jekyll build
 Ruby (Jekyll 3.9+), JavaScript ES6+, Liquid, SCSS: follow standard conventions for each language
 
 ## Recent Changes
+- 003-disqus-djmix: Added Ruby 3.x / Jekyll 3.9+ (via `github-pages` gem); Liquid templates; HTML + Minimal Mistakes theme v4.19.3 (remote); Disqus (already configured, shortname: `andymadge`)
 - 002-mix-download-link: Added Ruby 3.x / Jekyll 3.9+ (GitHub Pages gem); Liquid templating; HTML5 + Jekyll (via `github-pages` gem) — no new dependencies
 - 001-dj-mix-hosting: Added Ruby (Jekyll 3.9+ via GitHub Pages gem), JavaScript ES6+ + WaveSurfer.js v7 (jsDelivr CDN `@7`), BBC `audiowaveform` CLI (waveform generation, dev-time only), `ffprobe` (duration extraction, dev-time optional)
-- 001-dj-mix-hosting: Added Ruby / Jekyll 3.9+ (GitHub Pages gem), JavaScript ES6+, Liquid templates, SCSS + WaveSurfer.js v7 (jsDelivr CDN `@7`), BBC `audiowaveform` CLI (waveform generation, dev-time only), `ffprobe` (duration extraction, optional dev-time), HTML5 Audio API (browser-native)
 
 
 <!-- MANUAL ADDITIONS START -->

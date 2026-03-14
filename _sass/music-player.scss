@@ -392,8 +392,20 @@
     color: #1976d2;
     text-decoration: none;
 
-    &::before {
+    &[download]::before {
       content: "⬇ ";
+      display: inline-block;
+      margin-right: 0.2em;
+    }
+
+    &[href="#disqus_thread"]::before {
+      content: "💬 ";
+      display: inline-block;
+      margin-right: 0.2em;
+    }
+
+    & + a {
+      margin-left: 1.5rem;
     }
 
     &:hover {
