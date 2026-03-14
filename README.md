@@ -118,8 +118,7 @@ Technical reference material covering:
 
 ### Prerequisites
 
-- Ruby (version compatible with GitHub Pages)
-- Bundler gem
+- Docker Desktop
 
 ### Setup
 
@@ -129,31 +128,43 @@ Technical reference material covering:
    cd andymadge.github.io
    ```
 
-2. Install dependencies:
+2. Start the development server:
    ```bash
-   bundle install --path vendor/bundle
+   docker compose up
    ```
 
-3. Run local server:
-   ```bash
-   bundle exec jekyll serve
-   ```
+3. View site at `http://localhost:4000`
 
-4. View site at `http://localhost:4000`
+LiveReload is enabled — the browser refreshes automatically when files change.
 
-### Building
+### First run
+
+On the first run, Docker will build the image and install all gems into a named volume. This takes a few minutes. Subsequent starts are fast.
 
 ```bash
-bundle exec jekyll build
+docker compose up --build  # rebuild image (e.g. after Gemfile changes)
+docker compose down        # stop and remove the container
+```
+
+### Draft posts
+
+If you want to preview draft posts, set the `JEKYLL_EXTRA_ARGS` environment variable to `--drafts` when running the container. This can be done either as a one-off command or by editing the `compose.yml` file for persistent configuration.
+
+```bash
+# one-off (no file changes needed)
+JEKYLL_EXTRA_ARGS="--drafts" docker compose up
+
+# persistent (edit compose.yml)
+JEKYLL_EXTRA_ARGS: "--drafts"
+```
+
+### Building (without serving)
+
+```bash
+docker compose run --rm jekyll bundle exec jekyll build
 ```
 
 Output will be in `_site/` directory (excluded from git).
-
-### Troubleshooting
-
-**Multi-Architecture Development (Intel & Apple Silicon)**
-
-If you work across both Intel and Apple Silicon Macs and encounter bundler or nokogiri errors, see [BUNDLE_SETUP.md](BUNDLE_SETUP.md) for detailed setup instructions for each architecture.
 
 ## Configuration
 
@@ -193,10 +204,9 @@ Main navigation menu defined in `_data/navigation.yml`:
 
 ### Testing Changes
 
-1. Test locally with `bundle exec jekyll serve`
-2. Verify build completes without errors or warnings
-3. Review all pages in browser at localhost:4000
-4. Commit and push to `master` for automatic deployment
+1. Run `docker compose up` and verify build completes without errors
+2. Review all modified pages in browser at `http://localhost:4000`
+3. Commit and push to `master` for automatic deployment
 
 ## Content Guidelines
 
@@ -232,3 +242,32 @@ For theme customization options, see the [Minimal Mistakes documentation](https:
 ## License
 
 Content and original code are the property of Andy Madge. The Minimal Mistakes theme is licensed under the MIT License.
+
+---
+
+## Appendix: Running without Docker
+
+> These commands require a local Ruby installation compatible with GitHub Pages. Docker is the recommended approach.
+
+**Prerequisites**: Ruby, Bundler (`gem install bundler`)
+
+```bash
+# Install dependencies
+bundle install
+
+# Run development server
+bundle exec jekyll serve
+
+# Run with drafts
+bundle exec jekyll serve --drafts
+
+# Build only
+bundle exec jekyll build
+```
+
+If you encounter native extension errors (e.g. nokogiri) when switching between Intel and Apple Silicon Macs, clean and reinstall:
+
+```bash
+rm -rf vendor/bundle .bundle
+bundle install
+```

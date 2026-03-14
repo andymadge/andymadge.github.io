@@ -1,0 +1,41 @@
+<!-- Audio Player Component -->
+<div class="audio-player">
+  <!-- Unified player block with controls and waveform -->
+  <div class="player-block">
+    <!-- Playback controls -->
+    <div class="audio-controls">
+      <button id="play-pause-btn" class="control-btn play-pause-btn" aria-label="Play/Pause">
+        <span id="play-icon">▶</span>
+        <span id="pause-icon" style="display:none;">❚❚</span>
+      </button>
+
+      <button id="restart-btn" class="control-btn" aria-label="Restart" title="Restart from beginning">
+        <span>|◄</span>
+      </button>
+
+      <button id="skip-back-btn" class="control-btn" aria-label="Skip back 10 seconds" title="Skip back 10s">
+        <span>◄<span class="skip-time">10</span></span>
+      </button>
+
+      <button id="skip-forward-btn" class="control-btn" aria-label="Skip forward 10 seconds" title="Skip forward 10s">
+        <span><span class="skip-time">10</span>►</span>
+      </button>
+    </div>
+
+    <!-- Waveform visualization container with overlaid time displays -->
+    <div id="waveform">
+      <div id="time">0:00</div>
+      <div id="duration">0:00</div>
+      <div id="hover"></div>
+    </div>
+  </div>
+
+  <!-- Error message container (hidden by default) -->
+  <div id="audio-error" class="audio-error" style="display:none;">
+    <strong>Audio Playback Error</strong>
+    <p id="error-message"></p>
+  </div>
+</div>
+
+<!-- Load WaveSurfer.js -->
+{% include wavesurfer-loader.html %}

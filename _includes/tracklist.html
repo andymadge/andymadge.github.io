@@ -1,0 +1,21 @@
+{% if page.tracklist and page.tracklist.size > 0 %}
+<div class="tracklist">
+  <h4>Tracklist <small>(click to jump to a track)</small></h4>
+  <ul class="tracklist-items">
+    {% for track in page.tracklist %}
+      {% assign track_cleaned = track | strip %}
+      {% comment %}Split on first '] ' (bracket followed by space){% endcomment %}
+      {% assign first_split = track_cleaned | split: '] ' | first %}
+      {% assign timestamp = first_split | remove: '[' | strip %}
+      {% assign rest_parts = track_cleaned | split: '] ' %}
+      {% assign artist_title = rest_parts | shift | join: '] ' | strip %}
+      {% if timestamp != '' and artist_title != '' %}
+        <li data-timestamp="{{ timestamp }}">
+          <span class="timestamp">[{{ timestamp }}]</span>
+          <span class="artist-title">{{ artist_title }}</span>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

@@ -1,0 +1,224 @@
+---
+layout: single
+---
+
+<!-- Mix Cover and Content (description) -->
+<div class="mix-content-wrapper">
+  {% include mix-cover.html %}
+  <div id="mix-content">
+  {{ content }}
+  </div>
+</div>
+
+<!-- Audio Player Integration -->
+{% include audio-player.html %}
+
+<!-- Tracklist (Liquid-generated) -->
+{% include tracklist.html %}
+
+<!-- Mix Image (optional) -->
+{% include mix-image.html %}
+
+<!-- Audio Player Initialization Script -->
+<script src="{{ '/assets/js/audio-player.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/track-highlighter.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/playback-persistence.js' | relative_url }}"></script>
+<script>
+(async function() {
+  // Grab control buttons early so we can manage loading state
+  const playPauseBtn = document.getElementById('play-pause-btn');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon = document.getElementById('pause-icon');
+  const restartBtn = document.getElementById('restart-btn');
+  const skipBackBtn = document.getElementById('skip-back-btn');
+  const skipForwardBtn = document.getElementById('skip-forward-btn');
+  const controlBtns = [playPauseBtn, restartBtn, skipBackBtn, skipForwardBtn];
+
+  function setLoadingState(loading) {
+    controlBtns.forEach(btn => { if (btn) btn.disabled = loading; });
+    if (playIcon) playIcon.textContent = loading ? '⟳' : '▶';
+  }
+
+  // Show loading state immediately — player is not ready yet
+  setLoadingState(true);
+
+  try {
+    // Get configuration from page front matter
+    const config = {
+      containerId: 'waveform',
+      audioUrl: '{{ page.audio_url }}',
+      waveformUrl: '{% if page.waveform_file %}/assets/djmixes/{{ page.waveform_file }}{% endif %}',
+      duration: {{ page.duration_seconds | default: 0 }},
+      mixId: '{{ page.slug | default: page.title | slugify }}',
+      mixTitle: '{{ page.title | escape }}'
+    };
+
+    // Initialize audio player (awaits WaveSurfer ready event)
+    const player = await AudioPlayer.init(config);
+
+    // Player is ready — enable controls
+    setLoadingState(false);
+
+    // Load saved playback position
+    const savedPosition = PlaybackPersistence.getPosition(config.mixId);
+    if (savedPosition && savedPosition.position > 5) {
+      console.log(`Restoring playback position: ${formatTime(savedPosition.position)}`);
+      player.seekTo(savedPosition.position);
+      // Update time display immediately so it matches the restored position
+      // (timeupdate only fires during playback, so without this it shows 0:00 until play is clicked)
+      const timeElRestore = document.getElementById('time');
+      if (timeElRestore) timeElRestore.textContent = formatTime(savedPosition.position);
+    }
+
+    // Set up position persistence
+    let saveThrottle = null;
+    const savePosition = () => {
+      const position = player.getCurrentTime();
+      const duration = player.getDuration();
+      PlaybackPersistence.savePosition(config.mixId, position, duration, config.mixTitle);
+    };
+
+    // Save position periodically during playback (throttled to every 10 seconds)
+    player.on('timeupdate', () => {
+      if (!saveThrottle) {
+        saveThrottle = setTimeout(() => {
+          savePosition();
+          saveThrottle = null;
+        }, 10000); // 10 seconds
+      }
+    });
+
+    // Save immediately on pause
+    player.on('pause', () => {
+      savePosition();
+    });
+
+    // Save on page unload
+    window.addEventListener('beforeunload', () => {
+      savePosition();
+    });
+
+    // Wire up UI controls
+    const timeEl = document.getElementById('time');
+    const durationEl = document.getElementById('duration');
+    const waveformEl = document.getElementById('waveform');
+    const hover = document.getElementById('hover');
+
+    // Play/Pause button
+    playPauseBtn.addEventListener('click', () => {
+      if (player.isPlaying()) {
+        player.pause();
+      } else {
+        player.play();
+      }
+    });
+
+    // Restart button - go to beginning and stop
+    restartBtn.addEventListener('click', () => {
+      player.seekTo(0);
+      player.pause();
+    });
+
+    // Skip back 10 seconds
+    skipBackBtn.addEventListener('click', () => {
+      const currentTime = player.getCurrentTime();
+      player.seekTo(Math.max(0, currentTime - 10));
+    });
+
+    // Skip forward 10 seconds
+    skipForwardBtn.addEventListener('click', () => {
+      const currentTime = player.getCurrentTime();
+      const duration = player.getDuration();
+      player.seekTo(Math.min(duration, currentTime + 10));
+    });
+
+    // Click on waveform to seek and play from that position
+    if (player.wavesurfer) {
+      player.wavesurfer.on('interaction', () => {
+        player.play();
+      });
+
+      // Show loading state during mid-stream buffering stalls
+      const mediaEl = player.wavesurfer.getMediaElement();
+      if (mediaEl) {
+        mediaEl.addEventListener('waiting', () => setLoadingState(true));
+        mediaEl.addEventListener('canplay', () => setLoadingState(false));
+      }
+    }
+
+    // Soundcloud-style: Hover indicator that follows mouse
+    waveformEl.addEventListener('pointermove', (e) => {
+      hover.style.width = `${e.offsetX}px`;
+    });
+
+    // Update play/pause button state
+    player.on('play', () => {
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'inline';
+    });
+
+    player.on('pause', () => {
+      playIcon.style.display = 'inline';
+      pauseIcon.style.display = 'none';
+    });
+
+    // Update time display (Soundcloud-style using formatTime)
+    player.on('timeupdate', (currentTime) => {
+      timeEl.textContent = formatTime(currentTime);
+    });
+
+    // Set total duration when ready (Soundcloud-style)
+    if (player.wavesurfer) {
+      player.wavesurfer.on('decode', (duration) => {
+        durationEl.textContent = formatTime(duration);
+      });
+    }
+
+    // Fallback: Set duration from player if decode event doesn't fire
+    if (player.getDuration() > 0) {
+      durationEl.textContent = formatTime(player.getDuration());
+    }
+
+    // Error handling
+    player.on('error', (error) => {
+      console.error('Audio playback error:', error);
+      showError('Failed to load or play the audio. Please check your internet connection and try again.');
+    });
+
+    // Store player globally for debugging
+    window.mixPlayer = player;
+
+    // Initialize track highlighter
+    const highlighter = TrackHighlighter.init(player);
+    window.mixHighlighter = highlighter;
+
+    // Add click-to-play functionality for tracklist items
+    const tracklistItems = document.querySelectorAll('.tracklist-items li[data-timestamp]');
+    tracklistItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const timestamp = item.getAttribute('data-timestamp');
+        if (timestamp) {
+          // Convert timestamp (MM:SS or H:MM:SS) to seconds
+          const parts = timestamp.split(':').map(part => parseInt(part, 10));
+          let seconds = 0;
+          if (parts.length === 3) {
+            // H:MM:SS format
+            seconds = parts[0] * 3600 + parts[1] * 60 + parts[2];
+          } else if (parts.length === 2) {
+            // MM:SS format
+            seconds = parts[0] * 60 + parts[1];
+          }
+          // Seek to the track position and start playing
+          player.seekTo(seconds);
+          player.play();
+        }
+      });
+    });
+
+  } catch (error) {
+    console.error('Failed to initialize audio player:', error);
+    setLoadingState(false);
+    showError('Failed to initialize the audio player. The audio file may be unavailable or in an unsupported format.');
+  }
+})();
+</script>

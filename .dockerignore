@@ -1,0 +1,6 @@
+_site/
+vendor/
+.bundle/
+.git/
+node_modules/
+local_only/
