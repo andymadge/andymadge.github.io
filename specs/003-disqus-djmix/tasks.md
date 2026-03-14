@@ -24,8 +24,8 @@
 
 ### Implementation
 
-- [ ] T001 [P] [US1] Enable comments on djmix pages — in `_config.yml`, change `comments: false` to `comments: true` in the `_djmixes` default scope (line 141)
-- [ ] T002 [P] [US1] Add "Comment on this mix" anchor link — rewrite `_includes/mix-download.html` to include `<a href="#disqus_thread">Comment on this mix</a>` shown when `page.comments != false`, per the exact diff in `plan.md` (Change 2)
+- [x] T001 [P] [US1] Enable comments on djmix pages — in `_config.yml`, change `comments: false` to `comments: true` in the `_djmixes` default scope (line 141)
+- [x] T002 [P] [US1] Add "Comment on this mix" anchor link — rewrite `_includes/mix-download.html` to include `<a href="#disqus_thread">Comment on this mix</a>` shown when `page.comments != false`, per the exact diff in `plan.md` (Change 2)
 
 **Checkpoint**: Both file changes complete. Verify locally per `quickstart.md`.
 
@@ -35,9 +35,9 @@
 
 **Purpose**: Confirm everything works end-to-end before merging.
 
-- [ ] T003 Run `bundle exec jekyll serve` and confirm build completes without errors or warnings
-- [ ] T004 [P] Verify "Comment on this mix" link appears on a mix page at `http://localhost:4000`
-- [ ] T005 [P] Verify "Comment on this mix" link is absent on a mix page with `comments: false` in front matter (test by temporarily adding `comments: false` to any mix's front matter)
+- [x] T003 Run `bundle exec jekyll serve` and confirm build completes without errors or warnings
+- [x] T004 [P] Verify "Comment on this mix" link appears on a mix page at `http://localhost:4000`
+- [x] T005 [P] Verify "Comment on this mix" link is absent on a mix page with `comments: false` in front matter (test by temporarily adding `comments: false` to any mix's front matter)
 - [ ] T006 Merge to `master` and verify Disqus thread renders at the bottom of a mix page in production at `https://www.andymadge.com`
 
 ---

@@ -138,7 +138,7 @@ defaults:
       layout: mix
       author_profile: true
       share: false
-      comments: false
+      comments: true
       classes: wide
 
 comments:

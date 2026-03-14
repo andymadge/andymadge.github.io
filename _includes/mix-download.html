@@ -1,6 +1,10 @@
 {% assign download_url = page.audio_download_url | default: page.audio_url %}
-{% if download_url %}
+{% assign show_comment_link = true %}
+{% if page.comments == false %}{% assign show_comment_link = false %}{% endif %}
+
+{% if download_url or show_comment_link %}
 <p class="mix-download">
-  <a href="{{ download_url }}" download>Download mix</a>
+  {% if download_url %}<a href="{{ download_url }}" download>Download mix</a>{% endif %}
+  {% if show_comment_link %}<a href="#disqus_thread">Comment on this mix</a>{% endif %}
 </p>
 {% endif %}
