@@ -185,50 +185,49 @@ Build warnings MUST be investigated and resolved before deployment.
 
 ### Prerequisites
 
-- Ruby (version compatible with GitHub Pages)
-- Bundler gem (`gem install bundler`)
+- Docker Desktop
 
 ### Build Commands
 
-**Install dependencies**:
-```bash
-bundle install --path vendor/bundle
-```
-
 **Local preview server**:
 ```bash
-bundle exec jekyll serve
+docker compose up
 ```
-Site available at `http://localhost:4000`
+Site available at `http://localhost:4000`. LiveReload enabled.
 
-**Build static site**:
+**Rebuild image** (after Gemfile changes):
 ```bash
-bundle exec jekyll build
+docker compose up --build
+```
+
+**Build static site only**:
+```bash
+docker compose run --rm jekyll bundle exec jekyll build
 ```
 Output in `_site/` directory (excluded from git)
 
 ### Pre-commit Checklist
 
 Before committing changes:
-1. Site MUST build successfully with `bundle exec jekyll serve`
+1. Site MUST build successfully with `docker compose up`
 2. Build MUST complete without errors or warnings
-3. All modified pages MUST render correctly in local preview
+3. All modified pages MUST render correctly in local preview at `http://localhost:4000`
 4. Theme-related changes MUST be tested locally before committing
 
 ## Deployment and Testing
 
 ### Build Process
 
-- Site MUST build successfully with `bundle exec jekyll serve`
+- Site MUST build successfully with `docker compose up`
 - Build MUST complete without errors or warnings
 - All pages MUST render correctly in local preview at `http://localhost:4000`
 - Theme updates MUST be tested locally before committing
 
 ### Testing Steps
 
-1. Run `bundle exec jekyll serve` locally
+1. Run `docker compose up` locally
 2. Verify build completes without errors or warnings
-3. Review all modified pages in browser at localhost:4000
+3. Review all modified pages in browser at `http://localhost:4000`
 4. Check navigation, permalinks, and internal links
 5. Verify responsive design on multiple screen sizes (if design changes made)
 6. Commit and push to `master` for automatic deployment
