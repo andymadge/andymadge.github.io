@@ -189,6 +189,37 @@ layout: single
     // Store player globally for debugging
     window.mixPlayer = player;
 
+    // Hardware media key support (play/pause/seek) via Media Session API
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: '{{ page.title | escape }}',
+        artist: 'andymadge.com',
+        artwork: [{% if page.header.cover %}
+          { src: '{{ page.header.cover | relative_url }}', sizes: '512x512', type: 'image/png' }
+        {% endif %}]
+      });
+
+      navigator.mediaSession.setActionHandler('play', () => player.play());
+      navigator.mediaSession.setActionHandler('pause', () => player.pause());
+      navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+        player.seekTo(Math.max(0, player.getCurrentTime() - (details.seekOffset || 10)));
+      });
+      navigator.mediaSession.setActionHandler('seekforward', (details) => {
+        player.seekTo(Math.min(player.getDuration(), player.getCurrentTime() + (details.seekOffset || 10)));
+      });
+      // Mac F7/F9 keys fire previoustrack/nexttrack — treat as 10s seek
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        player.seekTo(Math.max(0, player.getCurrentTime() - 10));
+      });
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        player.seekTo(Math.min(player.getDuration(), player.getCurrentTime() + 10));
+      });
+
+      player.on('play', () => { navigator.mediaSession.playbackState = 'playing'; });
+      player.on('pause', () => { navigator.mediaSession.playbackState = 'paused'; });
+      player.on('finish', () => { navigator.mediaSession.playbackState = 'none'; });
+    }
+
     // Initialize track highlighter
     const highlighter = TrackHighlighter.init(player);
     window.mixHighlighter = highlighter;
