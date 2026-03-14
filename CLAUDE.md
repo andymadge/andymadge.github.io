@@ -26,14 +26,25 @@ scripts/           # add-mix.sh, generate-waveforms.sh
 
 ## Commands
 
-**Development server** (Docker — the only supported way to run locally):
+**Development server** (native Ruby — preferred):
+```bash
+bundle install             # first time or after Gemfile changes
+bundle exec jekyll serve --livereload  # start dev server at http://localhost:4000
+```
+
+**Development server** (Docker — alternative):
 ```bash
 docker compose up          # start dev server at http://localhost:4000
 docker compose up --build  # rebuild image first (after Gemfile changes)
 docker compose down        # stop
 ```
 
-**Build only**:
+**Build only** (native):
+```bash
+bundle exec jekyll build
+```
+
+**Build only** (Docker):
 ```bash
 docker compose run --rm jekyll bundle exec jekyll build
 ```

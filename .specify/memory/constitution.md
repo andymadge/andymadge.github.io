@@ -185,22 +185,30 @@ Build warnings MUST be investigated and resolved before deployment.
 
 ### Prerequisites
 
-- Docker Desktop
+- Ruby 3.x + Bundler (native, preferred) **or** Docker Desktop (alternative)
 
 ### Build Commands
 
-**Local preview server**:
+**Local preview server (native — preferred)**:
 ```bash
-docker compose up
+bundle install                                  # first time or after Gemfile changes
+bundle exec jekyll serve --livereload
 ```
 Site available at `http://localhost:4000`. LiveReload enabled.
 
-**Rebuild image** (after Gemfile changes):
+**Local preview server (Docker — alternative)**:
 ```bash
-docker compose up --build
+docker compose up          # start
+docker compose up --build  # rebuild image after Gemfile changes
+docker compose down        # stop
 ```
 
-**Build static site only**:
+**Build static site only (native)**:
+```bash
+bundle exec jekyll build
+```
+
+**Build static site only (Docker)**:
 ```bash
 docker compose run --rm jekyll bundle exec jekyll build
 ```
@@ -209,7 +217,7 @@ Output in `_site/` directory (excluded from git)
 ### Pre-commit Checklist
 
 Before committing changes:
-1. Site MUST build successfully with `docker compose up`
+1. Site MUST build successfully (`bundle exec jekyll serve` or `docker compose up`)
 2. Build MUST complete without errors or warnings
 3. All modified pages MUST render correctly in local preview at `http://localhost:4000`
 4. Theme-related changes MUST be tested locally before committing
@@ -218,14 +226,14 @@ Before committing changes:
 
 ### Build Process
 
-- Site MUST build successfully with `docker compose up`
+- Site MUST build successfully (`bundle exec jekyll serve` or `docker compose up`)
 - Build MUST complete without errors or warnings
 - All pages MUST render correctly in local preview at `http://localhost:4000`
 - Theme updates MUST be tested locally before committing
 
 ### Testing Steps
 
-1. Run `docker compose up` locally
+1. Run `bundle exec jekyll serve` (or `docker compose up`) locally
 2. Verify build completes without errors or warnings
 3. Review all modified pages in browser at `http://localhost:4000`
 4. Check navigation, permalinks, and internal links
