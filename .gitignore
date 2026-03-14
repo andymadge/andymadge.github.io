@@ -13,3 +13,6 @@ audio_files
 # Dev-only mix files (local development, not for production)
 _djmixes/dev-*
 assets/djmixes/dev-*/
+
+# Serena MCP tool config (local dev only)
+.serena/
