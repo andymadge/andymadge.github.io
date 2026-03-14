@@ -146,15 +146,23 @@ docker compose up --build  # rebuild image (e.g. after Gemfile changes)
 docker compose down        # stop and remove the container
 ```
 
-### Draft posts
+### Extra Jekyll arguments (Docker)
 
-If you want to preview draft posts, set the `JEKYLL_EXTRA_ARGS` environment variable to `--drafts` when running the container. This can be done either as a one-off command or by editing the `compose.yml` file for persistent configuration.
+Pass additional `jekyll serve` flags via the `JEKYLL_EXTRA_ARGS` environment variable. This can be done as a one-off command or by editing `compose.yml` for persistent configuration.
+
+**`--livereload`** — Auto-refreshes the browser when source files change. **`--port <number>`** — Changes the port Jekyll listens on (default: `4000`).
 
 ```bash
-# one-off (no file changes needed)
+# Preview draft posts
 JEKYLL_EXTRA_ARGS="--drafts" docker compose up
 
-# persistent (edit compose.yml)
+# Custom port (useful if 4000 is already in use)
+JEKYLL_EXTRA_ARGS="--port 4001" docker compose up
+
+# Combine flags
+JEKYLL_EXTRA_ARGS="--drafts --port 4001" docker compose up
+
+# Persistent configuration (edit compose.yml)
 JEKYLL_EXTRA_ARGS: "--drafts"
 ```
 
@@ -258,12 +266,25 @@ bundle install
 # Run development server
 bundle exec jekyll serve
 
+# Run with live reload (auto-refreshes browser on file changes)
+bundle exec jekyll serve --livereload
+
+# Run on a custom port (default is 4000)
+bundle exec jekyll serve --port 4001
+
+# Combine options
+bundle exec jekyll serve --livereload --port 4001
+
 # Run with drafts
 bundle exec jekyll serve --drafts
 
 # Build only
 bundle exec jekyll build
 ```
+
+**`--livereload`** — Injects a small script into served pages that opens a WebSocket connection back to Jekyll. When a source file changes, Jekyll rebuilds and the browser refreshes automatically — no manual reload needed.
+
+**`--port <number>`** — Changes the port Jekyll listens on (default: `4000`). Useful when something else is already using port 4000.
 
 If you encounter native extension errors (e.g. nokogiri) when switching between Intel and Apple Silicon Macs, clean and reinstall:
 
