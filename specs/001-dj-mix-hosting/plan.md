@@ -115,5 +115,6 @@ All items resolved as of 2026-02-21. See `tasks.md` for implementation details.
 | FR-031 | Date format updated to `YYYY/MM/DD` in `mix-index.html` |
 | FR-032 | Duration field removed from mix card display in `mix-index.html` |
 | FR-033 | `.mix-image-caption` confirmed to have no `font-size` override — inherits body font |
+| FR-034 | Mix card font sizes set to compact values in `music-player.scss`: h3 `1rem`, `.mix-meta` `0.75rem`, `.mix-excerpt` `0.8rem` |
 | Dependency | WaveSurfer.js CDN pinned to `7.12.1` in `wavesurfer-loader.html` |
 | Bug | Playback position restore: time display now updated immediately after `seekTo()` so it matches the restored position before playback begins |

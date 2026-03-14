@@ -157,6 +157,7 @@ A visitor starts listening to a mix but needs to leave. When they return to the 
 - **FR-031**: Mix card dates MUST be displayed in `YYYY/MM/DD` format with zero-padded month and day (e.g. `2026/02/21`).
 - **FR-032**: Mix cards MUST NOT display the mix duration/length. The duration field MUST be omitted from the mix index card display.
 - **FR-033**: The `mix_image_caption` text MUST render at the same font size as the main body text. No explicit `font-size` override MUST be applied to `.mix-image-caption`; it MUST inherit the base font size.
+- **FR-034**: Mix card text MUST use compact font sizes: card title (h3) at `1rem`, metadata (date/genre) at `0.75rem`, excerpt at `0.8rem`.
 
 ### Out of Scope (Future Enhancements)
 
