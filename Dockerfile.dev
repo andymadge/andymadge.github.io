@@ -1,0 +1,10 @@
+FROM ruby:3.3-slim
+
+# Build tools needed for native gem extensions (nokogiri, etc.)
+# git needed to fetch the remote Minimal Mistakes theme
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /site
