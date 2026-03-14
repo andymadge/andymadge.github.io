@@ -17,7 +17,7 @@
 
 **Purpose**: Confirm the development environment is ready — no new project initialization needed (Jekyll project already exists).
 
-- [ ] T001 Verify dev server starts cleanly: `docker compose up` and confirm `http://localhost:4000` loads
+- [x] T001 Verify dev server starts cleanly: `docker compose up` and confirm `http://localhost:4000` loads
 
 ---
 
@@ -29,8 +29,8 @@
 
 ### Implementation for User Story 1
 
-- [ ] T002 [US1] Create `_includes/mix-download.html` with a download anchor that resolves the URL using `{% assign download_url = page.audio_download_url | default: page.audio_url %}` and renders `<a href="{{ download_url }}" download>` (omitted entirely when both fields are absent)
-- [ ] T003 [US1] Update `_layouts/mix.html` to add `{% include mix-download.html %}` immediately after `{{ content }}` inside `<div id="mix-content">`
+- [x] T002 [US1] Create `_includes/mix-download.html` with a download anchor that resolves the URL using `{% assign download_url = page.audio_download_url | default: page.audio_url %}` and renders `<a href="{{ download_url }}" download>` (omitted entirely when both fields are absent)
+- [x] T003 [US1] Update `_layouts/mix.html` to add `{% include mix-download.html %}` immediately after `{{ content }}` inside `<div id="mix-content">`
 
 **Checkpoint**: After T003, visit any mix page — download link should appear at the end of the description and trigger a download of `audio_url` when clicked.
 
@@ -46,7 +46,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T004 [US2] Validate the `audio_download_url` override by temporarily adding the field to a dev mix (e.g., `_djmixes/dev-2025-11-25-example-mix.md`) and confirming the download link targets the override URL
+- [x] T004 [US2] Validate the `audio_download_url` override by temporarily adding the field to a dev mix (e.g., `_djmixes/dev-2025-11-25-example-mix.md`) and confirming the download link targets the override URL
 
 **Checkpoint**: Both US1 (default) and US2 (override) are confirmed working.
 
@@ -54,7 +54,7 @@
 
 ## Phase N: Polish & Cross-Cutting Concerns
 
-- [ ] T005 [P] Style the download link in `_sass/music-player.scss` to match site conventions (e.g., subtle placement, optional download icon via CSS `content`)
+- [x] T005 [P] Style the download link in `_sass/music-player.scss` to match site conventions (e.g., subtle placement, optional download icon via CSS `content`)
 - [ ] T006 Run all four manual test scenarios from `specs/002-mix-download-link/quickstart.md` and confirm all pass
 - [ ] T007 Verify `docker compose up` build produces zero errors or warnings
 
