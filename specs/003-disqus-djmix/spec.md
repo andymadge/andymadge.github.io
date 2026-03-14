@@ -1,115 +1,54 @@
-# Feature Specification: [FEATURE NAME]
+# Feature Specification: Disqus Comments on DJ Mix Posts
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**Feature Branch**: `003-disqus-djmix`
+**Created**: 2026-03-14
+**Status**: Draft
+**Input**: User description: "Disqus is enabled for blog posts, please also add it to djmix posts"
 
 ## User Scenarios & Testing *(mandatory)*
 
-<!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
--->
+### User Story 1 - Visitor Reads and Comments on a Mix (Priority: P1)
 
-### User Story 1 - [Brief Title] (Priority: P1)
+A visitor views a DJ mix page and wants to leave a comment or read existing comments. They scroll past the tracklist/player to find a Disqus comment thread at the bottom of the page, just as they would on a blog post.
 
-[Describe this user journey in plain language]
+**Why this priority**: This is the entire feature — enabling community engagement on mix pages.
 
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test**: Navigate to any DJ mix page in production and verify a Disqus comment thread appears at the bottom.
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** a visitor views any DJ mix page in the production environment, **When** they scroll to the bottom, **Then** a Disqus comment thread is visible below the mix content.
+2. **Given** a DJ mix page with no front matter `comments` override, **When** the page renders, **Then** Disqus is shown by default.
+3. **Given** a DJ mix page with `comments: false` in its front matter, **When** the page renders, **Then** no Disqus thread appears (per-post opt-out still works).
 
 ---
-
-### User Story 2 - [Brief Title] (Priority: P2)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-[Add more user stories as needed, each with an assigned priority]
 
 ### Edge Cases
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
-
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+- What happens when a mix has `comments: false` explicitly set in its front matter? → Disqus must be suppressible per-post.
+- Disqus only renders in production (not in development server) — this is existing behaviour shared with blog posts and is expected.
 
 ## Requirements *(mandatory)*
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
-
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
-
-*Example of marking unclear requirements:*
-
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
-
-### Key Entities *(include if feature involves data)*
-
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+- **FR-001**: Disqus comments MUST appear on all DJ mix pages by default.
+- **FR-002**: Individual mix pages MUST be able to suppress comments by setting `comments: false` in their front matter.
+- **FR-003**: The Disqus shortname used MUST be the same as that used for blog posts (`andymadge`).
+- **FR-004**: Comments MUST only render in the production environment (consistent with blog post behaviour).
+- **FR-005**: The Disqus thread identifier for each mix page MUST be unique and stable (based on the page URL).
 
 ## Success Criteria *(mandatory)*
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
-
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: A Disqus comment thread appears at the bottom of every DJ mix page when viewed in production.
+- **SC-002**: No Disqus thread appears on mix pages viewed via the local development server.
+- **SC-003**: A mix with `comments: false` in its front matter shows no comment thread.
+- **SC-004**: The same Disqus account (shortname) is used across both blog posts and mix pages — no new account or configuration required.
+
+## Assumptions
+
+- The Minimal Mistakes `single` layout (which `mix.html` wraps via `layout: single`) already renders Disqus when `page.comments` is truthy and `site.comments.provider` is set — no layout changes are needed beyond enabling the flag.
+- The only required change is removing the explicit `comments: false` from the `_djmixes` scope defaults in `_config.yml` (or changing it to `true`).
+- No new Disqus configuration, shortname, or include files are needed.
