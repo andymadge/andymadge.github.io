@@ -251,6 +251,21 @@ ifconfig | grep "inet " | grep -v 127.0.0.1
 
 ---
 
+## Dev-Only Mixes (Local Testing Only)
+
+If you want a mix to appear locally for development but **never be pushed to the repo**, prefix both the mix file and its asset folder with `dev-`:
+
+```
+_djmixes/dev-my-test-mix.md
+assets/djmixes/dev-my-test-mix/waveform.dat
+```
+
+Both patterns are in `.gitignore` (`_djmixes/dev-*` and `assets/djmixes/dev-*/`), so git will never track them. The mix still renders in Jekyll locally as normal.
+
+> Use this for test fixtures, placeholder mixes, or anything you want to experiment with without it ever going to production.
+
+---
+
 ## Step 6: Commit and Deploy
 
 ### 6.1 Add Files to Git
