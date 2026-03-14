@@ -9,3 +9,7 @@ Gemfile.lock
 assets/local-tests/
 .tmp
 audio_files
+
+# Dev-only mix files (local development, not for production)
+_djmixes/dev-*
+assets/djmixes/dev-*/
